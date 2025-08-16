@@ -55,4 +55,17 @@ public class AuthService {
                 .refreshTokenExpiresIn(1209600000L) //2주
                 .build();
     }
+
+    // 로그아웃
+    public void logout(String token) {
+
+        // "Bearer" 제거
+        String jwt = token.replace("Bearer", "");
+
+        if (!tokenProvider.validateToken(jwt)) {
+            throw new RuntimeException("유효하지 않은 토큰입니다.");
+        }
+
+        System.out.println("로그아웃 처리된 토큰: " + jwt);
+    }
 }

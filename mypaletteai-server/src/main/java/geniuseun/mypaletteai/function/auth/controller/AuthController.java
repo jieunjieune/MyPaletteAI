@@ -6,6 +6,7 @@ import geniuseun.mypaletteai.function.auth.service.AuthService;
 import geniuseun.mypaletteai.jwt.TokenDTO;
 import geniuseun.mypaletteai.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -39,5 +40,11 @@ public class AuthController {
     @PostMapping("/signup")
     public String signup(@RequestBody SignupRequest request) {
         return authService.signup(request);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String token) {
+        authService.logout(token);
+        return ResponseEntity.ok("로그아웃 성공!");
     }
 }
