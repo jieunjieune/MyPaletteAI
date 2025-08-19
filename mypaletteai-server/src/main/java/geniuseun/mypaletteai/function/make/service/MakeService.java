@@ -27,6 +27,9 @@ public class MakeService {
         List<String> recommendedColors = openAiClient.generateColors(request.getMainColor(), request.getMood(), request.getCount());
         String title = openAiClient.generateTitle(request.getMainColor(), request.getMood());
 
+        // 큰따옴표, 작은따옴표 제거
+        title = title.replace("\"", "").replace("'", "");
+
         // Palette 엔티티 저장
         Palette palette = Palette.builder()
                 .title(title)
