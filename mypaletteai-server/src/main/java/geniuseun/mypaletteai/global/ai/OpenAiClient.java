@@ -49,7 +49,7 @@ public class OpenAiClient {
 
     public List<String> generateColors(String mainColor,String mood, int count) {
         String prompt = "메인 색상 " + mainColor +
-                " 와 잘 어울리는 " + mood + "느낌의" + count + " 개의 색상 HEX 코드를 추천해줘. " +
+                " 와 잘 어울리는 다음과 같은" + mood + "분위기의" + count + " 개의 색상(메인컬러 포함) HEX 코드를 추천해줘. " +
                 "HEX 코드만 콤마로 구분해서 답해.";
 
         Map<String, Object> requestBody = new HashMap<>();

@@ -1,7 +1,9 @@
 package geniuseun.mypaletteai.function.make.service;
 
+import geniuseun.mypaletteai.function.make.dao.ColorRepository;
 import geniuseun.mypaletteai.function.make.dto.PaletteRequestDTO;
 import geniuseun.mypaletteai.function.make.dto.PaletteResponseDTO;
+import geniuseun.mypaletteai.function.make.entity.Color;
 import geniuseun.mypaletteai.function.make.entity.Palette;
 import geniuseun.mypaletteai.function.make.dao.PaletteRepository;
 import geniuseun.mypaletteai.global.ai.OpenAiClient;
@@ -17,6 +19,7 @@ public class MakeService {
 
     private final PaletteRepository paletteRepository;
     private final OpenAiClient openAiClient;
+    private final ColorRepository colorRepository;
 
     public PaletteResponseDTO generatePalette(PaletteRequestDTO request, Long userId) {
 
@@ -33,6 +36,14 @@ public class MakeService {
                 .createdAt(LocalDateTime.now())
                 .build();
         paletteRepository.save(palette);
+
+        for (String hex : recommendedColors) {
+            Color color = Color.builder()
+                    .palette(palette)   // ManyToOne 연결
+                    .hexCode(hex)
+                    .build();
+            colorRepository.save(color);
+        }
 
         // 결과 반환
         return PaletteResponseDTO.builder()
