@@ -47,6 +47,14 @@ dependencies {
 
     // BCrypt
     implementation 'org.springframework.security:spring-security-crypto'
+
+    // Open AI
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'org.springframework.boot:spring-boot-starter-json'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
 }
 
 
