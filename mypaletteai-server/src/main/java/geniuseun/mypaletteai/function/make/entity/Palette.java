@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class Palette {
 
     @Id
@@ -36,10 +35,17 @@ public class Palette {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "palette", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Color> colors = new ArrayList<>();
+    private List<Color> colors;
+
+    public Palette() {
+        this.colors = new ArrayList<>();
+    }
 
     public void addColor(Color color) {
+        if (colors == null) {
+            colors = new ArrayList<>();
+        }
         colors.add(color);
-        color.setPalette(this); // Color에도 팔레트 세팅
+        color.setPalette(this);
     }
 }
