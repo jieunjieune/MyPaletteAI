@@ -23,10 +23,4 @@ public class MakeController {
         Long userId = 1L; // 테스트용 하드코딩
         return makeService.generatePalette(request, userId);
     }
-
-    // 테스트용: 단일 색상 추천 확인
-    @GetMapping("/test")
-    public List<String> generateColors(String mainColor, String mood, int count) {
-        return openAiClient.generateColors(mainColor, mood, count);
-    }
 }
