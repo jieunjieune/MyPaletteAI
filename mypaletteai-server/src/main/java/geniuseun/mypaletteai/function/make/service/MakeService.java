@@ -44,6 +44,7 @@ public class MakeService {
             Color color = Color.builder()
                     .palette(palette)   // ManyToOne 연결
                     .hexCode(hex)
+                    .index(recommendedColors.indexOf(hex) + 1)
                     .build();
             colorRepository.save(color);
         }
