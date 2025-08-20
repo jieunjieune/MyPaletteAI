@@ -27,4 +27,8 @@ public class Color {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "palette_id", nullable = false)
     private Palette palette;
+
+    public Color(String hexCode) {
+        this.hexCode = hexCode;
+    }
 }

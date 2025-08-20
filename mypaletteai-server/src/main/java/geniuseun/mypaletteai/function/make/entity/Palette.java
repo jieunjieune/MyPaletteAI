@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "color_palette")
@@ -32,4 +34,12 @@ public class Palette {
 
     @Column(name = "palette_created_at")
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "palette", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Color> colors = new ArrayList<>();
+
+    public void addColor(Color color) {
+        colors.add(color);
+        color.setPalette(this); // Color에도 팔레트 세팅
+    }
 }
