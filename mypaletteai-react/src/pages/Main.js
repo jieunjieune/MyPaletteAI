@@ -13,23 +13,42 @@ function Main() {
 	
 	return (
 		<div className={MainCSS.container}>
-			<div>
-				<img src="/images/main/MyPaletteAiLogo-white.png" className={MainCSS.logo}/>
+			{/* 로고 */}
+			<div className={MainCSS.logoContainer}>
+				<img src="/images/main/mypaletteailogo-white.png" className={MainCSS.logo} />
 			</div>
-			<div>
-				<h3>오늘의 추천 Palette</h3>
-				<div style={{ display: "flex" }}>
-				{todayPalette?.recommendedColors?.map((color, index) => (
-					<div
-					key={index}
-					style={{
-						width: "60px",
-						height: "60px",
-						backgroundColor: color,
-						border: "1px solid #ccc",
-					}}
-					></div>
-				))}
+
+			{/* 팔레트 그리드 */}
+			<div className={MainCSS.paletteGrid}>
+				{todayPalette?.recommendedColors && (
+				<div className={MainCSS.paletteCard}>
+				{/* 색상 영역 */}
+				<div className={MainCSS.colorBar}>
+					{todayPalette.recommendedColors.map((color, index) => (
+						<div
+						key={index}
+						className={MainCSS.colorBlock}
+						style={{ backgroundColor: color }}
+						></div>
+					))}
+					</div>
+				
+					{/* 타이틀 */}
+					<div className={MainCSS.cardFooter}>
+					<span className={MainCSS.title}>{todayPalette.title}</span>
+					</div>
+				</div>
+				)}
+
+				{/* 예시로 다른 팔레트들 */}
+				<div className={MainCSS.paletteCard}>팔레트</div>
+				<div className={MainCSS.paletteCard}>팔레트</div>
+				<div className={MainCSS.paletteCard}>팔레트</div>
+				<div className={MainCSS.paletteCard}>팔레트</div>
+
+				{/* 만들기 버튼 */}
+				<div className={MainCSS.paletteCard + " " + MainCSS.createCard}>
+				만들기
 				</div>
 			</div>
 		</div>
