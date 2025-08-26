@@ -5,7 +5,7 @@ import geniuseun.mypaletteai.function.make.dto.PaletteRequestDTO;
 import geniuseun.mypaletteai.function.make.dto.PaletteResponseDTO;
 import geniuseun.mypaletteai.function.make.entity.Color;
 import geniuseun.mypaletteai.function.make.entity.Palette;
-import geniuseun.mypaletteai.function.make.dao.PaletteRepository;
+import geniuseun.mypaletteai.function.palette.dao.PaletteRepository;
 import geniuseun.mypaletteai.global.ai.OpenAiClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package geniuseun.mypaletteai.function.todayPalette.service;
 
-import geniuseun.mypaletteai.function.make.dao.PaletteRepository;
+import geniuseun.mypaletteai.function.palette.dao.PaletteRepository;
 import geniuseun.mypaletteai.function.make.dao.ColorRepository;
 import geniuseun.mypaletteai.function.make.entity.Palette;
 import geniuseun.mypaletteai.function.make.entity.Color;

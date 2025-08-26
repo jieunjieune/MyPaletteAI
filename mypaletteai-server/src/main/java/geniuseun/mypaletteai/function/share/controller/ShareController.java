@@ -1,6 +1,6 @@
 package geniuseun.mypaletteai.function.share.controller;
 
-import geniuseun.mypaletteai.function.make.dao.PaletteRepository;
+import geniuseun.mypaletteai.function.palette.dao.PaletteRepository;
 import geniuseun.mypaletteai.function.make.dto.PaletteResponseDTO;
 import geniuseun.mypaletteai.function.make.entity.Color;
 import geniuseun.mypaletteai.function.make.entity.Palette;
