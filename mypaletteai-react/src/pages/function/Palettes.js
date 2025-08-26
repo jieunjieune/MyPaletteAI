@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { callPaletteApi } from "../../apis/PaletteAPICalls";
-import PaletteCard from "../../components/palette/PaletteCard";
+import PaletteList from "../../components/palette/PaletteList";
+import PaletteCSS from "./Palettes.module.css";
 
 function Palettes() {
 	const dispatch = useDispatch();
@@ -14,14 +15,18 @@ function Palettes() {
 	}, [dispatch]);
 
 	return (
-		<div>
+		<div className={PaletteCSS.page}>
+
+			<h1 className={PaletteCSS.title}> My Palette AI와 함께 만들어진 Palettes </h1>
+
+		<div className={PaletteCSS.container}>
 			{palettes?.length > 0 ? (
-				palettes.map((palette, index) => (
-					<PaletteCard key={index} palette={palette} />
-				))
+				<PaletteList palettes={palettes} />  // <-- 여기서 사용
 			) : (
 				<p>팔레트가 없습니다.</p>
 			)}
+		</div>
+
 		</div>
 	)
 }
