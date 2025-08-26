@@ -1,5 +1,6 @@
 package geniuseun.mypaletteai.function.make.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -7,6 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class PaletteResponseDTO {
     private String title;
     private String mood;

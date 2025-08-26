@@ -1,5 +1,6 @@
 package geniuseun.mypaletteai.function.make.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,6 +36,7 @@ public class Palette {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "palette", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Color> colors;
 
     public Palette() {

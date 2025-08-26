@@ -1,5 +1,7 @@
 package geniuseun.mypaletteai.function.palette.service;
 
+import geniuseun.mypaletteai.function.make.dto.PaletteResponseDTO;
+import geniuseun.mypaletteai.function.make.entity.Color;
 import geniuseun.mypaletteai.function.make.entity.Palette;
 import geniuseun.mypaletteai.function.palette.dao.PaletteRepository;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -15,9 +18,22 @@ public class PaletteService {
     private final PaletteRepository paletteRepository;
 
     // 전체 조회
-    @Transactional(readOnly = true)
-    public List<Palette> getAllPalettes() {
-        return paletteRepository.findAll();
+    public List<PaletteResponseDTO> getAllPalettes() {
+        List<Palette> palettes = paletteRepository.findAll();
+
+        return palettes.stream()
+                .map(palette -> PaletteResponseDTO.builder()
+                        .title(palette.getTitle())
+                        .mood(palette.getMood())
+                        .mainColor(palette.getMainColor())
+                        .recommendedColors(
+                                palette.getColors().stream()
+                                        .map(Color::getHexCode)
+                                        .collect(Collectors.toList())
+                        )
+                        .message("팔레트 조회 성공")
+                        .build()
+                ).collect(Collectors.toList());
     }
 
     // 상세 조회

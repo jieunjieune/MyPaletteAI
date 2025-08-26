@@ -1,5 +1,6 @@
 package geniuseun.mypaletteai.function.palette.controller;
 
+import geniuseun.mypaletteai.function.make.dto.PaletteResponseDTO;
 import geniuseun.mypaletteai.function.make.entity.Palette;
 import geniuseun.mypaletteai.function.palette.service.PaletteService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class PaletteController {
 
     // 전체 조회
     @GetMapping
-    public List<Palette> getAllPalettes() {
+    public List<PaletteResponseDTO> getAllPalettes() {
         return paletteService.getAllPalettes();
     }
 
