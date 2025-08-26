@@ -14,7 +14,7 @@ function Header() {
 				{/* 로고 */}
 				<Link to="/" className={HeaderCSS.headerLogo}>
 				<img
-					src="/images/main/mypaletteaifont.png"
+					src="/images/main/MyPaletteAiLogo.png"
 					alt="로고"
 					className={HeaderCSS.logoImg}
 				/>

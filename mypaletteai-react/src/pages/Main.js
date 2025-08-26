@@ -14,12 +14,10 @@ function Main() {
 	return (
 		<div className={MainCSS.container}>
 			<div>
-				<img src="/images/main/mypaletteailogo.png" className={MainCSS.logo}/>
+				<img src="/images/main/MyPaletteAiLogo-white.png" className={MainCSS.logo}/>
 			</div>
 			<div>
 				<h3>오늘의 추천 Palette</h3>
-				<h2>{todayPalette?.title}</h2>
-				<p>{todayPalette?.mood}</p>
 				<div style={{ display: "flex" }}>
 				{todayPalette?.recommendedColors?.map((color, index) => (
 					<div
