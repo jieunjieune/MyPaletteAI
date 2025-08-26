@@ -1,40 +1,28 @@
 import React from "react";
-import styles from "./PaletteCard.module.css"
+import styles from "./PaletteCard.module.css";
 
 function PaletteCard({ palette }) {
-	const { title, mood, mainColor, recommendedColors, message } = palette;
+	const { title, mood, recommendedColors } = palette;
 
-	// 추천 색상이 배열 안 배열이면 flat 처리
+	// 추천색상 배열이 배열 안 배열이면 flat 처리
 	const colors = recommendedColors.flat();
 
 	return (
 		<div className={styles.card}>
-		<h3 className={styles.title}>{title}</h3>
-		<p className={styles.mood}>무드: {mood}</p>
-		<p className={styles.mainColor}>
-			메인 색상: 
-			<span
-			className={styles.colorBox}
-			style={{ backgroundColor: mainColor }}
-			></span>
-			{mainColor}
-		</p>
-		<p className={styles.recommendedColors}>
-			추천 색상:{" "}
-			{colors.length > 0 ? (
-			colors.map((color, idx) => (
-				<span
+		<div className={styles.colorBar}>
+			{colors.map((color, idx) => (
+			<div
 				key={idx}
-				className={styles.recommendedBox}
+				className={styles.colorBlock}
 				style={{ backgroundColor: color }}
 				title={color}
-				></span>
-			))
-			) : (
-			<span>없음</span>
-			)}
-		</p>
-		<small className={styles.message}>{message}</small>
+			></div>
+			))}
+		</div>
+		<div className={styles.cardFooter}>
+			<div className={styles.title}>{title}</div>
+			<div className={styles.mood}>{mood}</div>
+		</div>
 		</div>
 	);
 }

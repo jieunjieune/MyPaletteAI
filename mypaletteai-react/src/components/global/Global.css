@@ -1,0 +1,95 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+@font-face {
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+  unicode-range: U+1100-11FF, U+AC00-D7AF; /* Korean Hangul */
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	border: 0px solid silver;
+}
+
+img {
+	width: 100%;
+}
+
+body {
+	font-family: "Pretendard", "Montserrat", sans-serf;
+	/* background-color: var(--main-bg-color); */
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1 {
+	font-size: 45px;
+}
+
+h2 {
+	font-size: 34px;
+}
+
+h3 {
+	font-size: 24px;
+	font-weight: 300;
+}
+
+h4 {
+	font-size: 20px;
+}
+
+h5 {
+	font-size: 12px;
+}
+
+p {
+	font-size: 18px;
+	margin: 0;
+}
+
+button {
+	cursor: pointer;
+}
+
+:root {
+	/* 페이지 컬러 */
+	--header-color: #f5f1e7;
+	--header-color: rgb(0, 0, 0, 0.8);
+	--main-bg-color: #fffdf8;
+	--page-bg-color: #39393a;
+
+	/* 포인트 컬러 */
+	--main-color01: #ff6f61;
+	--main-color02: #ffd166;
+	--main-color03: #70c1b3;
+
+	/* 텍스트 컬러 */
+	--text01: #ffffff;
+	--text02: #202020;
+	--text03: #757575;
+
+	/* 간격 */
+	--spacing-xs: 8px;
+	--spacing-sm: 12px;
+	--spacing-md: 16px;
+	--spacing-lg: 28px;
+
+	/* 폰트 사이즈 */
+	--font-size-sm: 14px;
+	--font-size-md: 16px;
+	--font-size-lg: 18px;
+
+	/* 폰트 패밀리 */
+	--font-family: "Pretendard", "Montserrat", sans-serif;
+}
