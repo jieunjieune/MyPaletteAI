@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import Layout from "./layouts/Layout";
+import Palettes from "./pages/function/Palettes";
+import Make from "./pages/function/Make";
 
 function App() {
   return (
@@ -9,6 +11,8 @@ function App() {
       <Routes>
         <Route pate="/" element={<Layout/>}>
           <Route index element={<Main />} />
+          <Route path="/palettes" element={<Palettes />} />
+          <Route path="/palette/make" element={<Make />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -22,7 +22,7 @@ function Header() {
 		
 				{/* 메뉴 */}
 				<nav className={HeaderCSS.navMenu}>
-				<Link to="/palette/show">Palette</Link>
+				<Link to="/palettes">Palette</Link>
 				<Link to="/palette/make">Make</Link>
 				</nav>
 		
