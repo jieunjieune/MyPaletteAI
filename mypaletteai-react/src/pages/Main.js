@@ -48,7 +48,7 @@ function Main() {
 
 				{/* 만들기 버튼 */}
 				<div className={MainCSS.paletteCard + " " + MainCSS.createCard}>
-				만들기
+				팔레트만들기
 				</div>
 			</div>
 		</div>

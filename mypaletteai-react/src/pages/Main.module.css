@@ -18,7 +18,7 @@
 .paletteGrid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr); /* 3열 */
-	gap: 16px; /* 팔레트 간격 */
+	gap: 30px; /* 팔레트 간격 */
 }
 
 .paletteCard {
@@ -26,9 +26,9 @@
 	flex-direction: column;
 	justify-content: space-between;
 	background-color: #fff;
-	border-radius: 8px;
+	/* border-radius: 8px; */
 	overflow: hidden;
-	border: 1px solid #ddd;
+	/* border: 1px solid #ddd; */
 	height: 160px; /* 카드 높이 고정 */
 	cursor: pointer;
 	transition: transform 0.2s;
@@ -40,7 +40,7 @@
 
 .colorBar {
 	display: flex;
-	flex: 1; /* 위쪽을 가득 채움 */
+	flex: 1;
 	height: 100%;
 }
 
@@ -66,15 +66,5 @@
 	background-color: #ff6f61;
 	color: #fff;
 	font-weight: bold;
-}
-
-.colorsRow {
-	display: flex;
-	justify-content: center;
-	margin-top: 8px;
-}
-
-.paletteColor {
-	width: 60px;
-	height: 60px;
+	align-items: center;
 }
