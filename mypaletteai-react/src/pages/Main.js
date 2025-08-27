@@ -48,7 +48,7 @@ function Main() {
 				{/* 어제의 팔레트 (화면에서 이름 변경) */}
 				{yesterdayPalette ? (
 					<PaletteCard
-						palette={{ ...yesterdayPalette, title: "어제의 팔레트" }}
+						palette={{ ...yesterdayPalette, title: "어제의 팔레트", mood: "어제의 무드" }}
 					/>
 				) : (
 					<p>어제의 팔레트가 없습니다.</p>
