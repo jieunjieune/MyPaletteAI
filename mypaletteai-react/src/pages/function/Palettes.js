@@ -17,7 +17,7 @@ function Palettes() {
 	return (
 		<div className={PaletteCSS.page}>
 
-			<h1 className={PaletteCSS.title}><b>My Palette AI</b>와 함께 만들어진 Palettes </h1>
+			<h1 className={PaletteCSS.title}><b>My Palette AI</b>와 함께 만들어진 팔레트 🎨 </h1>
 
 		<div className={PaletteCSS.container}>
 			{palettes?.length > 0 ? (
