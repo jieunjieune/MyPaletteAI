@@ -89,7 +89,7 @@ export default function Make() {
 	return (
 		<div className={MakeCSS.background}>
 			<div className={MakeCSS.formCard}>
-				<h2 className={MakeCSS.title}>Palette AI와 팔레트 생성하기</h2>
+				<h1 className={MakeCSS.title}>My Palette AI와 팔레트 생성하기</h1>
 
 				{/* 메인 색상 */}
 				<div className={MakeCSS.row}>
