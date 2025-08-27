@@ -1,7 +1,34 @@
+.container {
+	min-height: 100hv;
+}
+
 .paletteGrid {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개 */
-	gap: 50px 50px; /* row-gap column-gap */
+	grid-template-columns: repeat(3, 500px);
+	gap: 50px;  
 	justify-content: center;
+	/* width: calc(3 * 500px + 2 * 50px); */
 	margin: 0 auto;
+}
+
+.loadMoreContainer {
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+.loadMoreButton {
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: bold;
+	width: 1600px;
+	background-color: #c7c7c7;
+	color: white;
+	border: none;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.loadMoreButton:hover {
+	background-color: #ffd166;
 }

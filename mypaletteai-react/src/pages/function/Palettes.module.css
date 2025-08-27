@@ -1,9 +1,9 @@
 .page {
-	height: 100vh;
+	min-height: 100vh;
 }
 
 .title {
-	margin-top: 50px;
+	margin-top: 70px;
 	justify-content: center;
 	display: flex;
 }
@@ -12,5 +12,5 @@
 	padding: 20px;
 	margin-top: 30px;
 	margin-bottom: 20px;
-	display: flex;
+	/* display: flex; */
 }
