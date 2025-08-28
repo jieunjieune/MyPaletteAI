@@ -9,7 +9,7 @@ export const callPaletteApi = () => {
 
 		const response = await fetch(requestURL);
 		const text = await response.text();
-		console.log("백엔드 원본 응답:", text);
+		// console.log("백엔드 원본 응답:", text);
 		const result = JSON.parse(text); // 문제 없으면 여기서 파싱
 
 		try{
@@ -18,7 +18,7 @@ export const callPaletteApi = () => {
 		if (!response.ok) throw new Error("서버 요청 실패");
 
 		const result = await response.json();
-		console.log("결과: ", result);
+		// console.log("결과: ", result);
 
 		dispatch({ type: GET_PALETTES, payload: result });
 		} catch (error) {
