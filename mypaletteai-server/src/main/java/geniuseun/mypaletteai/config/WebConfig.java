@@ -16,7 +16,8 @@ public class WebConfig {
                 // React 개발서버 주소 허용
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:3000")
-                        .allowedMethods("*");
+                        .allowedMethods("*")
+                        .allowCredentials(true);
             }
         };
     }

@@ -34,7 +34,8 @@ export const loginApi = (loginData) => {
 			const response = await fetch(requestURL, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(loginData)
+				body: JSON.stringify(loginData),
+				credentials: "include"		// 리프레시 토큰 쿠키 포함!
 			});
 
 			if (!response.ok) throw new Error("로그인 실패");
@@ -43,8 +44,11 @@ export const loginApi = (loginData) => {
 			const result = await response.json();
 			console.log("로그인 결과:", result);
 
+			// 엑세스 토큰 저장
+			localStorage.setItem("accessToken", result.accessToken);
+
 			// 스토어 저장
-			dispatch({ type: "user/LOGIN_USER", payload: result });
+			dispatch({ type: "auth/POST_LOGIN", payload: result });
 
 			console.log("로그인 한 사람? ", result);
 			// 로그인 성공 알림
@@ -52,6 +56,27 @@ export const loginApi = (loginData) => {
 		} catch (err) {
 			console.error("로그인 실패:", err);
 			alert("로그인 실패! 이메일 또는 비밀번호를 확인하세요.");
+		}
+	};
+};
+
+export const refreshApi = () => {
+	const requestURL = `${prefix}/auth/refresh`;
+	
+		return async () => {
+		try {
+			const response = await fetch(requestURL, {
+			method: "POST",
+			credentials: "include" // ✅ 쿠키 포함
+			});
+	
+			if (!response.ok) throw new Error("토큰 재발급 실패");
+	
+			const data = await response.json();
+			return data.accessToken;
+		} catch (err) {
+			console.error("토큰 재발급 실패:", err);
+			return null;
 		}
 	};
 };
