@@ -24,3 +24,34 @@ export const signupApi = (userData) => {
 		}
 	};
 };
+
+export const loginApi = (loginData) => {
+	const requestURL = `${prefix}/auth/login`;
+
+	return async (dispatch) => {
+		console.log("로그인 요청 url: ", requestURL);
+		try {
+			const response = await fetch(requestURL, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(loginData)
+			});
+
+			if (!response.ok) throw new Error("로그인 실패");
+
+			// 로그인은 보통 JSON 응답 (회원정보 or 토큰)
+			const result = await response.json();
+			console.log("로그인 결과:", result);
+
+			// 스토어 저장
+			dispatch({ type: "user/LOGIN_USER", payload: result });
+
+			console.log("로그인 한 사람? ", result);
+			// 로그인 성공 알림
+			alert("로그인 성공!");
+		} catch (err) {
+			console.error("로그인 실패:", err);
+			alert("로그인 실패! 이메일 또는 비밀번호를 확인하세요.");
+		}
+	};
+};

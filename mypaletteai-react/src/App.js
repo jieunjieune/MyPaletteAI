@@ -4,6 +4,7 @@ import Layout from "./layouts/Layout";
 import Palettes from "./pages/function/Palettes";
 import Make from "./pages/function/Make";
 import Signup from "./pages/auth/Signup";
+import Login from "./pages/auth/Login";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/palettes" element={<Palettes />} />
           <Route path="/palette/make" element={<Make />} />
           <Route path="/auth/signup" element={<Signup />} />
+          <Route path="/auth/login" element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>

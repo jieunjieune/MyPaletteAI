@@ -30,7 +30,7 @@ function Header() {
 				<div className={HeaderCSS.authBox}>
 				<Link to="/auth/signup">Signup</Link>
 				<span> or </span>
-				<Link to="/auth/signin">Signin</Link>
+				<Link to="/auth/login">Signin</Link>
 				</div>
 			</div>
 		</div>
