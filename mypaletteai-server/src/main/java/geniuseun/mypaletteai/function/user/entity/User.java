@@ -2,6 +2,8 @@ package geniuseun.mypaletteai.function.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -28,7 +30,9 @@ public class User {
     private String nickname;
 
     @Column(updatable = false)
+    @CreationTimestamp
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @UpdateTimestamp
     private LocalDateTime updatedAt = LocalDateTime.now();
 }
