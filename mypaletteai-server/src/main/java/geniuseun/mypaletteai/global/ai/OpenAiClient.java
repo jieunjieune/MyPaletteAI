@@ -21,7 +21,7 @@ public class OpenAiClient {
     private final RestTemplate restTemplate = new RestTemplate();
 
     public String generateTitle(String mainColor, String mood) {
-        String prompt = "메인 색상 " + mainColor + "과 분위기 '" + mood + "'에 어울리는 팔레트 제목을 한글로 추천해줘.";
+        String prompt = "메인 색상 " + mainColor + "과 분위기 '" + mood + "'에 어울리는 팔레트 제목을 공백포함 20자 이내의 한글로 추천해줘.";
 
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("model", "gpt-3.5-turbo");
