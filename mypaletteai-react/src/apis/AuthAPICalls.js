@@ -50,7 +50,6 @@ export const loginApi = (loginData) => {
 			// 스토어 저장
 			dispatch({ type: "auth/POST_LOGIN", payload: result });
 
-			console.log("로그인 한 사람? ", result);
 			// 로그인 성공 알림
 			alert("로그인 성공!");
 		} catch (err) {
@@ -79,4 +78,37 @@ export const refreshApi = () => {
 			return null;
 		}
 	};
+};
+
+// 로그아웃
+export const logoutApi = () => {
+    const requestURL = `${prefix}/auth/logout`;
+    return async (dispatch) => {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            if (!accessToken) throw new Error("로그인 상태가 아닙니다.");
+
+            const response = await fetch(requestURL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`
+                },
+                credentials: "include"
+            });
+
+            if (!response.ok) throw new Error("로그아웃 실패");
+
+            // 로컬스토리지 초기화
+            localStorage.removeItem("accessToken");
+
+            // Redux 상태 초기화
+            dispatch({ type: "auth/POST_LOGOUT" });
+
+            alert("로그아웃 완료!");
+        } catch (err) {
+            console.error(err);
+            alert("로그아웃 실패! 다시 시도해주세요.");
+        }
+    };
 };

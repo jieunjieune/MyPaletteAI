@@ -1,30 +1,49 @@
 import { createActions, handleActions } from "redux-actions";
 
-const initialState = {};
+const initialState = {
+	isLoggedIn: !!localStorage.getItem("accessToken"),
+	userId: null,
+	accessToken: localStorage.getItem("accessToken") || null,
+};
 
 export const POST_SIGNUP = "auth/POST_SIGNUP";
-export const POST_LOGIN = 'auth/POST_LOGIN';
-export const POST_LOGOUT = 'auth/POST_LOGOUT';
+export const POST_LOGIN = "auth/POST_LOGIN";
+export const POST_LOGOUT = "auth/POST_LOGOUT";
+export const SET_USER_INFO = "auth/SET_USER_INFO";
 
 export const actions = createActions({
 	[POST_SIGNUP]: (payload) => payload,
 	[POST_LOGIN]: (payload) => payload,
-	[POST_LOGOUT]: () => null
+	[POST_LOGOUT]: () => null,
+	[SET_USER_INFO]: (payload) => payload,
 });
 
 const authReducer = handleActions(
 	{
-		[POST_SIGNUP]: (state, { payload }) =>({
+		[POST_SIGNUP]: (state, { payload }) => ({
 			...state,
-			user: payload.user,
-			token: payload.token
+			isLoggedIn: true,
+			userId: payload.userId,
+			accessToken: payload.accessToken,
 		}),
 		[POST_LOGIN]: (state, { payload }) => ({
 			...state,
-			user: payload.user,
-			token: payload.token
+			isLoggedIn: true,
+			userId: payload.userId,
+			accessToken: payload.accessToken,
 		}),
-		[POST_LOGOUT]: () => initialState
+		[SET_USER_INFO]: (state, { payload }) => ({
+			...state,
+			userId: payload.userId,
+			accessToken: payload.accessToken,
+			isLoggedIn: true,
+		}),
+		[POST_LOGOUT]: () => ({
+			...initialState,
+			isLoggedIn: false,
+			userId: null,
+			accessToken: null,
+		}),
 	},
 	initialState
 );

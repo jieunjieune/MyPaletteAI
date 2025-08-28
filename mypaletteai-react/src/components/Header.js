@@ -1,41 +1,54 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import HeaderCSS from "./global/Header.module.css";
+import { POST_LOGOUT } from "../modules/AuthModule";
+import { useLoginInfo } from "../hooks/LoginInfo";
+import { logoutApi } from "../apis/AuthAPICalls";
 
 function Header() {
-
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { isLoggedIn } = useLoginInfo();
+
+	const handleLogout = async () => {
+		try {
+			await logoutApi();
+			localStorage.removeItem("accessToken");
+			dispatch({ type: POST_LOGOUT });
+			navigate("/auth/login");
+		} catch (err) {
+			alert("로그아웃 실패");
+		}
+	};
 
 	return (
 		<div className={HeaderCSS.headerBox}>
 			<div className={`${HeaderCSS.box} flex items-center justify-between`}>
-			
-				{/* 로고 */}
 				<Link to="/" className={HeaderCSS.headerLogo}>
-				<img
-					src="/images/main/MyPaletteAiLogo.png"
-					alt="로고"
-					className={HeaderCSS.logoImg}
-				/>
+					<img src="/images/main/MyPaletteAiLogo.png" alt="로고" className={HeaderCSS.logoImg} />
 				</Link>
-		
-				{/* 메뉴 */}
+
 				<nav className={HeaderCSS.navMenu}>
-				<Link to="/palettes">Palette</Link>
-				<Link to="/palette/make">Make</Link>
+					<Link to="/palettes">Palette</Link>
+					<Link to="/palette/make">Make</Link>
 				</nav>
-		
-				{/* 로그인/회원가입 */}
+
 				<div className={HeaderCSS.authBox}>
-				<Link to="/auth/signup">Signup</Link>
-				<span> or </span>
-				<Link to="/auth/login">Signin</Link>
+					{isLoggedIn ? (
+						<button onClick={handleLogout} className={HeaderCSS.logoutButton}>
+							Logout
+						</button>
+					) : (
+						<>
+							<Link to="/auth/signup">Signup</Link>
+							<span> or </span>
+							<Link to="/auth/login">Signin</Link>
+						</>
+					)}
 				</div>
 			</div>
 		</div>
 	);
-
 }
 
 export default Header;
