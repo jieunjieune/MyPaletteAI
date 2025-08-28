@@ -57,7 +57,7 @@ export default function Login() {
 		<div className={LoginCSS.background}>
 			<div className={LoginCSS.container}>
 				<form className={LoginCSS.formCard} onSubmit={handleSubmit}>
-					<h1>My Palette AI 로그인</h1>
+					<h1 className={LoginCSS.title}>My Palette AI 로그인</h1>
 
 					{/* 이메일 */}
 					<div className={LoginCSS.row}>
@@ -103,7 +103,7 @@ export default function Login() {
 					{errors.global && <p className={LoginCSS.error}>{errors.global}</p>}
 
 					<button className={LoginCSS.submitButton} type="submit">
-						로그인
+					(*˙˘˙)♡ 로그인 ♡(˙˘˙*)
 					</button>
 				</form>
 			</div>

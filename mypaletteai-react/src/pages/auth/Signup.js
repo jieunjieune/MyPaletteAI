@@ -83,7 +83,7 @@ export default function Register() {
 		<div className={SignupCSS.background}>
 		<div className={SignupCSS.container}>
 		<form className={SignupCSS.formCard} onSubmit={handleSubmit}>
-			<h1>My Palette AI 회원가입</h1>
+			<h1 className={SignupCSS.title}>My Palette AI 회원가입</h1>
 
 			{/* 이메일 */}
 			<div className={SignupCSS.row}>

@@ -20,7 +20,7 @@
 }
 
 /* 타이틀 */
-h1 {
+.title {
 	text-align: center;
 	margin-bottom: 40px;
 	font-weight: 700;
