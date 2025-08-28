@@ -59,6 +59,7 @@ public class AuthService {
                 .refreshToken(refreshToken)
                 .accessTokenExpiresIn(3600000L) //1시간
                 .refreshTokenExpiresIn(1209600000L) //2주
+                .nickname(user.getNickname())
                 .build();
     }
 
