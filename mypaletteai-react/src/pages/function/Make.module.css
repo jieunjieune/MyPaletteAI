@@ -195,3 +195,26 @@
 .moodInputWrapper button:hover {
 	background-color: #FF856F;
 }
+
+.loading {
+	display: flex;
+	gap: 10px;
+	margin: 20px 0;
+}
+
+.brush {
+	font-size: 16px;
+	color: #FF6F61;
+	opacity: 0.2;
+	animation: blink 1.5s infinite;
+}
+
+.brush1 { animation-delay: 0s; }
+.brush2 { animation-delay: 0.3s; }
+.brush3 { animation-delay: 0.6s; }
+
+@keyframes blink {
+	0% { opacity: 0.2; transform: scale(1); }
+	50% { opacity: 1; transform: scale(1.2); }
+	100% { opacity: 0.2; transform: scale(1); }
+}
