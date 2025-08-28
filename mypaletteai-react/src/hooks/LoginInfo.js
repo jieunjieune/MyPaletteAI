@@ -5,7 +5,11 @@ import { refreshApi } from "../apis/AuthAPICalls";
 
 export const useLoginInfo = () => {
 	const dispatch = useDispatch();
-	const { isLoggedIn, userId, accessToken } = useSelector((state) => state.authReducer);
+	const { isLoggedIn, userId, accessToken, nickname } = useSelector((state) => state.authReducer);
+
+	console.log("로그인 인포 isLoggedIn? ", isLoggedIn);
+	console.log("로그인 인포 userId? ", userId);
+	console.log("로그인 인포 nickname? ", nickname);
 
 	useEffect(() => {
 		const initializeAuth = async () => {
@@ -31,7 +35,7 @@ export const useLoginInfo = () => {
 		initializeAuth();
 	}, [dispatch, isLoggedIn]);
 
-	return { isLoggedIn, userId, accessToken };
+	return { isLoggedIn, userId, accessToken, nickname };
 };
 
 export default useLoginInfo;

@@ -8,7 +8,9 @@ import { logoutApi } from "../apis/AuthAPICalls";
 function Header() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { isLoggedIn } = useLoginInfo();
+	const { isLoggedIn, nickname } = useLoginInfo();
+
+    console.log("지금 로그인한 닉네임? ", nickname);
 
 	const handleLogout = async () => {
 		try {
@@ -35,9 +37,12 @@ function Header() {
 
 				<div className={HeaderCSS.authBox}>
 					{isLoggedIn ? (
+                        <>
+                        <span>{nickname}님, 반갑습니다 ⌯•ᴗ•⌯ಣ</span>
 						<button onClick={handleLogout} className={HeaderCSS.logoutButton}>
 							Logout
 						</button>
+                        </>
 					) : (
 						<>
 							<Link to="/auth/signup">Signup</Link>

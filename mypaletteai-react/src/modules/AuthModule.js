@@ -30,11 +30,13 @@ const authReducer = handleActions(
 			...state,
 			isLoggedIn: true,
 			userId: payload.userId,
+			nickname: payload.nickname,
 			accessToken: payload.accessToken,
 		}),
 		[SET_USER_INFO]: (state, { payload }) => ({
 			...state,
 			userId: payload.userId,
+			nickname: payload.nickname,
 			accessToken: payload.accessToken,
 			isLoggedIn: true,
 		}),
