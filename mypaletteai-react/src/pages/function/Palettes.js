@@ -8,7 +8,7 @@ function Palettes() {
 	const dispatch = useDispatch();
 	const palettes = useSelector((state) => state.paletteReducer);
 
-	console.log("palettes:", palettes);
+	// console.log("palettes:", palettes);
 
 	useEffect(() => {
 		dispatch(callPaletteApi());
