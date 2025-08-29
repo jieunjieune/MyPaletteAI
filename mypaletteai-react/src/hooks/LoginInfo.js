@@ -2,38 +2,42 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_USER_INFO, POST_LOGOUT } from "../modules/AuthModule";
 import { refreshApi } from "../apis/AuthAPICalls";
+import { jwtDecode } from "jwt-decode";
 
 export const useLoginInfo = () => {
 	const dispatch = useDispatch();
-	const { isLoggedIn, userId, accessToken, nickname } = useSelector((state) => state.authReducer);
-
-	console.log("로그인 인포 isLoggedIn? ", isLoggedIn);
-	console.log("로그인 인포 userId? ", userId);
-	console.log("로그인 인포 nickname? ", nickname);
+	const { isLoggedIn, userId, accessToken, nickname } = useSelector(
+		(state) => state.authReducer
+	);
 
 	useEffect(() => {
 		const initializeAuth = async () => {
 			const token = localStorage.getItem("accessToken");
-			if (token && !isLoggedIn) {
+
+			// ✅ 토큰이 있으면 decode
+			if (token) {
 				try {
-					// refresh API 호출 → 새 accessToken 발급
-					const newToken = await dispatch(refreshApi());
-					if (newToken) {
-						localStorage.setItem("accessToken", newToken);
-						dispatch({
-							type: SET_USER_INFO,
-							payload: { userId: null, accessToken: newToken }, // userId 필요하면 백에서 받아오기
-						});
-					}
+					const decoded = jwtDecode(token);
+					const decodedUserId = decoded.sub; // 보통 sub에 userId 저장됨
+					
+					dispatch({
+						type: SET_USER_INFO,
+						payload: {
+							userId: decodedUserId,
+							accessToken: token,
+							nickname: localStorage.getItem("nickname") || null, // ✅ 닉네임은 로컬에서 불러오기
+						},
+					});
 				} catch (err) {
-					console.error("자동 로그인 실패:", err);
+					console.error("토큰 디코딩 실패:", err);
 					dispatch({ type: POST_LOGOUT });
 					localStorage.removeItem("accessToken");
+					localStorage.removeItem("nickname");
 				}
 			}
 		};
 		initializeAuth();
-	}, [dispatch, isLoggedIn]);
+	}, [dispatch]);
 
 	return { isLoggedIn, userId, accessToken, nickname };
 };

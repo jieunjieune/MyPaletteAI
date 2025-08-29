@@ -4,6 +4,7 @@ const initialState = {
 	isLoggedIn: !!localStorage.getItem("accessToken"),
 	userId: null,
 	accessToken: localStorage.getItem("accessToken") || null,
+	nickname: localStorage.getItem("nickname") || null,
 };
 
 export const POST_SIGNUP = "auth/POST_SIGNUP";
@@ -26,26 +27,35 @@ const authReducer = handleActions(
 			userId: payload.userId,
 			accessToken: payload.accessToken,
 		}),
-		[POST_LOGIN]: (state, { payload }) => ({
-			...state,
-			isLoggedIn: true,
-			userId: payload.userId,
-			nickname: payload.nickname,
-			accessToken: payload.accessToken,
-		}),
+		[POST_LOGIN]: (state, { payload }) => {
+			if (payload.nickname) {
+				localStorage.setItem("nickname", payload.nickname);
+			}
+			return {
+				...state,
+				isLoggedIn: true,
+				userId: payload.userId,
+				nickname: payload.nickname,
+				accessToken: payload.accessToken,
+			};
+		},
 		[SET_USER_INFO]: (state, { payload }) => ({
 			...state,
 			userId: payload.userId,
-			nickname: payload.nickname,
+			nickname: payload.nickname || state.nickname,
 			accessToken: payload.accessToken,
 			isLoggedIn: true,
 		}),
-		[POST_LOGOUT]: () => ({
-			...initialState,
-			isLoggedIn: false,
-			userId: null,
-			accessToken: null,
-		}),
+		[POST_LOGOUT]: () => {
+			localStorage.removeItem("nickname");
+			return {
+				...initialState,
+				isLoggedIn: false,
+				userId: null,
+				accessToken: null,
+				nickname: null,
+			};
+		},
 	},
 	initialState
 );
