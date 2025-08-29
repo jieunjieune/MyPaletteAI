@@ -74,7 +74,9 @@
 .selectedMood { background-color: #FF6F61; color: #fff; }
 
 .selectedMoodList {
-	margin: 10px 120px 20px;
+	margin-top: -20px;
+	margin-left: 170px;
+	margin-bottom: 20px;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 6px;
