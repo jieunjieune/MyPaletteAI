@@ -9,4 +9,5 @@ public class PaletteRequestDTO {
     private String mood;
     private String mainColor; // HEX
     private int count; // 추천 색조합 개수
+    private Long userId;
 }

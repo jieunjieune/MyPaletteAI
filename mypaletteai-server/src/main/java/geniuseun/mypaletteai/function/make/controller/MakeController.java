@@ -20,7 +20,7 @@ public class MakeController {
     // 색조합 생성
     @PostMapping("/palette")
     public PaletteResponseDTO createPalette(@RequestBody PaletteRequestDTO request) {
-        Long userId = 1L; // 테스트용 하드코딩
+        Long userId = request.getUserId();
         return makeService.generatePalette(request, userId);
     }
 }

@@ -4,10 +4,12 @@ import { callMakeApi } from "../../apis/MakeAPICalls";
 import PaletteCard from "../../components/palette/PaletteCard";
 import MakeCSS from "./Make.module.css";
 import { FaDice, FaQuoteLeft, FaQuoteRight, FaPaintBrush } from "react-icons/fa";
+import { useLoginInfo } from "../../hooks/LoginInfo";
 
 export default function Make() {
 	const dispatch = useDispatch();
 	const palette = useSelector((state) => state.makeReducer);
+	const { userId } = useLoginInfo();
 
 	const mainColors = [
 		"red","orange","yellow","green","blue","indigo",
@@ -70,7 +72,7 @@ export default function Make() {
 		const moodToSend = selectedMoods.length > 0 ? selectedMoods.join(", ") : "random";
 		setLoading(true);
 		try {
-		await dispatch(callMakeApi({ mainColor, mood: moodToSend, count }));
+		await dispatch(callMakeApi({ mainColor, mood: moodToSend, count, userId }));
 		} finally {
 		setLoading(false);
 		}
