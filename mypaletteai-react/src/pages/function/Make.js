@@ -4,7 +4,7 @@ import { callMakeApi } from "../../apis/MakeAPICalls";
 import PaletteCard from "../../components/palette/PaletteCard";
 import MakeCSS from "./Make.module.css";
 import { FaDice, FaQuoteLeft, FaQuoteRight, FaPaintBrush } from "react-icons/fa";
-import { useLoginInfo } from "../../hooks/LoginInfo";
+import { useLoginInfo } from "../../hooks/useLoginInfo";
 
 export default function Make() {
 	const dispatch = useDispatch();
