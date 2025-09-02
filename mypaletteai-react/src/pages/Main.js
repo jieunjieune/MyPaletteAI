@@ -26,6 +26,8 @@ function Main() {
 	}
 	const yesterdayStr = `오늘의 팔레트 (${formatDate(new Date(Date.now() - 86400000))})`;
 	const yesterdayPalette = palettes.find(p => p.title === yesterdayStr);
+	const defaultPalette = palettes.find(p => p.title === "여름의 열정");
+	// console.log("디폴트팔레트? ", defaultPalette);
 
 	// 가장 최근 3개 팔레트
 	const recentPalettes = palettes
@@ -50,8 +52,12 @@ function Main() {
 					<PaletteCard
 						palette={{ ...yesterdayPalette, title: "어제의 팔레트", mood: "어제의 무드" }}
 					/>
+				) : defaultPalette ? (
+					<PaletteCard
+						palette={{ ...defaultPalette}}
+					/>
 				) : (
-					<p>어제의 팔레트가 없습니다.</p>
+					<p>오류</p>
 				)}
 
 				{/* 최근 3개 팔레트 */}
