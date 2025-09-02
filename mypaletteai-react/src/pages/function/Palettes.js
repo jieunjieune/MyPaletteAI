@@ -21,7 +21,7 @@ function Palettes() {
 
 		<div className={PaletteCSS.container}>
 			{palettes?.length > 0 ? (
-				<PaletteList palettes={palettes} />  // <-- 여기서 사용
+				<PaletteList palettes={palettes} />
 			) : (
 				<p>팔레트가 없습니다.</p>
 			)}
