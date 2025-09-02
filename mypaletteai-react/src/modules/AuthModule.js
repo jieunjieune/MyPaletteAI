@@ -35,7 +35,7 @@ const authReducer = handleActions(
 				...state,
 				isLoggedIn: true,
 				userId: payload.userId,
-				nickname: payload.nickname,
+				nickname: payload.nickname || state.nickname,
 				accessToken: payload.accessToken,
 			};
 		},

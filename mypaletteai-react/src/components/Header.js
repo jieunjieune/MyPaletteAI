@@ -2,15 +2,16 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import HeaderCSS from "./global/Header.module.css";
 import { POST_LOGOUT } from "../modules/AuthModule";
-import { useLoginInfo } from "../hooks/LoginInfo";
+import { useLoginInfo } from "../hooks/useLoginInfo";
 import { logoutApi } from "../apis/AuthAPICalls";
 
 function Header() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { isLoggedIn, nickname } = useLoginInfo();
+	const { isLoggedIn, nickname, userId } = useLoginInfo();
 
-    console.log("지금 로그인한 닉네임? ", nickname);
+	console.log("지금 로그인 됨? ", isLoggedIn)
+    console.log("지금 로그인한 번호? 닉네임? ",userId, nickname);
 
 	const handleLogout = async () => {
 		try {
