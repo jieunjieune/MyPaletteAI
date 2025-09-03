@@ -4,6 +4,7 @@ import geniuseun.mypaletteai.function.make.entity.Palette;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public interface PaletteRepository extends JpaRepository<Palette, Long> {
@@ -14,4 +15,6 @@ public interface PaletteRepository extends JpaRepository<Palette, Long> {
     // 날짜 범위로도 조회할 수 있게
     Optional<Palette> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 
+    // createdBy 기준으로 팔레트 조회
+    List<Palette> findByCreatedBy(Long createdBy);
 }

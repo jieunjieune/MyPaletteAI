@@ -38,6 +38,12 @@ public class PaletteController {
                 .build();
     }
 
+    // 특정 userId의 팔레트 조회
+    @GetMapping("/user/{userId}")
+    public List<PaletteResponseDTO> getPalettesByUser(@PathVariable Long userId) {
+        return paletteService.getPalettesByUser(userId);
+    }
+
     // 생성
     @PostMapping
     public Palette createPalette(@RequestBody Palette palette) {

@@ -44,6 +44,27 @@ public class PaletteService {
                 .orElseThrow(() -> new RuntimeException("팔레트를 찾을 수 없습니다."));
     }
 
+    // 특정 userId 기준 팔레트 조회
+    public List<PaletteResponseDTO> getPalettesByUser(Long userId) {
+        List<Palette> palettes = paletteRepository.findByCreatedBy(userId);
+
+        return palettes.stream()
+                .map(palette -> PaletteResponseDTO.builder()
+                        .paletteId(palette.getId())
+                        .title(palette.getTitle())
+                        .mood(palette.getMood())
+                        .mainColor(palette.getMainColor())
+                        .recommendedColors(
+                                palette.getColors().stream()
+                                        .map(Color::getHexCode)
+                                        .collect(Collectors.toList())
+                        )
+                        .message("사용자 팔레트 조회 성공")
+                        .build()
+                )
+                .collect(Collectors.toList());
+    }
+
     // 생성
     @Transactional
     public Palette createPalette(Palette palette) {
