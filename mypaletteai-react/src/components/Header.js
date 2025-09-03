@@ -40,7 +40,7 @@ function Header() {
 			<Link to="/palettes" className={HeaderCSS.menuItem}>팔레트 탐색</Link>
 			<Link to="/palette/make" className={HeaderCSS.menuItem}>팔레트 만들기</Link>
 			{isLoggedIn && userId && (
-				<Link to={`/palettes/${userId}`} className={HeaderCSS.myPaletteButton}>내 팔레트⛧</Link>
+				<Link to={`/palettes/my/${userId}`} className={HeaderCSS.myPaletteButton}>내 팔레트⛧</Link>
 			)}
 			</nav>
 

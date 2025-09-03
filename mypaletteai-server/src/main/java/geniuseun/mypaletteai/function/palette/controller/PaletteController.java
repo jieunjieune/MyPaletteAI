@@ -39,7 +39,7 @@ public class PaletteController {
     }
 
     // 특정 userId의 팔레트 조회
-    @GetMapping("/user/{userId}")
+    @GetMapping("/my/{userId}")
     public List<PaletteResponseDTO> getPalettesByUser(@PathVariable Long userId) {
         return paletteService.getPalettesByUser(userId);
     }
