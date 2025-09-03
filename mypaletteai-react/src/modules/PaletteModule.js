@@ -1,6 +1,11 @@
 import { createActions, handleActions } from "redux-actions";
 
-const initialState = [];
+// 초기 상태를 객체로 변경
+const initialState = {
+  list: [],      // 전체 팔레트 리스트
+  detail: null,  // 선택한 팔레트 상세
+  message: null, // 삭제나 기타 메시지
+};
 
 export const GET_PALETTES = "palettes/GET_PALETTES";
 export const GET_PALETTE = "palettes/GET_PALETTE";
@@ -8,35 +13,50 @@ export const POST_PALETTE = "palettes/POST_PALETTE";
 export const PUT_PALETTE = "palettes/PUT_PALETTE";
 export const DELETE_PALETTE = "palettes/DELETE_PALETTE";
 
-const actions  = createActions({
-	[GET_PALETTES]: () => {},
-	[GET_PALETTE]: () => {},
-	[POST_PALETTE]: () => {},
-	[PUT_PALETTE]: () => {},
-	[DELETE_PALETTE]: () => {}
-})
+export const actions = createActions({
+	[GET_PALETTES]: (payload) => payload,
+	[GET_PALETTE]: (payload) => payload,
+	[POST_PALETTE]: (payload) => payload,
+	[PUT_PALETTE]: (payload) => payload,
+	[DELETE_PALETTE]: (payload) => payload,
+	});
 
-const paletteReducer = handleActions(
+	const paletteReducer = handleActions(
 	{
-		[GET_PALETTES]: (state, { payload }) => payload,
+		// 전체 팔레트 조회
+		[GET_PALETTES]: (state, { payload }) => ({
+		...state,
+		list: payload,
+		}),
+		// 특정 팔레트 조회
 		[GET_PALETTE]: (state, { payload }) => ({
-			...state,
-			detail: payload
+		...state,
+		detail: payload,
 		}),
+		// 새 팔레트 생성
 		[POST_PALETTE]: (state, { payload }) => ({
-			...state,
-			detail: payload   // 새로 등록한 팔레트는 detail에 저장
+		...state,
+		list: [...state.list, payload],
+		detail: payload,
 		}),
+		// 팔레트 수정
 		[PUT_PALETTE]: (state, { payload }) => ({
-			...state,
-			detail: payload   // 수정된 팔레트
+		...state,
+		list: state.list.map((p) =>
+			p.paletteId === payload.paletteId ? payload : p
+		),
+		detail: payload,
 		}),
+		// 팔레트 삭제
 		[DELETE_PALETTE]: (state, { payload }) => ({
-			...state,
-			message: payload  // 삭제 결과 메시지
-		})
-		},
-		initialState
-	);
+		...state,
+		list: state.list.filter((p) => p.paletteId !== payload.paletteId),
+		message: payload.message,
+		detail:
+			state.detail?.paletteId === payload.paletteId ? null : state.detail,
+		}),
+	},
+	initialState
+);
 
 export default paletteReducer;

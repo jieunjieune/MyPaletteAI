@@ -6,7 +6,7 @@ import PaletteCSS from "./Palettes.module.css";
 
 function Palettes() {
 	const dispatch = useDispatch();
-	const palettes = useSelector((state) => state.paletteReducer);
+	const palettes = useSelector((state) => state.paletteReducer.list);
 
 	// console.log("palettes:", palettes);
 

@@ -10,7 +10,7 @@ function Main() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate(); // <-- 추가
 	const todayPalette = useSelector((state) => state.todayPalette);
-	const palettes = useSelector(state => state.paletteReducer);
+	const palettes = useSelector(state => state.paletteReducer.list || []);
 
 	useEffect(() => {
 		dispatch(callTodayPaletteApi());
