@@ -122,7 +122,7 @@
 	margin-right: 50px;
 }
 
-.randomButton {
+.randomButton, .resetButton {
 	padding: 8px 16px;
 	background-color: #ffd166;
 	color: #333;
@@ -133,7 +133,7 @@
 	transition: background 0.2s;
 }
 
-.randomButton:hover { 
+.randomButton:hover, .resetButton:hover { 
 	background-color: #70c1b3;
 	color: #fff;
 }

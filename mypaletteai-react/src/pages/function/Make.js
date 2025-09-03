@@ -158,6 +158,18 @@ export default function Make() {
 
 			{/* 버튼 그룹 */}
 			<div className={MakeCSS.buttonGroup}>
+				{/* 선택 초기화 버튼 */}
+					<button
+						className={MakeCSS.resetButton}
+						onClick={() => {
+							setMainColor("");
+							setSelectedMoods([]);
+							setCustomMood("");
+							setCount(4);
+						}}
+					>
+						선택 초기화
+					</button>
 			<button className={MakeCSS.randomButton} onClick={handleRandomSelect}>
 				<FaDice /> random
 			</button>
