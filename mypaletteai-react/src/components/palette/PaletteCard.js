@@ -7,7 +7,7 @@ function PaletteCard({ palette, isButton }) {
 	const { title, mood, recommendedColors, paletteId } = palette || {};
 	const navigate = useNavigate();
 
-	console.log("팔레트아이디: ", paletteId);
+	// console.log("팔레트아이디: ", paletteId);
 
 	const colors = Array.isArray(recommendedColors)
 		? recommendedColors.flat()
