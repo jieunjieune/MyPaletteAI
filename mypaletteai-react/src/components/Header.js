@@ -10,56 +10,58 @@ function Header() {
 	const navigate = useNavigate();
 	const { isLoggedIn, nickname, userId } = useLoginInfo();
 
-    console.log("지금 로그인? ",isLoggedIn, userId, nickname);
-
 	const handleLogout = async () => {
 		try {
-			await logoutApi();
-			localStorage.removeItem("accessToken");
-			dispatch({ type: POST_LOGOUT });
-			navigate("/auth/login");
+		await logoutApi();
+		localStorage.removeItem("accessToken");
+		localStorage.removeItem("nickname");
+		localStorage.removeItem("userId");
+		dispatch({ type: POST_LOGOUT });
+		navigate("/auth/login");
 		} catch (err) {
-			alert("로그아웃 실패");
+		alert("로그아웃 실패");
 		}
 	};
 
 	return (
 		<div className={HeaderCSS.headerBox}>
-			<div className={`${HeaderCSS.box} flex items-center justify-between`}>
-				<Link to="/" className={HeaderCSS.headerLogo}>
-					<img src="/images/main/MyPaletteAiLogo.png" alt="로고" className={HeaderCSS.logoImg} />
-				</Link>
+		<div className={`${HeaderCSS.box} flex items-center justify-between`}>
+			{/* 로고 */}
+			<Link to="/" className={HeaderCSS.headerLogo}>
+			<img
+				src="/images/main/MyPaletteAiLogo.png"
+				alt="로고"
+				className={HeaderCSS.logoImg}
+			/>
+			</Link>
 
-				<nav className={HeaderCSS.navMenu}>
-					<Link to="/palettes">Palette</Link>
-					<Link to="/palette/make">Make</Link>
-				</nav>
+			{/* 메뉴 */}
+			<nav className={HeaderCSS.navMenu}>
+			<Link to="/palettes" className={HeaderCSS.menuItem}>팔레트 탐색</Link>
+			<Link to="/palette/make" className={HeaderCSS.menuItem}>팔레트 만들기</Link>
+			{isLoggedIn && userId && (
+				<Link to={`/palettes/${userId}`} className={HeaderCSS.myPaletteButton}>내 팔레트⛧</Link>
+			)}
+			</nav>
 
-				<div className={HeaderCSS.authBox}>
-					{isLoggedIn ? (
-                        <>
-                        <span>{nickname}님, 반갑습니다 ⌯•ᴗ•⌯ಣ</span>
-						{userId && (
-                <button
-					className={HeaderCSS.myPaletteButton}
-					onClick={() => navigate(`/palettes/${userId}`)}
-					>
-					내 팔레트
-					</button>
-				)}
-						<button onClick={handleLogout} className={HeaderCSS.logoutButton}>
-							Logout
-						</button>
-                        </>
-					) : (
-						<>
-							<Link to="/auth/signup">Signup</Link>
-							<span> or </span>
-							<Link to="/auth/login">Signin</Link>
-						</>
-					)}
-				</div>
+			{/* 로그인/닉네임 + 로그아웃 */}
+			<div className={HeaderCSS.authBox}>
+			{isLoggedIn ? (
+				<>
+				<span>{nickname}님, 반갑습니다 ⌯•ᴗ•⌯ಣ</span>
+				<button onClick={handleLogout} className={HeaderCSS.logoutButton}>
+					Logout
+				</button>
+				</>
+			) : (
+				<>
+				<Link to="/auth/signup">Signup</Link>
+				<span> or </span>
+				<Link to="/auth/login">Signin</Link>
+				</>
+			)}
 			</div>
+		</div>
 		</div>
 	);
 }
