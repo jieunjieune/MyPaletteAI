@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/palettes")
@@ -23,8 +24,18 @@ public class PaletteController {
 
     // 상세 조회
     @GetMapping("/{id}")
-    public Palette getPalette(@PathVariable Long id) {
-        return paletteService.getPalette(id);
+    public PaletteResponseDTO getPalette(@PathVariable Long id) {
+        Palette palette = paletteService.getPalette(id);
+        return PaletteResponseDTO.builder()
+                .paletteId(palette.getId())
+                .title(palette.getTitle())
+                .mood(palette.getMood())
+                .mainColor(palette.getMainColor())
+                .recommendedColors(palette.getColors().stream()
+                        .map(c -> c.getHexCode())
+                        .collect(Collectors.toList()))
+                .message("팔레트 상세 조회 성공")
+                .build();
     }
 
     // 생성

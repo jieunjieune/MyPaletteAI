@@ -38,6 +38,7 @@ public class TodayPaletteService {
                     .collect(Collectors.toList());
 
             return PaletteResponseDTO.builder()
+                    .paletteId(palette.getId())
                     .title(palette.getTitle())
                     .mainColor(palette.getMainColor())
                     .mood(palette.getMood())

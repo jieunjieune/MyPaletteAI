@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class PaletteResponseDTO {
+    private Long paletteId;
     private String title;
     private String mood;
     private String mainColor;

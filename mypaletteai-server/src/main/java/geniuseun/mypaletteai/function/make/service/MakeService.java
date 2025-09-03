@@ -51,6 +51,7 @@ public class MakeService {
 
         // 결과 반환
         return PaletteResponseDTO.builder()
+                .paletteId(palette.getId())
                 .title(title)
                 .mood(palette.getMood())
                 .mainColor(palette.getMainColor())

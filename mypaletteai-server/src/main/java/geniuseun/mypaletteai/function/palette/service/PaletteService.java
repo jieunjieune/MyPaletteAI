@@ -23,6 +23,7 @@ public class PaletteService {
 
         return palettes.stream()
                 .map(palette -> PaletteResponseDTO.builder()
+                        .paletteId(palette.getId())
                         .title(palette.getTitle())
                         .mood(palette.getMood())
                         .mainColor(palette.getMainColor())

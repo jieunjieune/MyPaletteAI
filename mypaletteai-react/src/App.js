@@ -5,6 +5,7 @@ import Palettes from "./pages/function/Palettes";
 import Make from "./pages/function/Make";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
+import PaletteDetail from "./pages/function/PaletteDetail";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route pate="/" element={<Layout/>}>
           <Route index element={<Main />} />
           <Route path="/palettes" element={<Palettes />} />
+          <Route path="/palettes/:id" element={<PaletteDetail />} />
           <Route path="/palette/make" element={<Make />} />
           <Route path="/auth/signup" element={<Signup />} />
           <Route path="/auth/login" element={<Login />} />
