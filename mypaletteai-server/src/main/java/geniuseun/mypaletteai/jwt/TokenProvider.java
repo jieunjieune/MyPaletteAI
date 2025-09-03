@@ -65,4 +65,14 @@ public class TokenProvider {
 
         return new UsernamePasswordAuthenticationToken(userId, "", null);
     }
+
+    // refresh 관련
+    public String getUserIdFromToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
 }

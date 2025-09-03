@@ -1,3 +1,5 @@
+import { SET_USER_INFO, POST_LOGOUT } from "../modules/AuthModule";
+
 const prefix = `http://${process.env.REACT_APP_RESTAPI_IP}:8080`;
 
 export const signupApi = (userData) => {
@@ -25,90 +27,109 @@ export const signupApi = (userData) => {
 	};
 };
 
+// 로그인
 export const loginApi = (loginData) => {
-	const requestURL = `${prefix}/auth/login`;
+    const requestURL = `${prefix}/auth/login`;
 
-	return async (dispatch) => {
-		console.log("로그인 요청 url: ", requestURL);
-		try {
-			const response = await fetch(requestURL, {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(loginData),
-				credentials: "include"		// 리프레시 토큰 쿠키 포함!
-			});
+    return async (dispatch) => {
+        try {
+            const response = await fetch(requestURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(loginData),
+                credentials: "include" // ✅ HttpOnly refreshToken 쿠키 포함
+            });
 
-			if (!response.ok) throw new Error("로그인 실패");
+            if (!response.ok) throw new Error("로그인 실패");
 
-			// 로그인은 보통 JSON 응답 (회원정보 or 토큰)
-			const result = await response.json();
-			console.log("로그인 결과:", result);
+            const result = await response.json();
+			console.log("로그인 결과: ", result);
 
-			// 엑세스 토큰 저장
-			localStorage.setItem("accessToken", result.accessToken);
+            // accessToken + 유저 정보만 저장
+            localStorage.setItem("accessToken", result.accessToken);
+            localStorage.setItem("userId", result.userId);
+            localStorage.setItem("nickname", result.nickname);
 
-			// 스토어 저장
-			dispatch({ type: "auth/POST_LOGIN", payload: result });
+            dispatch({ type: "auth/POST_LOGIN", payload: result });
+			console.log("로그인결과: " , result);
 
-			// 로그인 성공 알림
-			alert("로그인 성공!");
-		} catch (err) {
-			console.error("로그인 실패:", err);
-			alert("로그인 실패! 이메일 또는 비밀번호를 확인하세요.");
-		}
-	};
+            return result;
+        } catch (err) {
+            console.error("로그인 실패:", err);
+            throw err;
+        }
+    };
 };
 
+// 리프레시
 export const refreshApi = () => {
 	const requestURL = `${prefix}/auth/refresh`;
-	
-		return async () => {
+
+	return async (dispatch) => {
 		try {
-			const response = await fetch(requestURL, {
+		// 🔹 JS에서는 refreshToken 쿠키 접근 불가
+		// 브라우저가 자동으로 쿠키를 전송함
+		const response = await fetch(requestURL, {
 			method: "POST",
-			credentials: "include" // ✅ 쿠키 포함
-			});
-	
-			if (!response.ok) throw new Error("토큰 재발급 실패");
-	
-			const data = await response.json();
-			return data.accessToken;
-		} catch (err) {
-			console.error("토큰 재발급 실패:", err);
-			return null;
+			credentials: "include", // 🔹 쿠키 포함
+		});
+
+		if (!response.ok) throw new Error("리프레시 토큰 유효하지 않음");
+
+		const data = await response.json();
+		console.log("🔄 새 accessToken 발급:", data);
+
+		// 🔹 localStorage 갱신
+		localStorage.setItem("accessToken", data.accessToken);
+		localStorage.setItem("userId", data.userId);
+		localStorage.setItem("nickname", data.nickname);
+
+		// 🔹 Redux 상태 갱신
+		dispatch({
+			type: "auth/SET_USER_INFO",
+			payload: {
+			userId: data.userId,
+			accessToken: data.accessToken,
+			nickname: data.nickname,
+			},
+		});
+
+		return data.accessToken;
+		} catch (error) {
+		console.error("리프레시 토큰 실패:", error);
+		dispatch({ type: POST_LOGOUT });
+		localStorage.clear();
+		return null;
 		}
 	};
 };
 
 // 로그아웃
 export const logoutApi = () => {
-    const requestURL = `${prefix}/auth/logout`;
-    return async (dispatch) => {
-        try {
-            const accessToken = localStorage.getItem("accessToken");
-            if (!accessToken) throw new Error("로그인 상태가 아닙니다.");
+	const requestURL = `${prefix}/auth/logout`;
 
-            const response = await fetch(requestURL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${accessToken}`
-                },
-                credentials: "include"
-            });
+	return async (dispatch) => {
+		try {
+			const accessToken = localStorage.getItem("accessToken");
+			if (!accessToken) throw new Error("로그인 상태가 아님");
 
-            if (!response.ok) throw new Error("로그아웃 실패");
+			const response = await fetch(requestURL, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${accessToken}`,
+				},
+				credentials: "include", // ✅ refreshToken 쿠키 삭제 위해
+			});
 
-            // 로컬스토리지 초기화
-            localStorage.removeItem("accessToken");
+			if (!response.ok) throw new Error("로그아웃 실패");
 
-            // Redux 상태 초기화
-            dispatch({ type: "auth/POST_LOGOUT" });
-
-            alert("로그아웃 완료!");
-        } catch (err) {
-            console.error(err);
-            alert("로그아웃 실패! 다시 시도해주세요.");
-        }
-    };
+			localStorage.clear();
+			dispatch({ type: POST_LOGOUT });
+			alert("로그아웃 완료!");
+		} catch (err) {
+			console.error(err);
+			alert("로그아웃 실패! 다시 시도해주세요.");
+		}
+	};
 };

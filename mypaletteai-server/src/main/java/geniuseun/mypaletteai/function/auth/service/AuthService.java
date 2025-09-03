@@ -43,9 +43,9 @@ public class AuthService {
     // 로그인
     public TokenDTO login(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(()-> new RuntimeException("가입이력이 없는 이메일입니다."));
+                .orElseThrow(() -> new RuntimeException("가입이력이 없는 이메일입니다."));
 
-        if(!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
 
@@ -57,8 +57,31 @@ public class AuthService {
                 .userId(user.getUserId())
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
-                .accessTokenExpiresIn(3600000L) //1시간
-                .refreshTokenExpiresIn(1209600000L) //2주
+                .accessTokenExpiresIn(1000L * 60 * 60)      // 1시간
+                .refreshTokenExpiresIn(1000L * 60 * 60 * 24 * 14) // 2주
+                .nickname(user.getNickname())
+                .build();
+    }
+
+    // 리프레시
+    public TokenDTO refreshAccessToken(String refreshToken) {
+        if (!tokenProvider.validateToken(refreshToken)) {
+            throw new RuntimeException("리프레시 토큰이 유효하지 않습니다.");
+        }
+
+        Long userId = Long.valueOf(tokenProvider.getUserIdFromToken(refreshToken));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+
+        String newAccessToken = tokenProvider.createAccessToken(userId);
+
+        return TokenDTO.builder()
+                .tokenType("Bearer")
+                .userId(user.getUserId())
+                .accessToken(newAccessToken)
+                .refreshToken(refreshToken) // 그대로 유지
+                .accessTokenExpiresIn(1000L * 60 * 60)
+                .refreshTokenExpiresIn(1000L * 60 * 60 * 24 * 14)
                 .nickname(user.getNickname())
                 .build();
     }
