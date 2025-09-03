@@ -1,0 +1,72 @@
+.container {
+	width: 100%;
+	height: 100vh;
+	max-width: 1200px;
+	margin: 0 auto;
+	align-content: center;
+}
+
+.colorBar {
+	display: flex;
+	border: 1px solid #e3e3e3;
+}
+
+.colorItem {
+	display: flex;
+	width: 1000px;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid #e3e3e3;
+
+}
+
+.colorBlock {
+	width: 100%;
+	height: 500px;
+}
+
+.colorName {
+	margin-top: 6px;
+	font-size: 20px;
+	color: #757575;
+	font-weight: 500;
+	height: 50px;
+	align-content: center;
+	cursor: pointer;
+	position: relative;
+}
+
+.copied {
+	position: absolute;
+	bottom: 110%; /* 항상 위쪽으로 */
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 8px; /* 글자와 HEX 코드 간격 */
+	font-size: 14px;
+	color: #70c1b3;
+	white-space: nowrap; /* 줄바꿈 방지 */
+	animation: fadeOut 1.5s forwards;
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.info {
+	text-align:right;
+}
+
+.title {
+	font-size: 24px;
+	margin-bottom: -10px;
+}
+
+.mood {
+	font-size: 16px;
+	color: #555;
+}
