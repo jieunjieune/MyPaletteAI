@@ -10,8 +10,7 @@ function Header() {
 	const navigate = useNavigate();
 	const { isLoggedIn, nickname, userId } = useLoginInfo();
 
-	console.log("지금 로그인 됨? ", isLoggedIn)
-    console.log("지금 로그인한 번호? 닉네임? ",userId, nickname);
+    console.log("지금 로그인? ",isLoggedIn, userId, nickname);
 
 	const handleLogout = async () => {
 		try {
@@ -40,6 +39,14 @@ function Header() {
 					{isLoggedIn ? (
                         <>
                         <span>{nickname}님, 반갑습니다 ⌯•ᴗ•⌯ಣ</span>
+						{userId && (
+                <button
+					className={HeaderCSS.myPaletteButton}
+					onClick={() => navigate(`/palettes/${userId}`)}
+					>
+					내 팔레트
+					</button>
+				)}
 						<button onClick={handleLogout} className={HeaderCSS.logoutButton}>
 							Logout
 						</button>
