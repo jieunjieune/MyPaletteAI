@@ -11,11 +11,15 @@ export default function MyPalette() {
 	const dispatch = useDispatch();
 
 	// 내가 만든 팔레트
-	const palettes = useSelector((state) => state.paletteReducer.myPalettes || []);
+	const palettes = useSelector((state) =>
+		Array.isArray(state.paletteReducer.myPalettes) ? state.paletteReducer.myPalettes : []
+	);
 	const loading = useSelector((state) => state.paletteReducer.loading);
 
 	// 저장한 팔레트
-	const savedPalettes = useSelector((state) => state.saveReducer.list || []);
+	const savedPalettes = useSelector((state) =>
+		Array.isArray(state.saveReducer.list) ? state.saveReducer.list : []
+	);
 	const saveLoading = useSelector((state) => state.saveReducer.loading);
 
 	// 페이지네이션 상태
@@ -35,20 +39,22 @@ export default function MyPalette() {
 
 	// 공통 렌더 함수
 	const renderList = (items, visibleCount, setVisibleCount, label) => {
-		if (!items || items.length === 0) {
+		const list = Array.isArray(items) ? items : []; // ✅ 안전하게 배열 처리
+
+		if (list.length === 0) {
 		return <div>아직 {label} 팔레트가 없습니다.</div>;
 		}
 
 		return (
 		<>
 			<div className={MyPaletteCSS.gridWrapper}>
-			{items.slice(0, visibleCount).map((palette) => (
+			{list.slice(0, visibleCount).map((palette) => (
 				<div key={palette.paletteId || palette.saveId} className={MyPaletteCSS.gridItem}>
 				<PaletteCard palette={palette} />
 				</div>
 			))}
 			</div>
-			{visibleCount < items.length && (
+			{visibleCount < list.length && (
 			<button
 				className={MyPaletteCSS.moreButton}
 				onClick={() => setVisibleCount((prev) => prev + 6)} // 6개씩 더보기
