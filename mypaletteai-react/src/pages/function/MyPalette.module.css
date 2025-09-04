@@ -20,20 +20,22 @@
 }
 
 .moreButton {
-	width: 1600px;
+	width: 99%;
 	display: block;
 	margin: 0 auto 40px;
 	padding: 10px 20px;
-	font-size: 1rem;
+	font-size: 14px;
+	font-weight: bold;
 	border: none;
 	border-radius: 2px;
-	color: #70c1b3;
+	color: #b3b3b3;
 	cursor: pointer;
 	transition: background-color 0.2s ease;
 }
 
 .moreButton:hover {
-	color: #ffd166;
+	background-color: #ffd166;
+	color: #fff;
 }
 
 .moreButton:disabled {
