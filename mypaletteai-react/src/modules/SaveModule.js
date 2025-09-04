@@ -27,7 +27,7 @@ const saveReducer = handleActions(
 		}),
 		[DELETE_SAVEPALETTE]: (state, { payload }) => ({
 			...state,
-			list: state.list.filter((p) => p.paletteId !== payload), // payload에 삭제할 paletteId 전달
+			list: state.list.filter((p) => p?.saveId !== payload), // optional chaining 추가
 		}),
 	},
 	initialState

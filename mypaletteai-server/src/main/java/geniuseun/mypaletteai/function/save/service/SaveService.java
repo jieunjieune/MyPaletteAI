@@ -34,17 +34,21 @@ public class SaveService {
         Palette palette = paletteRepository.findById(paletteId)
                 .orElseThrow(() -> new IllegalArgumentException("팔레트를 찾을 수 없습니다."));
 
-        // 중복 저장 방지
+        // 중복 저장 체크
         boolean exists = saveRepository.existsByUserIdAndPalette(userId, palette);
         if (exists) {
+            SavedPalette existing = saveRepository.findByUserIdAndPalette(userId, palette)
+                    .orElseThrow(() -> new RuntimeException("저장된 팔레트를 찾을 수 없습니다."));
+
+            SavedPaletteDTO dto = convertToDTO(existing);
             return SaveResponseDTO.builder()
                     .success(false)
                     .message("이미 저장된 팔레트입니다.")
-                    .savedPalette(null)
+                    .savedPalette(dto)
                     .build();
         }
 
-        // SavedPalette 엔티티 저장
+        // 새 엔티티 저장
         SavedPalette savedEntity = saveRepository.save(
                 SavedPalette.builder()
                         .userId(userId)
@@ -53,59 +57,47 @@ public class SaveService {
                         .build()
         );
 
-        // 저장된 엔티티를 DTO로 변환
-        SavedPaletteDTO dto = SavedPaletteDTO.builder()
-                .saveId(savedEntity.getId())
-                .paletteId(palette.getId())
-                .title(palette.getTitle())
-                .mainColor(palette.getMainColor())
-                .mood(palette.getMood())
-                .colors(
-                        palette.getColors().stream()
-                                .map(Color::getHexCode)
-                                .collect(Collectors.toList())
-                )
-                .savedAt(savedEntity.getSavedAt())
-                .build();
+        SavedPaletteDTO dto = convertToDTO(savedEntity);
 
-        // 최종 응답
         return SaveResponseDTO.builder()
                 .success(true)
                 .message("팔레트 저장 완료!")
-                .savedPalette(dto) // ✅ 객체 통째로 전달
+                .savedPalette(dto)
                 .build();
     }
 
     // 저장된 팔레트 조회 (사용자별)
     @Transactional(readOnly = true)
     public List<SavedPaletteDTO> getSavedPalettesByUser(Long userId) {
-        // userId로 저장된 팔레트 전체 조회
         List<SavedPalette> savedList = saveRepository.findByUserId(userId);
-
-        return savedList.stream().map(saved -> {
-            Palette palette = saved.getPalette();
-
-            List<String> colors = palette.getColors().stream()
-                    .map(Color::getHexCode)
-                    .collect(Collectors.toList());
-
-            return SavedPaletteDTO.builder()
-                    .saveId(saved.getId())                 // ✅ saveId 매핑
-                    .paletteId(palette.getId())            // 원본 팔레트 id
-                    .title(palette.getTitle())
-                    .mainColor(palette.getMainColor())
-                    .mood(palette.getMood())
-                    .colors(colors)
-                    .savedAt(saved.getSavedAt())           // ✅ 저장 시간 매핑
-                    .build();
-        }).collect(Collectors.toList());
+        return savedList.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-
     // 저장된 팔레트 삭제
+    @Transactional
     public void deleteSavedPalette(Long saveId, Long userId) {
         SavedPalette save = saveRepository.findByIdAndUserId(saveId, userId)
                 .orElseThrow(() -> new RuntimeException("저장된 팔레트가 없습니다."));
         saveRepository.delete(save);
+    }
+
+    // DTO 변환 공통 메서드
+    private SavedPaletteDTO convertToDTO(SavedPalette saved) {
+        Palette palette = saved.getPalette();
+        List<String> colors = palette.getColors().stream()
+                .map(Color::getHexCode)
+                .collect(Collectors.toList());
+
+        return SavedPaletteDTO.builder()
+                .saveId(saved.getId())
+                .paletteId(palette.getId())
+                .title(palette.getTitle())
+                .mainColor(palette.getMainColor())
+                .mood(palette.getMood())
+                .colors(colors)
+                .savedAt(saved.getSavedAt())
+                .build();
     }
 }
