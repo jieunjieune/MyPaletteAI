@@ -70,3 +70,34 @@
 	font-size: 16px;
 	color: #555;
 }
+
+
+.bookmarkIcon {
+	font-size: 28px;
+	color: ff6f61;
+	cursor: pointer;
+	transition: transform 0.2s;
+	margin-right: 5px;
+}
+
+.bookmarkIcon:hover {
+	transform: scale(1.2);
+}
+
+.bookmarkIconFilled {
+	font-size: 28px;
+	color: #ff6f61;
+	cursor: pointer;
+	transition: transform 0.2s;
+	margin-right: 5px;
+}
+
+.bookmarkIconFilled:hover {
+	transform: scale(1.2);
+}
+
+.saveMessage {
+	margin-top: 8px;
+	font-size: 14px;
+	color: #70c1b3;
+}

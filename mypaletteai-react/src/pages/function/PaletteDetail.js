@@ -5,6 +5,7 @@ import { paletteDetailApi } from "../../apis/PaletteAPICalls";
 import { savePaletteApi, deleteSavePaletteApi, getSavePalettesApi } from "../../apis/SaveAPICalls";
 import DetailCSS from "./PaletteDetail.module.css";
 import { useLoginInfo } from "../../hooks/useLoginInfo";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 
 export default function PaletteDetail() {
 	const { id } = useParams();
@@ -94,20 +95,17 @@ export default function PaletteDetail() {
 
 				{/* 저장 / 삭제 버튼 */}
 				{!savedId ? (
-					<button
-						onClick={handleSave}
-						disabled={savingState}
-						className={DetailCSS.saveButton}
-					>
-						{savingState ? "저장 중..." : "저장하기"}
-					</button>
+					<FaRegBookmark
+					className={DetailCSS.bookmarkIcon}
+					onClick={handleSave}
+					title="저장하기"
+				/>
 				) : (
-					<button
-						onClick={handleDelete}
-						className={DetailCSS.deleteButton}
-					>
-						삭제하기
-					</button>
+					<FaBookmark
+					className={DetailCSS.bookmarkIconFilled}
+					onClick={handleDelete}
+					title="삭제하기"
+					/>
 				)}
 
 				{/* 메시지 표시 */}
