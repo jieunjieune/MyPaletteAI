@@ -10,7 +10,7 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* 카드 3개씩 */
 	gap: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 }
 
 .gridItem {
@@ -31,6 +31,7 @@
 	color: #b3b3b3;
 	cursor: pointer;
 	transition: background-color 0.2s ease;
+	margin-top: -30px;
 }
 
 .moreButton:hover {
@@ -45,4 +46,12 @@
 
 .title {
     margin-left: 20px;
+	font-size: 26px;
+}
+
+.noListMessage {
+	margin-left: 20px;
+	margin-top: -10px;
+	margin-bottom: 50px;
+	color: #70c1b3;
 }

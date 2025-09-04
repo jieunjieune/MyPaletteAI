@@ -34,7 +34,7 @@ export default function MyPalette() {
 		}
 	}, [dispatch, userId]);
 
-	if (!userId) return <div>로그인 후 내 팔레트를 볼 수 있습니다.</div>;
+	if (!userId) return <div>로그인 후 이용이 가능합니다.</div>;
 	if (loading || saveLoading) return <div>불러오는 중...</div>;
 
 	// 공통 렌더 함수
@@ -42,7 +42,7 @@ export default function MyPalette() {
 		const list = Array.isArray(items) ? items : []; // ✅ 안전하게 배열 처리
 
 		if (list.length === 0) {
-		return <div>아직 {label} 팔레트가 없습니다.</div>;
+		return <div className={MyPaletteCSS.noListMessage}>아직 {label} 팔레트가 없습니다 🥲</div>;
 		}
 
 		return (
