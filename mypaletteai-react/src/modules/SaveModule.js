@@ -2,6 +2,7 @@ import { createActions, handleActions } from "redux-actions";
 
 const initialState = {
 	list: [],
+	loading: false,
 };
 
 export const GET_SAVEPALETTES = "save/GET_SAVEPALETTES";
@@ -22,7 +23,7 @@ const saveReducer = handleActions(
 		}),
 		[POST_SAVEPALETTE]: (state, { payload }) => ({
 			...state,
-			list: [...state.list, payload], // 새 팔레트 추가
+			list: payload, // 새 팔레트 추가
 		}),
 		[DELETE_SAVEPALETTE]: (state, { payload }) => ({
 			...state,

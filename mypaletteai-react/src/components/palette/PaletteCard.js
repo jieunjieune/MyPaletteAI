@@ -10,7 +10,9 @@ function PaletteCard({ palette, isButton }) {
 	// console.log("팔레트아이디: ", paletteId);
 
 	const colors = Array.isArray(recommendedColors)
-		? recommendedColors.flat()
+	? recommendedColors.flat()
+	: Array.isArray(palette.colors) 
+		? palette.colors.flat()
 		: [];
 
 	const handleClick = () => {

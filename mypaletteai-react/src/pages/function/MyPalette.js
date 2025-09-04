@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginInfo } from "../../hooks/useLoginInfo";
 import { myPaletteApi } from "../../apis/PaletteAPICalls";
+import { getSavePalettesApi } from "../../apis/SaveAPICalls"; 
 import PaletteCard from "../../components/palette/PaletteCard";
 import MyPaletteCSS from "./MyPalette.module.css";
 
@@ -9,69 +10,63 @@ export default function MyPalette() {
 	const { userId } = useLoginInfo();
 	const dispatch = useDispatch();
 
+	// 내가 만든 팔레트
 	const palettes = useSelector((state) => state.paletteReducer.myPalettes || []);
 	const loading = useSelector((state) => state.paletteReducer.loading);
 
-	const [currentIndex, setCurrentIndex] = useState(0);
-	const [visibleCount, setVisibleCount] = useState(3);
+	// 저장한 팔레트
+	const savedPalettes = useSelector((state) => state.saveReducer.list || []);
+	const saveLoading = useSelector((state) => state.saveReducer.loading);
 
+	// 페이지네이션 상태
+	const [visibleMade, setVisibleMade] = useState(6);   // 내가 만든 팔레트 6개씩
+	const [visibleSaved, setVisibleSaved] = useState(6); // 저장한 팔레트 6개씩
+
+	// 데이터 불러오기
 	useEffect(() => {
-		if (userId) dispatch(myPaletteApi(userId));
+		if (userId) {
+		dispatch(myPaletteApi(userId));
+		dispatch(getSavePalettesApi());
+		}
 	}, [dispatch, userId]);
 
-	// 화면 너비에 따라 visibleCount 변경
-	useEffect(() => {
-		const handleResize = () => {
-			const width = window.innerWidth;
-			if (width < 600) setVisibleCount(1);
-			else if (width < 900) setVisibleCount(2);
-			else setVisibleCount(3);
-		};
-		handleResize();
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, []);
-
 	if (!userId) return <div>로그인 후 내 팔레트를 볼 수 있습니다.</div>;
-	if (loading) return <div>불러오는 중...</div>;
-	if (!palettes || palettes.length === 0) return <div>아직 생성한 팔레트가 없습니다.</div>;
+	if (loading || saveLoading) return <div>불러오는 중...</div>;
 
-	const maxIndex = Math.max(0, palettes.length - visibleCount);
+	// 공통 렌더 함수
+	const renderList = (items, visibleCount, setVisibleCount, label) => {
+		if (!items || items.length === 0) {
+		return <div>아직 {label} 팔레트가 없습니다.</div>;
+		}
 
-	const handlePrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
-	const handleNext = () => setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+		return (
+		<>
+			<div className={MyPaletteCSS.gridWrapper}>
+			{items.slice(0, visibleCount).map((palette) => (
+				<div key={palette.paletteId || palette.saveId} className={MyPaletteCSS.gridItem}>
+				<PaletteCard palette={palette} />
+				</div>
+			))}
+			</div>
+			{visibleCount < items.length && (
+			<button
+				className={MyPaletteCSS.moreButton}
+				onClick={() => setVisibleCount((prev) => prev + 6)} // 6개씩 더보기
+			>
+				더보기
+			</button>
+			)}
+		</>
+		);
+	};
 
 	return (
 		<div className={MyPaletteCSS.container}>
-			<h1 className={MyPaletteCSS.title}>내가 만든 팔레트</h1>
-			<div className={MyPaletteCSS.sliderWrapper}>
-				<button
-					className={`${MyPaletteCSS.navButton} ${MyPaletteCSS.prevButton}`}
-					onClick={handlePrev}
-					disabled={currentIndex === 0}
-				>
-					&lt;
-				</button>
-				<div
-					className={MyPaletteCSS.sliderTrack}
-					style={{ transform: `translateX(-${(100 / visibleCount) * currentIndex}%)` }}
-				>
-					{palettes.map((palette) => (
-						<div key={palette.paletteId} className={MyPaletteCSS.gridItem}>
-							<PaletteCard palette={palette} />
-						</div>
-					))}
-				</div>
-				<button
-					className={`${MyPaletteCSS.navButton} ${MyPaletteCSS.nextButton}`}
-					onClick={handleNext}
-					disabled={currentIndex === maxIndex}
-				>
-					&gt;
-				</button>
-			</div>
+		<h1 className={MyPaletteCSS.title}>내가 만든 팔레트</h1>
+		{renderList(palettes, visibleMade, setVisibleMade, "생성한")}
 
-			<h1 className={MyPaletteCSS.title}>저장한 팔레트</h1>
+		<h1 className={MyPaletteCSS.title}>저장한 팔레트</h1>
+		{renderList(savedPalettes, visibleSaved, setVisibleSaved, "저장한")}
 		</div>
 	);
 }
