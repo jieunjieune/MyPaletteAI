@@ -72,16 +72,34 @@
 }
 
 
-.bookmarkIcon {
-	font-size: 28px;
-	color: #ff6f61;
-	cursor: pointer;
-	transition: transform 0.2s;
-	margin-right: 5px;
+/* 버튼 영역: 가로로 정렬, 오른쪽 정렬 */
+.actionButtons {
+	display: flex;
+	flex-direction: row;
+	gap: 18px; /* 아이콘 간격 */
+	margin-top: 10px;
+	justify-content: flex-end; /* 오른쪽 정렬 */
+	align-items: center;
 }
 
-.bookmarkIcon:hover {
-	transform: scale(1.2);
+/* 아이콘 공통 스타일 */
+.bookmarkIcon, .bookmarkIconFilled, .shareIcon {
+	font-size: 28px; /* 아이콘 크기 */
+	color: #70c1b3;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.downloadIcon {
+	font-size: 34px;
+	color: #70c1b3;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.bookmarkIcon:hover, .bookmarkIconFilled:hover, .shareIcon:hover, .downloadIcon:hover {
+	transform: translateY(-2px);
+	color: #ff6f61;
 }
 
 .bookmarkIconFilled {
@@ -89,7 +107,6 @@
 	color: #ff6f61;
 	cursor: pointer;
 	transition: transform 0.2s;
-	margin-right: 5px;
 }
 
 .bookmarkIconFilled:hover {
@@ -97,6 +114,7 @@
 }
 
 .saveMessage {
+	text-align: right;
 	margin-top: 8px;
 	font-size: 14px;
 	color: #70c1b3;
