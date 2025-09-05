@@ -11,7 +11,7 @@
 
 /* 내부 컨텐츠 박스 */
 .box {
-    max-width: 1500px;
+    max-width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -33,16 +33,16 @@
 .navMenu {
     display: flex;
     flex-direction: row;
-    width: 1000px;
-    /* gap: 8px; */
+    width: 100%;
+    margin-left: 40px;
+    gap: 10px;
 }
 
 /* 메뉴 항목 */
 .menuItem {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* width: 80px; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
     height: 100%; /* 헤더 전체 높이 */
     padding: 10px 20px;
     color: #333;
@@ -83,16 +83,27 @@
     align-items: center;
     gap: 10px;
     font-weight: 500;
+    margin-right: 50px;
 }
 
 .authBox a {
+    display: flex;
     text-decoration: none;
     color: #333;
     transition: color 0.2s;
+    white-space: nowrap; /* ✅ 한 줄로 표시 (줄바꿈 방지) */
 }
 
 .authBox a:hover {
     color: #FF6F61;
+}
+
+.authBox span {
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    display: inline-block;
 }
 
 /* 로그아웃 버튼 */
