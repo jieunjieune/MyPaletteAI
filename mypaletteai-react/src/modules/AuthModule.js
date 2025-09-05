@@ -5,18 +5,28 @@ const initialState = {
 	userId: localStorage.getItem("userId") || null,
 	accessToken: localStorage.getItem("accessToken") || null,
 	nickname: localStorage.getItem("nickname") || null,
+	resetRequestMessage: "",   // 비밀번호 초기화 요청 메시지
+	resetConfirmMessage: "",   // 비밀번호 재설정 완료 메시지
+	loadingResetRequest: false,
+	loadingResetConfirm: false,
+	errorResetRequest: null,
+	errorResetConfirm: null,
 };
 
 export const POST_SIGNUP = "auth/POST_SIGNUP";
 export const POST_LOGIN = "auth/POST_LOGIN";
 export const POST_LOGOUT = "auth/POST_LOGOUT";
 export const SET_USER_INFO = "auth/SET_USER_INFO";
+export const POST_RESET_REQUEST = "auth/POST_RESET_REQUEST";
+export const POST_RESET_CONFIRM = "auth/POST_RESET_CONFIRM";
 
 export const actions = createActions({
 	[POST_SIGNUP]: (payload) => payload,
 	[POST_LOGIN]: (payload) => payload,
 	[POST_LOGOUT]: () => null,
 	[SET_USER_INFO]: (payload) => payload,
+	[POST_RESET_REQUEST]: (payload) => payload,
+	[POST_RESET_CONFIRM]: (payload) => payload,
 });
 
 const authReducer = handleActions(
@@ -69,6 +79,18 @@ const authReducer = handleActions(
 				nickname: null,
 			};
 		},
+		[POST_RESET_REQUEST]: (state, { payload }) => ({
+			...state,
+			loadingResetRequest: false,
+			resetRequestMessage: payload?.message || "비밀번호 재설정 요청 완료",
+			errorResetRequest: payload?.error || null,
+		}),
+		[POST_RESET_CONFIRM]: (state, { payload }) => ({
+			...state,
+			loadingResetConfirm: false,
+			resetConfirmMessage: payload?.message || "비밀번호가 성공적으로 변경되었습니다.",
+			errorResetConfirm: payload?.error || null,
+		}),
 	},
 	initialState
 );

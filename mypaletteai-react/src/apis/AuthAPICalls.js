@@ -1,4 +1,4 @@
-import { SET_USER_INFO, POST_LOGOUT } from "../modules/AuthModule";
+import { SET_USER_INFO, POST_LOGOUT, POST_RESET_REQUEST, POST_RESET_CONFIRM } from "../modules/AuthModule";
 
 const prefix = `http://${process.env.REACT_APP_RESTAPI_IP}:8080`;
 
@@ -132,4 +132,70 @@ export const logoutApi = () => {
 			alert("로그아웃 실패! 다시 시도해주세요.");
 		}
 	};
+};
+
+// 비밀번호 재설정 요청 (이메일 발송)
+export const resetPasswordRequestApi = (email) => {
+    const requestURL = `${prefix}/auth/reset-password-request`;
+
+    return async (dispatch) => {
+        try {
+            const response = await fetch(requestURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+            });
+
+            const resultText = await response.text();
+
+            if (!response.ok) throw new Error(resultText);
+
+            dispatch({
+                type: POST_RESET_REQUEST,
+                payload: { message: resultText },
+            });
+
+            alert(resultText); // UX용 알림
+        } catch (err) {
+            console.error("비밀번호 재설정 요청 실패:", err);
+            dispatch({
+                type: POST_RESET_REQUEST,
+                payload: { error: err.message || "요청 실패" },
+            });
+            alert(err.message || "비밀번호 재설정 요청 실패");
+        }
+    };
+};
+
+// 비밀번호 재설정 완료 (새 비밀번호 설정)
+export const resetPasswordConfirmApi = ({ email, resetToken, newPassword }) => {
+    const requestURL = `${prefix}/auth/reset-password-confirm`;
+
+    return async (dispatch) => {
+        try {
+            const response = await fetch(requestURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, resetToken, newPassword }),
+            });
+
+            const resultText = await response.text();
+
+            if (!response.ok) throw new Error(resultText);
+
+            dispatch({
+                type: POST_RESET_CONFIRM,
+                payload: { message: resultText },
+            });
+
+            alert(resultText); // UX용 알림
+        } catch (err) {
+            console.error("비밀번호 재설정 실패:", err);
+            dispatch({
+                type: POST_RESET_CONFIRM,
+                payload: { error: err.message || "재설정 실패" },
+            });
+            alert(err.message || "비밀번호 재설정 실패");
+        }
+    };
 };

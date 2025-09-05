@@ -7,6 +7,7 @@ import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import PaletteDetail from "./pages/function/PaletteDetail";
 import MyPalette from "./pages/function/MyPalette";
+import ResetPasswordRequest from "./pages/auth/ResetPasswordRequest";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/palette/make" element={<Make />} />
           <Route path="/auth/signup" element={<Signup />} />
           <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/reset-password-request" element={<ResetPasswordRequest />} />
         </Route>
       </Routes>
     </BrowserRouter>
