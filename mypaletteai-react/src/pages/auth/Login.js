@@ -32,27 +32,39 @@ export default function Login() {
 	// 제출
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		validateField("email");
-		validateField("password");
-		if (Object.values(errors).some(msg => msg)) return;
-
-		try {
+		setErrors({}); // 초기화
+		
+		// 이메일 유효성 체크
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!emailRegex.test(email)) {
+			setErrors({ email: "올바른 이메일 주소를 입력해주세요." });
+			return;
+			}
+		
+			// 비밀번호 체크
+			if (!password) {
+			setErrors({ password: "비밀번호를 입력해주세요." });
+			return;
+			}
+		
+			// 오류 없으면 로그인 시도
+			try {
 			const result = await dispatch(loginApi({ email, password }));
-
+		
 			// 이메일 기억하기
 			if (rememberEmail) localStorage.setItem("rememberEmail", email);
 			else localStorage.removeItem("rememberEmail");
-
+		
 			// 자동 로그인 체크
 			if (rememberMe) localStorage.setItem("rememberMe", "true");
 			else localStorage.removeItem("rememberMe");
-
+		
 			navigate("/"); // 로그인 성공
-		} catch (err) {
+			} catch (err) {
 			console.error("로그인 실패:", err);
-			setErrors({ ...errors, global: "로그인 정보가 올바르지 않습니다." });
-		}
-	};
+			setErrors({ global: "로그인 정보가 올바르지 않습니다." });
+			}
+		};
 
 	return (
 		<div className={LoginCSS.background}>
