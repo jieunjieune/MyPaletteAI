@@ -15,31 +15,30 @@ export default function PaletteDetail() {
 	const palette = useSelector((state) => state.paletteReducer.detail);
 	const savingState = useSelector((state) => state.paletteReducer.saving);
 	const saveResult = useSelector((state) => state.paletteReducer.saveResult);
-
 	const savedPalettes = useSelector((state) => state.saveReducer.list || []);
 
 	const [loading, setLoading] = useState(true);
 	const [copied, setCopied] = useState("");
 	const [savedId, setSavedId] = useState(null);
 
-	// 1️⃣ 페이지 로드: 팔레트 상세 + 사용자 저장 팔레트 목록 불러오기
+	// 상세 + 저장된 팔레트 조회
 	useEffect(() => {
 		const fetchData = async () => {
-			try {
-				await dispatch(paletteDetailApi(id));
-				if (userId) await dispatch(getSavePalettesApi());
-			} finally {
-				setLoading(false);
-			}
+		try {
+			await dispatch(paletteDetailApi(id));
+			if (userId) await dispatch(getSavePalettesApi());
+		} finally {
+			setLoading(false);
+		}
 		};
 		fetchData();
 	}, [dispatch, id, userId]);
 
-	// 2️⃣ savedPalettes 변경 시 현재 팔레트가 이미 저장됐는지 확인
+	// 저장 여부 확인
 	useEffect(() => {
 		if (userId && savedPalettes.length > 0) {
-			const existing = savedPalettes.find(p => p.paletteId === parseInt(id));
-			if (existing) setSavedId(existing.saveId);
+		const existing = savedPalettes.find((p) => p.paletteId === parseInt(id));
+		if (existing) setSavedId(existing.saveId);
 		}
 	}, [savedPalettes, id, userId]);
 
@@ -49,13 +48,11 @@ export default function PaletteDetail() {
 		setTimeout(() => setCopied(""), 1500);
 	};
 
-	// 3️⃣ 저장 버튼 클릭
 	const handleSave = async () => {
 		const result = await dispatch(savePaletteApi(id));
 		if (result?.savedPalette?.saveId) setSavedId(result.savedPalette.saveId);
 	};
 
-	// 4️⃣ 삭제 버튼 클릭
 	const handleDelete = async () => {
 		if (!savedId) return;
 		await dispatch(deleteSavePaletteApi(savedId));
@@ -67,52 +64,54 @@ export default function PaletteDetail() {
 
 	return (
 		<div className={DetailCSS.container}>
-			{/* 색상 바 */}
-			<div className={DetailCSS.colorBar}>
-				{palette.recommendedColors?.map((color, idx) => (
-					<div key={idx} className={DetailCSS.colorItem}>
-						<div
-							className={DetailCSS.colorBlock}
-							style={{ backgroundColor: color }}
-						/>
-						<div
-							className={DetailCSS.colorName}
-							onClick={() => handleCopy(color)}
-						>
-							{color}
-							{copied === color && (
-								<span className={DetailCSS.copied}>복사✨</span>
-							)}
-						</div>
-					</div>
-				))}
-			</div>
-
-			{/* 텍스트 정보 */}
-			<div className={DetailCSS.info}>
-				<h1 className={DetailCSS.title}>{palette.title}</h1>
-				<p className={DetailCSS.mood}>{palette.mood}</p>
-
-				{/* 저장 / 삭제 버튼 */}
-				{!savedId ? (
-					<FaRegBookmark
-					className={DetailCSS.bookmarkIcon}
-					onClick={handleSave}
-					title="저장하기"
+		{/* 색상 바 */}
+		<div className={DetailCSS.colorBar}>
+			{palette.recommendedColors?.map((color, idx) => (
+			<div key={idx} className={DetailCSS.colorItem}>
+				<div
+				className={DetailCSS.colorBlock}
+				style={{ backgroundColor: color }}
 				/>
-				) : (
-					<FaBookmark
-					className={DetailCSS.bookmarkIconFilled}
-					onClick={handleDelete}
-					title="삭제하기"
-					/>
+				<div
+				className={DetailCSS.colorName}
+				onClick={() => handleCopy(color)}
+				>
+				{color}
+				{copied === color && (
+					<span className={DetailCSS.copied}>복사✨</span>
 				)}
-
-				{/* 메시지 표시 */}
-				{saveResult?.message && (
-					<div className={DetailCSS.saveMessage}>{saveResult.message}</div>
-				)}
+				</div>
 			</div>
+			))}
+		</div>
+
+		{/* 텍스트 정보 */}
+		<div className={DetailCSS.info}>
+			<h1 className={DetailCSS.title}>{palette.title}</h1>
+			<p className={DetailCSS.mood}>{palette.mood}</p>
+
+			{/* 북마크 버튼: 로그인 했을 때만 보이도록 */}
+			{userId && (
+			!savedId ? (
+				<FaRegBookmark
+				className={DetailCSS.bookmarkIcon}
+				onClick={handleSave}
+				title="저장하기"
+				/>
+			) : (
+				<FaBookmark
+				className={DetailCSS.bookmarkIconFilled}
+				onClick={handleDelete}
+				title="삭제하기"
+				/>
+			)
+			)}
+
+			{/* 메시지 */}
+			{saveResult?.message && (
+			<div className={DetailCSS.saveMessage}>{saveResult.message}</div>
+			)}
+		</div>
 		</div>
 	);
 }
