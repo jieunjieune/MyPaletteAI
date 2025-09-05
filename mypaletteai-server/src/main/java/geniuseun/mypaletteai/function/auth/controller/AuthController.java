@@ -74,15 +74,23 @@ public class AuthController {
 
     // 1. 비밀번호 초기화 요청
     @PostMapping("/reset-password-request")
-    public ResponseEntity<String> requestRasswordReset(@RequestBody ResetPasswordRequest request) {
-        String resetToken = authService.requestPasswordReset(request);
-        return ResponseEntity.ok("비밀번호 재설정 요청 성공! 토큰은 서버 로그 확인");
+    public ResponseEntity<?> requestPasswordReset(@RequestBody ResetPasswordRequest request) {
+        try {
+            authService.requestPasswordReset(request);
+            return ResponseEntity.ok("비밀번호 재설정 요청 성공! 이메일을 확인하세요.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
     }
 
     // 2. 비밀번호 재설정 완료
     @PostMapping("/reset-password-confirm")
-    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordConfirm request) {
-        authService.resetPassword(request);
-        return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordConfirm request) {
+        try {
+            authService.resetPassword(request);
+            return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
     }
 }
