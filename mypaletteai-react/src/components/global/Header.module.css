@@ -95,7 +95,7 @@
 }
 
 .authBox a:hover {
-    color: #FF6F61;
+    color: #70c1b3;
 }
 
 .authBox span {
@@ -106,19 +106,59 @@
     display: inline-block;
 }
 
-/* 로그아웃 버튼 */
-.logoutButton {
-    padding: 6px 14px;
-    background-color: #FF6F61;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
+.nickname {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: -2.5px;
     cursor: pointer;
-    font-weight: 500;
-    transition: all 0.2s ease-in-out;
 }
 
-.logoutButton:hover {
-    background-color: #FF856F;
-    transform: translateY(-1px);
+.nicknameWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #70c1b3;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+    min-width: 150px; /* 조금 넓게 */
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}
+
+/* 공통 스타일: 링크/버튼 */
+.dropdownItem,
+.dropdownItemButton {
+    padding: 12px 16px;  /* 패딩 통일 */
+    text-decoration: none;
+    color: #333;
+    font-size: 14px; /* 글씨 크기 통일 */
+    font-weight: 500;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+    gap: 5px;
+}
+
+.dropdownItem:hover,
+.dropdownItemButton:hover {
+    background-color: #f0f0f0ce;
+    color: #FF6F61;
+}
+
+/* 로그아웃 버튼 드롭다운 내에서 통일 */
+.dropdownItemButton {
+    width: 100%; /* 드롭다운 너비 맞춤 */
 }

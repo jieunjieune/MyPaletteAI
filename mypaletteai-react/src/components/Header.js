@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import HeaderCSS from "./global/Header.module.css";
@@ -9,6 +10,8 @@ function Header() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { isLoggedIn, nickname, userId } = useLoginInfo();
+
+	const [dropdownOpen, setDropdownOpen] = useState(false);
 
 	const handleLogout = async () => {
 		try {
@@ -39,20 +42,44 @@ function Header() {
 			<nav className={HeaderCSS.navMenu}>
 			<Link to="/palettes" className={HeaderCSS.menuItem}>팔레트 탐색</Link>
 			<Link to="/palette/make" className={HeaderCSS.menuItem}>팔레트 만들기</Link>
-			{isLoggedIn && userId && (
-				<Link to={`/palettes/my/${userId}`} className={HeaderCSS.myPaletteButton}>내 팔레트⛧</Link>
-			)}
 			</nav>
 
-			{/* 로그인/닉네임 + 로그아웃 */}
+			{/* 로그인/닉네임 + 드롭다운 */}
 			<div className={HeaderCSS.authBox}>
 			{isLoggedIn ? (
-				<>
-				<span>{nickname}님, 반갑습니다 ⌯•ᴗ•⌯ಣ</span>
-				<button onClick={handleLogout} className={HeaderCSS.logoutButton}>
-					Logout
-				</button>
-				</>
+				<div
+				className={HeaderCSS.nicknameWrapper}
+				onMouseEnter={() => setDropdownOpen(true)}
+				onMouseLeave={() => setDropdownOpen(false)}
+				>
+				<span className={HeaderCSS.nickname}>
+					{nickname}
+				</span>
+				<span> 님, 반갑습니다 ⌯•ᴗ•⌯ಣ</span>
+
+				{dropdownOpen && (
+					<div className={HeaderCSS.dropdownMenu}>
+					<Link
+						to={`/palettes/my/${userId}`}
+						className={HeaderCSS.dropdownItem}
+					>
+						내 팔레트 ⛧
+					</Link>
+					<Link
+						to="/user/update"
+						className={HeaderCSS.dropdownItem}
+					>
+						정보 수정
+					</Link>
+					<button
+						onClick={handleLogout}
+						className={HeaderCSS.dropdownItemButton}
+					>
+						로그아웃
+					</button>
+					</div>
+				)}
+				</div>
 			) : (
 				<>
 				<Link to="/auth/signup">Signup</Link>
