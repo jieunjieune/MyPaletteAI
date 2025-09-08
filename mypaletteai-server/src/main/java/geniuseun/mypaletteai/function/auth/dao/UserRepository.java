@@ -14,4 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // 대소문자 구분 없이 이메일 조회
     @Query("SELECT u FROM User u WHERE LOWER(u.email) = LOWER(:email)")
     Optional<User> findByEmailIgnoreCase(@Param("email") String email);
+
+    // 닉네임 존재 여부 확인
+    boolean existsByNickname(String nickname);
 }

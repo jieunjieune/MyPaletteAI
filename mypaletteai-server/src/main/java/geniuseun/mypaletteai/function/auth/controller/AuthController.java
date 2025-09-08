@@ -6,18 +6,16 @@ import geniuseun.mypaletteai.function.auth.dto.ResetPasswordConfirm;
 import geniuseun.mypaletteai.function.auth.dto.ResetPasswordRequest;
 import geniuseun.mypaletteai.function.auth.dto.SignupRequest;
 import geniuseun.mypaletteai.function.auth.service.AuthService;
-import geniuseun.mypaletteai.function.user.entity.User;
-import geniuseun.mypaletteai.function.user.service.UserService;
 import geniuseun.mypaletteai.jwt.TokenDTO;
 import geniuseun.mypaletteai.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -92,5 +90,15 @@ public class AuthController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
+    }
+
+    // 닉네임 중복 체크
+    @GetMapping("/check-nickname")
+    public ResponseEntity<?> checkNickname(@RequestParam String nickname) {
+        boolean exists = userRepository.existsByNickname(nickname);
+        Map<String, Object> result = new HashMap<>();
+        result.put("available", !exists);
+        result.put("message", exists ? "이미 사용 중인 닉네임입니다." : "사용 가능한 닉네임입니다.");
+        return ResponseEntity.ok(result);
     }
 }
