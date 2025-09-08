@@ -1,4 +1,5 @@
-import { GET_USER_ALL, GET_USER_ONE } from "../modules/UserModule";
+import { GET_USER_ALL, GET_USER_ONE, PUT_USER } from "../modules/UserModule";
+import { SET_USER_INFO } from "../modules/AuthModule";
 
 const prefix = `http://${process.env.REACT_APP_RESTAPI_IP}:8080`;
 
@@ -36,31 +37,51 @@ export const userAllApi = () => {
 	};
 };
 
-export const userApi = (userId) => {
-
+export const updateUserApi = (userId, userData) => {
 	const requestURL = `${prefix}/user/${userId}`;
-	console.log("api 요청 url: ", requestURL);
+	const accessToken = localStorage.getItem("accessToken");
 
-	return async (dispatch, getState) => {
-		try {
-			const response = await fetch(requestURL, {
-				method: 'GET'
-			});
+	return async (dispatch) => {
+	try {
+		const response = await fetch(requestURL, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${accessToken}`,
+		},
+		body: JSON.stringify(userData),
+		});
 
-			if (!response.ok) {
-				console.error(`서버 응답 오류: ${response.status}`);
-				alert("회원 정보를 찾을 수 없습니다.");
-				return;
-			}
-
-			const data = await response.json();
-
-			dispatch( { type: GET_USER_ONE, payload: data });
-
-			return data;
-		} catch (error) {
-			console.error("회원 정보 호출 실패:", error);
-			alert("회원 정보를 불러오는 중 오류가 발생했습니다.");
+		const contentType = response.headers.get("content-type");
+		let result;
+		if (contentType && contentType.includes("application/json")) {
+		result = await response.json();
+		} else {
+		result = await response.text();
 		}
+
+		if (!response.ok) {
+		throw new Error(result?.message || result || "회원정보 수정 실패");
+		}
+
+		alert(result?.message || "회원정보가 수정되었습니다.");
+
+		// Redux 상태 업데이트
+		dispatch({
+		type: "SET_USER_INFO",
+		payload: {
+			userId,
+			nickname: userData.nickname,
+			accessToken,
+		},
+		});
+		localStorage.setItem("nickname", userData.nickname);
+
+		return result;
+	} catch (err) {
+		console.error("회원정보 수정 오류:", err);
+		alert(err.message || "회원정보 수정 실패");
+		throw err;
+	}
 	};
 };

@@ -9,6 +9,7 @@ import PaletteDetail from "./pages/function/PaletteDetail";
 import MyPalette from "./pages/function/MyPalette";
 import ResetPasswordRequest from "./pages/auth/ResetPasswordRequest";
 import ResetPassword from "./pages/auth/ResetPassword";
+import UserInfo from "./pages/User/UserInfo";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/reset-password-request" element={<ResetPasswordRequest />} />
           <Route path="/auth/reset-password" element={<ResetPassword />} />
+          <Route path="/user/update" element={<UserInfo />} />
         </Route>
       </Routes>
     </BrowserRouter>

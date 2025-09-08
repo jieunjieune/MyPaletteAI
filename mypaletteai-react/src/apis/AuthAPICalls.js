@@ -199,3 +199,23 @@ export const resetPasswordConfirmApi = ({ email, resetToken, newPassword }) => {
         }
     };
 };
+
+// 닉네임 중복체크
+export const checkNicknameApi = (nickname) => {
+	const requestURL = `${prefix}/auth/check-nickname?nickname=${encodeURIComponent(nickname)}`;
+	console.log("요청 url: ", requestURL);
+
+	return async () => {
+		try {
+			const response = await fetch(requestURL);
+			if (!response.ok) {
+				throw new Error(await response.text());
+			}
+			const data = await response.json(); // { available: true, message: "사용 가능한 닉네임입니다." }
+			return data;
+		} catch (err) {
+			console.error("닉네임 중복 확인 오류:", err);
+			return { available: false, message: "닉네임 중복 확인 실패" };
+		}
+	};
+};

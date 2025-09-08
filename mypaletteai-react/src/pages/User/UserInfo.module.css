@@ -1,0 +1,162 @@
+/* 배경 */
+.background {
+	min-height: 100vh;
+	padding-top: 80px;
+	background-image: url('https://images.unsplash.com/photo-1610829151215-112a99628f6f?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.1.0');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* 중앙 컨테이너 */
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 40px 20px;
+	font-family: 'Pretendard', sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* 타이틀 */
+.title {
+	text-align: center;
+	margin-bottom: 40px;
+	font-weight: 700;
+	margin-top: 20px;
+	color: #70c1b3;
+}
+
+/* 카드 */
+.formCard {
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.9);
+	padding: 20px 50px;
+	border-radius: 6px;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	animation: fadeIn 0.4s ease-in-out;
+}
+
+/* 입력 row */
+.row {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+
+/* 라벨 + input 같은 줄 */
+.rowInner {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.row label {
+	width: 100px;
+	font-weight: bold;
+	color: #333;
+}
+
+.row input {
+	flex: 1;
+	padding: 10px;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	font-size: 1rem;
+	transition: all 0.2s ease-in-out;
+}
+
+.row input:focus {
+	border-color: #70c1b3;
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(112, 193, 179, 0.3);
+}
+
+/* 메시지 */
+.error {
+	color: #e74c3c;
+	font-size: 0.85rem;
+	margin-left: 110px; /* 라벨 너비 맞춤 */
+	margin-top: 4px;
+}
+
+.success {
+	color: #27ae60;
+	font-size: 0.85rem;
+	margin-left: 110px;
+	margin-top: 4px;
+}
+
+/* 버튼 */
+.submitButton {
+	margin-bottom: 10px;
+	padding: 15px;
+	border: none;
+	border-radius: 6px;
+	background: #70c1b3;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.submitButton:hover {
+	background: #ffd166;
+	color: #3e3e3e;
+	transform: translateY(-1px);
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(15px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* 링크 버튼 row */
+.linkRow {
+	display: flex;
+	justify-content: flex-end;
+	gap: 15px;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.checkButton {
+	background-color: #70c1b3;
+	padding: 10px 10px;
+	border-radius: 6px;
+	border: none;
+	color: #fff;
+}
+
+.checkButton:hover {
+	background: #ffd166;
+	color: #3e3e3e;
+	transform: translateY(-1px);
+}
+
+.passwordButton {
+	width: 100%;
+	background-color: #ffd166;
+	padding: 10px 10px;
+	border-radius: 6px;
+	border: none;
+	color: #3e3e3e;
+}
+
+.passwordButton:hover {
+	background: #70c1b3;
+	color: #fff;
+	transform: translateY(-1px);
+}
