@@ -5,21 +5,23 @@ import PaletteCard from "../../components/palette/PaletteCard";
 import MakeCSS from "./Make.module.css";
 import { FaDice, FaQuoteLeft, FaQuoteRight, FaPaintBrush } from "react-icons/fa";
 import { useLoginInfo } from "../../hooks/useLoginInfo";
+import { useNavigate } from "react-router-dom";
 
 export default function Make() {
 	const dispatch = useDispatch();
 	const palette = useSelector((state) => state.makeReducer);
 	const { userId } = useLoginInfo();
+	const navigator = useNavigate();
 
 	const mainColors = [
 		"red","orange","yellow","green","blue","indigo",
-		"purple","pink","gray","black","white"
+		"purple","pink", "brown", "gray","black","white"
 	];
 	const moods = [
 		"부드러운","화사한","선명한","차분한","밝은","따뜻한",
 		"시원한","청량한","알록달록한","비슷한 색감의",
 		"채도가 낮은","파스텔톤의", "싱그러운", "차가운", "신비로운",
-		"몽환적인", "현대적인", "잔잔한", "현재 계절에 어울리는", "지금 날씨에 맞는"
+		"몽환적인", "현대적인", "잔잔한", "현재 계절에 어울리는", "지금 날씨에 맞는", "프레젠테이션 제작용", "로고 제작용", "인테리어용"
 	];
 	const countOptions = [3,4,5,6,7];
 
@@ -68,6 +70,13 @@ export default function Make() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!mainColor) return alert("메인 색상을 선택해주세요!");
+
+		if (!userId) {
+		alert("로그인 후 이용이 가능합니다.");
+		navigator("/auth/login");
+		return;
+	};
+			
 
 		const moodToSend = selectedMoods.length > 0 ? selectedMoods.join(", ") : "random";
 		setLoading(true);
