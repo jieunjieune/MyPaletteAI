@@ -55,7 +55,7 @@ export default function Make() {
 	const handleRandomSelect = () => {
 		const randomColor = mainColors[Math.floor(Math.random() * mainColors.length)];
 		const randomMoods = [];
-		const moodCount = Math.floor(Math.random() * 4) + 1;
+		const moodCount = Math.floor(Math.random() * 2) + 1;
 		while (randomMoods.length < moodCount) {
 		const m = moods[Math.floor(Math.random() * moods.length)];
 		if (!randomMoods.includes(m)) randomMoods.push(m);
