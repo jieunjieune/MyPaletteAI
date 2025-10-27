@@ -21,6 +21,11 @@ function PaletteCard({ palette, isButton }) {
 		navigate("/palette/make");
 		} else {
 		// 팔레트 카드 → 상세 페이지 이동
+		if (!paletteId) {
+			alert("팔레트 정보를 불러오는 중입니다. 잠시만 기다려 주세요!");
+			window.location.reload();
+			return;
+		}
 		navigate(`/palettes/${paletteId}`);
 		}
 	};
