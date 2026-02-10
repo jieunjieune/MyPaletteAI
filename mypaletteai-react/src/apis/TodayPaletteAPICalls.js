@@ -1,6 +1,6 @@
 import { GET_TODAY_PALETTE } from "../modules/TodayPaletteModule";
 
-const prefix = `http://${process.env.REACT_APP_RESTAPI_IP}:8080`;
+const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}:8080`;
 
 export const callTodayPaletteApi = () => {
 	let requestURL = `${prefix}/today`;
