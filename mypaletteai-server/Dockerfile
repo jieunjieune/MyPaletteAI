@@ -18,4 +18,4 @@ RUN chmod +x ./gradlew
 RUN ./gradlew build -x test --stacktrace --no-daemon
 
 # 6️⃣ jar 실행
-CMD ["sh", "-c", "java -jar build/libs/*.jar"]
+CMD ["sh", "-c", "java -jar build/libs/mypaletteai-0.0.1-SNAPSHOT.jar"]
