@@ -5,7 +5,7 @@ import { paletteDetailApi } from "../../apis/PaletteAPICalls";
 import { savePaletteApi, deleteSavePaletteApi, getSavePalettesApi } from "../../apis/SaveAPICalls";
 import DetailCSS from "./PaletteDetail.module.css";
 import { useLoginInfo } from "../../hooks/useLoginInfo";
-import { FaRegBookmark, FaBookmark, FaShareAlt, FaDownload } from "react-icons/fa";
+import { FaRegBookmark, FaBookmark, FaShareAlt } from "react-icons/fa";
 import html2canvas from "html2canvas";
 import { MdDownload } from "react-icons/md";
 
@@ -15,7 +15,7 @@ export default function PaletteDetail() {
 	const { userId } = useLoginInfo();
 
 	const palette = useSelector((state) => state.paletteReducer.detail);
-	const savingState = useSelector((state) => state.paletteReducer.saving);
+	// const savingState = useSelector((state) => state.paletteReducer.saving);
 	const saveResult = useSelector((state) => state.paletteReducer.saveResult);
 	const savedPalettes = useSelector((state) => state.saveReducer.list || []);
 

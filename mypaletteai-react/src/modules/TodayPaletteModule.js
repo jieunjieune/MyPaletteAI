@@ -9,9 +9,9 @@ const initialState = {
 
 export const GET_TODAY_PALETTE = "today/GET_TODAY_PALETTE";
 
-const actions = createActions({
-	[GET_TODAY_PALETTE]: () => {}
-})
+// const actions = createActions({
+// 	[GET_TODAY_PALETTE]: () => {}
+// })
 
 const todayPaletteReducer = handleActions(
 	{

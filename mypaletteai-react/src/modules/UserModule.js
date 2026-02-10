@@ -10,12 +10,12 @@ export const GET_USER_ONE = 'user/GET_USER_ONE';
 export const PUT_USER = 'user/PUT_USER';
 export const DELETE_USER = 'user/DELETE_USER';
 
-const actions = createActions({
-	[GET_USER_ALL]: () => {},
-	[GET_USER_ONE]: () => {},
-	[PUT_USER]: () => {},
-	[DELETE_USER]: () => {},
-})
+// const actions = createActions({
+// 	[GET_USER_ALL]: () => {},
+// 	[GET_USER_ONE]: () => {},
+// 	[PUT_USER]: () => {},
+// 	[DELETE_USER]: () => {},
+// })
 
 const userReducer = handleActions(
 	{
