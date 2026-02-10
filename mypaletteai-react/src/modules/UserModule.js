@@ -1,4 +1,4 @@
-import { createActions, handleActions } from "redux-actions";
+import { handleActions } from "redux-actions";
 
 const initialState = {
 	user: null,
