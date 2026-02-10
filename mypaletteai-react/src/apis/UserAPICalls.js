@@ -1,7 +1,7 @@
 import { GET_USER_ALL, GET_USER_ONE, PUT_USER } from "../modules/UserModule";
 import { SET_USER_INFO } from "../modules/AuthModule";
 
-const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}:8080`;
+const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}`;
 
 export const userAllApi = () => {
 	const requestURL = `${prefix}/user/all`;

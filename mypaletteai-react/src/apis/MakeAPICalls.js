@@ -1,6 +1,6 @@
 import { POST_MAKE } from "../modules/MakeModule";
 
-const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}:8080`;
+const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}`;
 
 export const callMakeApi = (inputData) => {
 

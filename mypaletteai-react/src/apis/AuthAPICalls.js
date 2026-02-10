@@ -1,6 +1,6 @@
 import { SET_USER_INFO, POST_LOGOUT, POST_RESET_REQUEST, POST_RESET_CONFIRM } from "../modules/AuthModule";
 
-const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}:8080`;
+const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}`;
 
 export const signupApi = (userData) => {
 	const requestURL = `${prefix}/auth/signup`;

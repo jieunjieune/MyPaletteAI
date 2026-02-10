@@ -1,6 +1,6 @@
 import { DELETE_SAVEPALETTE, GET_SAVEPALETTES, POST_SAVEPALETTE } from "../modules/SaveModule";
 
-const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}:8080`;
+const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}`;
 
 export const savePaletteApi = (paletteId) => {
 	const requestURL = `${prefix}/save/${paletteId}`;

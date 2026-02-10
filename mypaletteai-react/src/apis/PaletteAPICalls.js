@@ -1,6 +1,6 @@
 import { GET_PALETTES, GET_PALETTE, GET_MYPALETTE, LOADING_PALETTES } from "../modules/PaletteModule";
 
-const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}:8080`;
+const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}`;
 
 export const callPaletteApi = () => {
 	let requestURL = `${prefix}/palettes`;
