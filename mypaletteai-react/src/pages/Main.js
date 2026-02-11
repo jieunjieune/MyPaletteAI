@@ -38,7 +38,8 @@ function Main() {
 	return (
 		<div className={MainCSS.container}>
 			<div className={MainCSS.logoContainer}>
-				<img src="/images/main/mypaletteailogo-white.png" alt="My Palette AI" className={MainCSS.logo} />
+				<img src={process.env.PUBLIC_URL + "/images/main/MyPaletteAiLogo-white.png"}
+				alt="My Palette AI" className={MainCSS.logo} />
 			</div>
 
 			<div className={MainCSS.paletteGrid} style={{ justifyContent: "center", gap: "50px" }}>

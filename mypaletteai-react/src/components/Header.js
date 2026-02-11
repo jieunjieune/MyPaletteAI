@@ -31,8 +31,7 @@ function Header() {
 		<div className={`${HeaderCSS.box} flex items-center justify-between`}>
 			{/* 로고 */}
 			<Link to="/" className={HeaderCSS.headerLogo}>
-			<img
-				src="/images/main/MyPaletteAiLogo.png"
+			<img src={process.env.PUBLIC_URL + "/images/main/MyPaletteAiLogo.png"}
 				alt="로고"
 				className={HeaderCSS.logoImg}
 			/>
