@@ -38,7 +38,8 @@ public class AuthController {
                 .secure(false)    // HTTPS 환경이면 true
                 .path("/")        // 전체 경로에서 사용 가능
                 .maxAge(60 * 60 * 24 * 14) // 2주
-                .sameSite("Strict")
+                .sameSite("None")
+                .secure(true)
                 .build();
 
         return ResponseEntity.ok()
