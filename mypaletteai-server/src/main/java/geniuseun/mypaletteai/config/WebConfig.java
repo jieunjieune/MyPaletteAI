@@ -15,7 +15,8 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 // React 개발서버 주소 허용
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000")
+                        .allowedOrigins("http://localhost:3000",
+                                "https://my-palette-ai.vercel.app")
                         .allowedMethods("*")
                         .allowCredentials(true);
             }
