@@ -11,6 +11,7 @@ export const signupApi = (userData) => {
 			const response = await fetch(requestURL, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
+				credentials: "include",
 				body: JSON.stringify(userData)
 			});
 			if (!response.ok) throw new Error("회원가입 실패");
