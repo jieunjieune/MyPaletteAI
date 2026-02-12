@@ -30,6 +30,10 @@ export const signupApi = (userData) => {
 
 // 로그인
 export const loginApi = (loginData) => {
+	
+	console.log("loginApi진입");
+	console.log("입력값:", loginData);
+
     const requestURL = `${prefix}/auth/login`;
 
     return async (dispatch) => {
