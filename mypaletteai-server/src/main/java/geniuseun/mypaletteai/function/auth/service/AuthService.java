@@ -9,14 +9,14 @@ import geniuseun.mypaletteai.jwt.TokenDTO;
 import geniuseun.mypaletteai.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.time.ZoneId;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Service
@@ -28,6 +28,9 @@ public class AuthService {
     private final TokenProvider tokenProvider;
     private final PasswordResetTokenRepository tokenRepository;
     private final EmailService emailService;
+
+    @Value("${app.frontend-url}")
+    private String frontendUrl;
 
     // 회원가입
     public String signup(SignupRequest request) {
@@ -116,7 +119,7 @@ public class AuthService {
 
         // 새 토큰 생성
         String resetToken = UUID.randomUUID().toString();
-        LocalDateTime expiry = LocalDateTime.now().plusHours(1);
+        LocalDateTime expiry = LocalDateTime.now(ZoneId.of("Asia/Seoul")).plusHours(1);
 
         PasswordResetToken token = PasswordResetToken.builder()
                 .userId(user.getUserId())
@@ -128,7 +131,7 @@ public class AuthService {
         tokenRepository.save(token);
 
         // 이메일 발송 (링크)
-        String resetLink = "http://localhost:3000/auth/reset-password?token=" + resetToken;
+        String resetLink = frontendUrl + "/auth/reset-password?token=" + resetToken;
         emailService.sendPasswordResetEmail(user.getEmail(), resetLink);
 
         log.info("비밀번호 재설정 토큰 발급 (userId={}): {}", user.getUserId(), resetToken);
