@@ -49,7 +49,7 @@ export default function Login() {
 		
 			// 오류 없으면 로그인 시도
 			try {
-			// const result = await dispatch(loginApi({ email, password }));
+			const result = await dispatch(loginApi({ email, password }));
 		
 			// 이메일 기억하기
 			if (rememberEmail) localStorage.setItem("rememberEmail", email);
