@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,7 @@ public class TodayPaletteService {
 
     @Transactional
     public PaletteResponseDTO getTodayPalette() {
-        LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.now(ZoneId.of("Asia/Seoul"));
 
         // 1. 오늘 날짜 팔레트 조회
         Optional<Palette> optionalPalette = paletteRepository.findByCreatedAt(today.atStartOfDay());
