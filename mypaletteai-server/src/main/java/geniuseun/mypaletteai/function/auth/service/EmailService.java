@@ -29,7 +29,7 @@ public class EmailService {
                     true
             );
 
-            helper.setFrom("your-email@gmail.com", "MyPaletteAI");
+            helper.setFrom("jieune120@gmail.com", "MyPaletteAI");
 
             mailSender.send(message);
         } catch (Exception e) {
