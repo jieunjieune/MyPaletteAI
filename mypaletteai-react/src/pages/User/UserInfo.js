@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { checkNicknameApi } from "../../apis/AuthAPICalls";
-import { useLoginInfo } from "../../hooks/useLoginInfo";
+import { useLoginInfo, userId } from "../../hooks/useLoginInfo";
 import UserCSS from "./UserInfo.module.css";
+import { updateUserApi } from "../../apis/UserAPICalls";
 
 export default function UserInfo() {
 	const dispatch = useDispatch();
