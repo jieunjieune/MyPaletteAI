@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { checkNicknameApi } from "../../apis/AuthAPICalls";
-import { useLoginInfo, userId } from "../../hooks/useLoginInfo";
+import { useLoginInfo } from "../../hooks/useLoginInfo";
 import UserCSS from "./UserInfo.module.css";
 import { updateUserApi } from "../../apis/UserAPICalls";
 
 export default function UserInfo() {
 	const dispatch = useDispatch();
-	const { nickname: currentNickname } = useLoginInfo();
+	const { nickname: currentNickname, userId } = useLoginInfo();
 
 	// 닉네임 관련 상태
 	const [nickname, setNickname] = useState(currentNickname || "");
