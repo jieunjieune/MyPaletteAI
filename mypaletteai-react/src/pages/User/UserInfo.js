@@ -67,7 +67,7 @@ export default function UserInfo() {
 		const updateData = { nickname };
 		if (showPasswordFields && newPassword) updateData.password = newPassword;
 
-		// const result = await dispatch(updateUserApi(userId, updateData));
+		const result = await dispatch(updateUserApi(userId, updateData));
 
 		// Redux와 화면 상태 동기화
 		setMessage("회원정보가 성공적으로 수정되었습니다!");
