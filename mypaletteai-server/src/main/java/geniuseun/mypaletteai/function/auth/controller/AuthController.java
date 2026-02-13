@@ -89,7 +89,7 @@ public class AuthController {
             authService.resetPassword(request);
             return ResponseEntity.ok("비밀번호가 성공적으로 변경되었습니다.");
         } catch (RuntimeException e) {
-            return ResponseEntity.status(400).body(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
