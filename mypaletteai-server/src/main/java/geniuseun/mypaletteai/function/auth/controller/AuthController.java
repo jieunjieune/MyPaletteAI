@@ -78,7 +78,7 @@ public class AuthController {
             authService.requestPasswordReset(request);
             return ResponseEntity.ok("비밀번호 재설정 요청 성공! 이메일을 확인하세요.");
         } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
