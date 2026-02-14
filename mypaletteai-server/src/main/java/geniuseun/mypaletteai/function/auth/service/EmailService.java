@@ -35,7 +35,7 @@ public class EmailService {
 
             String jsonInput = """
             {
-              "from": "MyPaletteAI <jieune120@gmail.com>",
+              "from": "MyPaletteAI <mypaletteai@mypaletteai.kr>",
               "to": ["%s"],
               "subject": "[My Palette AI] 비밀번호 재설정 안내",
               "html": "<h3>안녕하세요 😊</h3><p>아래 링크 클릭:</p><a href=\\"%s\\">비밀번호 재설정</a>"
