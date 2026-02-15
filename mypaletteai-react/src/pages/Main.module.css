@@ -3,24 +3,26 @@
 	min-height: 100vh;
 	max-width: 1600px;
 	margin: 0 auto;
-	padding: 16px;
+	padding: clamp(12px, 3vw, 20px);
 }
 
 .logoContainer {
-	margin-top: 50px;
+	margin-top: clamp(20px, 5vw, 50px);
 	text-align: center;
 }
 
 .logo {
-	height: 350px;
+	width: clamp(160px, 40vw, 350px);
+	height: auto;
 }
 
+/* 🔥 핵심 반응형 grid */
 .paletteGrid {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-	gap: 30px; /* 팔레트 간격 */
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: clamp(15px, 3vw, 30px);
 	width: 100%;
-	justify-items: center; /* 가운데 정렬 */
+	justify-items: center;
 	margin-bottom: 50px;
 }
 
@@ -29,9 +31,10 @@
 	flex-direction: column;
 	justify-content: space-between;
 	background-color: #fff;
-	/* overflow: hidden; */
 	cursor: pointer;
 	transition: transform 0.2s;
+	width: 100%;
+	max-width: 400px;
 }
 
 .paletteCard:hover {
@@ -45,11 +48,11 @@
 }
 
 .colorBlock {
-	flex: 1; /* 색상 개수에 따라 동일한 비율 */
+	flex: 1;
 	height: 100%;
 }
 
-  /* 카드 하단 */
+/* 카드 하단 */
 .cardFooter {
 	padding: 8px;
 	background-color: rgba(255, 255, 255, 0.8);
@@ -69,24 +72,24 @@
 	align-items: center;
 }
 
-
-/* 작은 화면용 반응형 */
-@media (max-width: 1200px) {
-	.paletteGrid {
-	gap: 25px;
-	}
-}
-
+/* 📱 태블릿 */
 @media (max-width: 900px) {
-.paletteGrid {
-	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-	gap: 20px;
-	}	
+
+	.paletteGrid {
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	}
+
 }
 
+/* 📱 모바일 */
 @media (max-width: 600px) {
-.paletteGrid {
-	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-	gap: 15px;
+
+	.paletteGrid {
+		grid-template-columns: 1fr; /* 한 줄씩 */
 	}
+
+	.paletteCard {
+		max-width: 100%;
+	}
+
 }
