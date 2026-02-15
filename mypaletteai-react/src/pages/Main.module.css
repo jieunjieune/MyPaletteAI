@@ -15,7 +15,6 @@
 .logo {
 	width: clamp(220px, 50vw, 500px);
 	height: auto;
-	filter: drop-shadow(0 12px 24px rgba(0,0,0,0.18));
 	transition: transform 0.3s ease;
 }
 
