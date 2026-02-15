@@ -154,11 +154,11 @@
 
     .menuItem {
         padding: 6px 10px;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .authBox span {
-        max-width: 120px;
+        max-width: 100px;
     }
 
 }
