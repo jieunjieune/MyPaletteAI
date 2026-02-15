@@ -161,4 +161,8 @@
         max-width: 100px;
     }
 
+    .authBox a {
+        font-size: 12px;
+    }
+
 }
