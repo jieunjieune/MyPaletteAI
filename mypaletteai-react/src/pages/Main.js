@@ -42,7 +42,7 @@ function Main() {
 				alt="My Palette AI" className={MainCSS.logo} />
 			</div>
 
-			<div className={MainCSS.paletteGrid} style={{ justifyContent: "center", gap: "50px" }}>
+			<div className={MainCSS.paletteGrid} style={{ justifyContent: "center"}}>
 				{/* 오늘의 팔레트 */}
 				{todayPalette && todayPalette.recommendedColors && (
 					<PaletteCard palette={todayPalette} />
