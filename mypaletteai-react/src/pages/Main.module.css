@@ -8,7 +8,7 @@
 
 .logoContainer {
 	margin-top: clamp(40px, 6vw, 80px);
-	margin-bottom: clamp(30px, 5vw, 70px);
+	margin-bottom: clamp(20px, 5vw, 40px);
 	text-align: center;
 }
 
