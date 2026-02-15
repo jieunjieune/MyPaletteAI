@@ -7,6 +7,7 @@
     position: fixed;
     top: 0;
     z-index: 1000;
+    box-sizing: border-box;
 }
 
 /* 내부 컨텐츠 박스 */
@@ -33,9 +34,9 @@
 .navMenu {
     display: flex;
     flex-direction: row;
-    width: 100%;
     margin-left: 40px;
     gap: 10px;
+    flex-shrink: 0;
 }
 
 /* 메뉴 항목 */
@@ -49,6 +50,7 @@
     text-decoration: none;
     font-weight: bold;
     transition: all 0.2s ease-in-out;
+    white-space: nowrap;
 }
 
 .menuItem:hover {
@@ -161,4 +163,13 @@
 /* 로그아웃 버튼 드롭다운 내에서 통일 */
 .dropdownItemButton {
     width: 100%; /* 드롭다운 너비 맞춤 */
+}
+
+@media (max-width: 768px) {
+
+    .box {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
 }
