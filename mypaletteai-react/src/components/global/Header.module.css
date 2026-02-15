@@ -12,17 +12,22 @@
 
 /* 내부 컨텐츠 박스 */
 .box {
-    max-width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    /* 🔥 핵심 */
+    flex-wrap: nowrap;
+    gap: 20px;
 }
 
 /* 로고 */
 .headerLogo {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .logoImg {
@@ -34,17 +39,14 @@
 .navMenu {
     display: flex;
     flex-direction: row;
-    margin-left: 40px;
     gap: 10px;
+
+    /* 🔥 공간 욕심 금지 */
     flex-shrink: 0;
 }
 
 /* 메뉴 항목 */
 .menuItem {
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    height: 100%; /* 헤더 전체 높이 */
     padding: 10px 20px;
     color: #333;
     text-decoration: none;
@@ -55,27 +57,6 @@
 
 .menuItem:hover {
     color: #FF6F61;
-    font-weight: bolder;
-    height: 100%;
-    transform: translateY(-2px);
-}
-
-.myPaletteButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%; /* 헤더 전체 높이 */
-    padding: 10px 20px;
-    color: #70c1b3;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.2s ease-in-out;
-}
-
-.myPaletteButton:hover {
-    color: #FF6F61;
-    font-weight: bolder;
-    height: 100%;
     transform: translateY(-2px);
 }
 
@@ -85,15 +66,16 @@
     align-items: center;
     gap: 10px;
     font-weight: 500;
-    margin-right: 50px;
+
+    /* 🔥 줄바꿈 방지 */
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .authBox a {
-    display: flex;
     text-decoration: none;
     color: #333;
     transition: color 0.2s;
-    white-space: nowrap; /* ✅ 한 줄로 표시 (줄바꿈 방지) */
 }
 
 .authBox a:hover {
@@ -102,16 +84,15 @@
 
 .authBox span {
     white-space: nowrap;
-    overflow: auto;
+    overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 300px;
-    display: inline-block;
+    max-width: 200px;
 }
 
+/* 닉네임 */
 .nickname {
     font-weight: bold;
     font-size: 16px;
-    margin-top: -2.5px;
     cursor: pointer;
 }
 
@@ -122,6 +103,7 @@
     gap: 5px;
 }
 
+/* 드롭다운 */
 .dropdownMenu {
     position: absolute;
     top: 100%;
@@ -131,26 +113,25 @@
     border-radius: 6px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     z-index: 10;
-    min-width: 150px; /* 조금 넓게 */
+    min-width: 150px;
     display: flex;
     flex-direction: column;
-    margin-right: 50px;
 }
 
-/* 공통 스타일: 링크/버튼 */
+/* 공통 스타일 */
 .dropdownItem,
 .dropdownItemButton {
-    padding: 12px 16px;  /* 패딩 통일 */
+    padding: 12px 16px;
     text-decoration: none;
     color: #333;
-    font-size: 14px; /* 글씨 크기 통일 */
+    font-size: 14px;
     font-weight: 500;
     background: none;
     border: none;
     text-align: left;
     cursor: pointer;
     display: flex;
-    align-items: center; /* 세로 가운데 정렬 */
+    align-items: center;
     gap: 5px;
 }
 
@@ -160,16 +141,24 @@
     color: #FF6F61;
 }
 
-/* 로그아웃 버튼 드롭다운 내에서 통일 */
 .dropdownItemButton {
-    width: 100%; /* 드롭다운 너비 맞춤 */
+    width: 100%;
 }
 
+/* 📱 모바일 대응 */
 @media (max-width: 768px) {
 
-    .box {
-        flex-wrap: wrap;
-        gap: 10px;
+    .logoImg {
+        height: 40px;
+    }
+
+    .menuItem {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .authBox span {
+        max-width: 120px;
     }
 
 }
