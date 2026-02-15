@@ -14,7 +14,9 @@
 }
 
 img {
-	width: 100%;
+	max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 body {
@@ -91,5 +93,5 @@ button {
 	--font-size-lg: 18px;
 
 	/* 폰트 패밀리 */
-	--font-family: "Pretendard", "Montserrat", sans-serif;
+	--font-family: "Pretendard", "Montserrat", sans-serf;
 }
