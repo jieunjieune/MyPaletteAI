@@ -17,7 +17,7 @@
 /* 정렬 select 영역 */
 .sortContainer {
 	width: 100%;
-	max-width: 1600px;  /* 메인과 동일 */
+	max-width: 1700px;
 	padding: 0 20px;
 	display: flex;
 	justify-content: flex-end;
@@ -39,7 +39,7 @@
 	grid-template-columns: repeat(3, 1fr); /* 웹에서는 3개씩 */
 	gap: clamp(15px, 3vw, 30px);
 	width: 100%;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 }
 
 /* 팔레트 카드 */
@@ -127,6 +127,7 @@
 	border: none;
 	cursor: pointer;
 	transition: background 0.2s;
+	margin-bottom: 20px;
 }
 
 .loadMoreButton:hover {
