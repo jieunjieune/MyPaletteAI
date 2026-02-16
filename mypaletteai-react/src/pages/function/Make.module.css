@@ -1,3 +1,4 @@
+/* 배경 & 폼 카드 */
 .background {
 	min-height: 100vh;
 	background: url("https://images.unsplash.com/photo-1677064730754-af0f40fbb7cb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center/cover;
@@ -25,6 +26,7 @@
 	margin-bottom: 70px;
 }
 
+/* 행(Row) */
 .row {
 	display: flex;
 	align-items: center;
@@ -39,6 +41,7 @@
 	margin-left: 50px;
 }
 
+/* 컬러 선택 */
 .colorPicker {
 	display: flex;
 	gap: 10px;
@@ -53,9 +56,16 @@
 	cursor: pointer;
 	transition: transform 0.2s, border-color 0.2s;
 }
-.colorButton:hover { transform: scale(1.1); border-color: #FF6F61; }
-.colorButton.selected { border-color: #FF6F61; box-shadow: 0 0 6px #FF6F61; }
+.colorButton:hover { 
+	transform: scale(1.1); 
+	border-color: #FF6F61; 
+}
+.colorButton.selected { 
+	border-color: #FF6F61; 
+	box-shadow: 0 0 6px #FF6F61; 
+}
 
+/* 무드 선택 */
 .moodPicker {
 	display: flex;
 	flex-wrap: wrap;
@@ -70,8 +80,14 @@
 	border: 1px solid #ccc;
 	transition: 0.2s;
 }
-.moodButton:hover { background-color: #ffd166; transform: scale(1.05); }
-.selectedMood { background-color: #FF6F61; color: #fff; }
+.moodButton:hover { 
+	background-color: #ffd166; 
+	transform: scale(1.05); 
+}
+.selectedMood { 
+	background-color: #FF6F61; 
+	color: #fff; 
+}
 
 .selectedMoodList {
 	margin-top: -20px;
@@ -100,6 +116,7 @@
 }
 .deleteTagBtn:hover { color: #FF6F61; }
 
+/* Count */
 .countPicker { display: flex; gap: 8px; }
 .countButton {
 	padding: 6px 12px;
@@ -113,6 +130,7 @@
 .countButton:hover { background-color: #eee; }
 .selectedCount { background-color: #70c1b3; color: #fff; }
 
+/* 버튼 그룹 */
 .buttonGroup {
 	display: flex;
 	justify-content: flex-end;
@@ -154,50 +172,23 @@
 	color: #fff;
 }
 
+/* 결과 카드 그리드 */
 .resultGrid {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-/* 직접 입력 무드 영역 */
-.moodInputWrapper {
-	display: flex;
-	gap: 8px;
+	flex-direction: column; /* 한 번에 하나씩 */
 	align-items: center;
-	margin-right: 50px;
+	padding: 0 20px;
+	width: 100%;
 }
 
-.moodInputWrapper input {
-	padding: 6px 12px;
-	border-radius: 20px;
-	border: 1px solid #ccc;
-	font-size: 14px;
-	flex: 1;
-	transition: border-color 0.2s, box-shadow 0.2s;
+/* PaletteCard 폭 제한 */
+.paletteCard {
+	width: 100%;
+	max-width: 400px; /* 웹에서는 최대 400px */
+	margin-bottom: 20px;
 }
 
-.moodInputWrapper input:focus {
-	border-color: #FF6F61;
-	box-shadow: 0 0 6px rgba(255, 111, 97, 0.3);
-	outline: none;
-}
-
-.moodInputWrapper button {
-	padding: 6px 14px;
-	border-radius: 20px;
-	background-color: #FF6F61;
-	color: #fff;
-	border: none;
-	cursor: pointer;
-	font-weight: bold;
-	transition: background-color 0.2s;
-}
-
-.moodInputWrapper button:hover {
-	background-color: #FF856F;
-}
-
+/* 로딩 */
 .loading {
 	display: flex;
 	gap: 10px;
@@ -219,4 +210,30 @@
 	0% { opacity: 0.2; transform: scale(1); }
 	50% { opacity: 1; transform: scale(1.2); }
 	100% { opacity: 0.2; transform: scale(1); }
+}
+
+/* 📱 태블릿 (900px 이하) */
+@media (max-width: 900px) {
+	.paletteCard {
+		max-width: 320px;
+	}
+}
+
+/* 📱 모바일 (600px 이하) */
+@media (max-width: 600px) {
+	.paletteCard {
+		max-width: 280px;
+	}
+	.title {
+		font-size: 20px;
+		margin-bottom: 40px;
+	}
+	.formCard {
+		padding: 30px 20px;
+	}
+	.moodInputWrapper {
+		flex-direction: column;
+		align-items: flex-start;
+		margin-right: 0;
+	}
 }
