@@ -21,19 +21,35 @@ public class OpenAiClient {
     private final RestTemplate restTemplate = new RestTemplate();
 
     public String generateTitle(String mainColor, String mood) {
-        String prompt = "메인 색상 " + mainColor + "과 분위기 '" + mood + "'에 어울리는 팔레트 제목을 15자 이내의 한글로 추천해줘.";
+
+        String systemPrompt = """
+        너는 감성적인 색상 팔레트 이름을 만드는 전문 AI다.
+        반드시 조건을 지켜라:
+        - 한글만 사용
+        - 15자 이내
+        - 서정적이고 자연스러운 표현
+        - 설명 없이 제목 하나만 출력
+        - 번호, 따옴표, 줄바꿈 절대 금지
+        """;
+
+        String userPrompt = "메인 색상: " + mainColor +
+                ", 분위기: '" + mood + "' 에 어울리는 팔레트 제목 하나 추천.";
 
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("model", "gpt-3.5-turbo");
+        requestBody.put("model", "gpt-4o-mini");
         requestBody.put("messages", List.of(
-                Map.of("role", "user", "content", prompt)));
+                Map.of("role", "system", "content", systemPrompt),
+                Map.of("role", "user", "content", userPrompt)
+        ));
         requestBody.put("max_tokens", 20);
+        requestBody.put("temperature", 0.9);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiKey);
 
-        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
+        HttpEntity<Map<String, Object>> requestEntity =
+                new HttpEntity<>(requestBody, headers);
 
         ResponseEntity<Map> response = restTemplate.exchange(
                 apiUrl,
@@ -42,27 +58,53 @@ public class OpenAiClient {
                 Map.class
         );
 
-        return ((Map<String, Object>) ((Map<String, Object>)
+        String result = ((Map<String, Object>) ((Map<String, Object>)
                 ((List<Object>) response.getBody().get("choices")).get(0))
                 .get("message")).get("content").toString().trim();
+
+        return result;
     }
 
-    public List<String> generateColors(String mainColor,String mood, int count) {
-        String prompt = "메인 색상은 " + mainColor +
-                ", 원하는 분위기는 다음과 같아. " + mood + " 느낌으로, 동일한 명도로(또는 채도로), 너무 뜬금없는 조합은 피해서,  메인컬러를 포함한 " + count + " 개의 색상 HEX 코드를 추천해줘. " +
-                "HEX 코드만 콤마로 구분해서 답해.";
+    public List<String> generateColors(String mainColor, String mood, int count) {
+
+        String systemPrompt = """
+        너는 색상 팔레트를 생성하는 전문 컬러 AI다.
+
+        반드시 아래 규칙을 지켜라:
+        - HEX 코드만 출력 (#RRGGBB)
+        - 반드시 6자리 HEX 코드 형식만 사용
+        - 설명 금지
+        - 쉼표로만 구분
+        - 공백 없이 출력
+        - 정확히 요청 개수만 출력
+        - 색상 중복 금지
+        - 메인 색상 반드시 포함
+        - 명도, 채도, 보색, 유사색 고려한 컬러조합
+        - 네온색, 과도한 채도 제외
+        - 웹 UI 디자인에 적합한 컬러 팔레트
+        - 색상 간 충분한 대비 유지
+        """;
+
+        String userPrompt =
+                "메인 색상: " + mainColor +
+                        ", 분위기: '" + mood +
+                        "'. 팔레트 색상 " + count + "개 생성.";
 
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("model", "gpt-3.5-turbo");
+        requestBody.put("model", "gpt-4o-mini");
         requestBody.put("messages", List.of(
-                Map.of("role", "user", "content", prompt)));
-        requestBody.put("max_tokens", 150);
+                Map.of("role", "system", "content", systemPrompt),
+                Map.of("role", "user", "content", userPrompt)
+        ));
+        requestBody.put("max_tokens", 100);
+        requestBody.put("temperature", 0.7); // 안정성 ↑
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiKey);
 
-        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestBody, headers);
+        HttpEntity<Map<String, Object>> requestEntity =
+                new HttpEntity<>(requestBody, headers);
 
         ResponseEntity<Map> response = restTemplate.exchange(
                 apiUrl,
@@ -75,7 +117,6 @@ public class OpenAiClient {
                 ((List<Object>) response.getBody().get("choices")).get(0))
                 .get("message")).get("content").toString();
 
-        // HEX 코드만 추출
         return Arrays.stream(content.replaceAll("[^#0-9A-Fa-f,]", "").split(","))
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
