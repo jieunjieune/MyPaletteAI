@@ -29,9 +29,10 @@
 /* 행(Row) */
 .row {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	margin-bottom: 30px;
 	gap: 20px;
+	flex-wrap: wrap;
 }
 
 .label {
@@ -39,6 +40,14 @@
 	font-weight: bold;
 	color: #444;
 	margin-left: 50px;
+}
+
+/* 컬러/무드/카운트 영역 flex */
+.colorPicker, .moodPicker, .countPicker {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	flex: 1 1 auto; /* 남는 공간 차지 */
 }
 
 /* 컬러 선택 */
@@ -97,6 +106,7 @@
 	flex-wrap: wrap;
 	gap: 6px;
 }
+
 .moodTag {
 	font-size: 14px;
 	background: #ffd166;
@@ -106,6 +116,47 @@
 	align-items: center;
 	gap: 6px;
 }
+
+/* 직접 입력 무드 영역 */
+.moodInputWrapper {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-left: 0;
+	margin-right: 50px;
+}
+
+.moodInputWrapper input {
+	padding: 6px 12px;
+	border-radius: 20px;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	transition: border-color 0.2s, box-shadow 0.2s;
+	flex: 1 1 150px;
+}
+
+.moodInputWrapper input:focus {
+	border-color: #FF6F61;
+	box-shadow: 0 0 6px rgba(255, 111, 97, 0.3);
+	outline: none;
+}
+
+.moodInputWrapper button {
+	padding: 6px 14px;
+	border-radius: 20px;
+	background-color: #FF6F61;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	font-weight: bold;
+	transition: background-color 0.2s;
+}
+
+.moodInputWrapper button:hover {
+	background-color: #FF856F;
+}
+
 .deleteTagBtn {
 	background: none;
 	border: none;
@@ -133,6 +184,7 @@
 /* 버튼 그룹 */
 .buttonGroup {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: flex-end;
 	gap: 10px;
 	margin-top: 15px;
@@ -217,23 +269,48 @@
 	.paletteCard {
 		max-width: 320px;
 	}
+
+	/* 태블릿에서도 줄바꿈 허용 */
+	.row {
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+	.label {
+		margin-bottom: 4px;
+		min-width: 80px;
+	}
+	.colorPicker, .moodPicker, .countPicker {
+		flex: 1 1 100%;
+	}
+	.moodInputWrapper {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 6px;
+		align-items: center;
+	}
+	.buttonGroup {
+		justify-content: flex-end;
+		gap: 8px;
+	}
 }
 
 /* 📱 모바일 (600px 이하) */
 @media (max-width: 600px) {
 	.paletteCard {
-		max-width: 280px;
+		max-width: 320px;
 	}
-	.title {
-		font-size: 20px;
-		margin-bottom: 40px;
+	.row {
+		flex-direction: column;
+		align-items: flex-start;
 	}
-	.formCard {
-		padding: 30px 20px;
+	.label {
+		margin-bottom: 6px;
 	}
 	.moodInputWrapper {
 		flex-direction: column;
 		align-items: flex-start;
-		margin-right: 0;
+	}
+	.buttonGroup {
+		justify-content: center;
 	}
 }
