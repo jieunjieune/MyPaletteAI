@@ -1,6 +1,6 @@
 .container {
 	width: 100%;
-	height: 100vh;
+	min-height: 100vh;
 	max-width: 1200px;
 	margin: 0 auto;
 	align-content: center;
@@ -133,7 +133,7 @@
 /* 모바일 */
 @media (max-width: 600px) {
     .colorBlock {
-        height: 400px;
+        height: 300px;
     }
 	.colorName {
 		font-size: 16px;

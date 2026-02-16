@@ -265,6 +265,14 @@
 
 /* 📱 태블릿 (900px 이하) */
 @media (max-width: 900px) {
+	.background {
+		padding: 20px;
+	}
+
+	.formCard {
+		margin-top: 70px;
+	}
+
 	.paletteCard {
 		max-width: 320px;
 	}
@@ -295,6 +303,14 @@
 
 /* 📱 모바일 (600px 이하) */
 @media (max-width: 600px) {
+	.background {
+		padding: 10px;
+	}
+
+	.formCard {
+		margin-top: 100px;
+	}
+
 	.paletteCard {
 		max-width: 320px;
 	}
