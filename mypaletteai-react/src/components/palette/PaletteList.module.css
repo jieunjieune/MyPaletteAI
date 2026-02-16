@@ -4,10 +4,11 @@
 
 .paletteGrid {
 	display: grid;
-	grid-template-columns: repeat(3, 500px);
-	gap: 50px;  
+	grid-template-columns: repeat(3, 1fr);
+	gap: 30px;  
 	justify-content: center;
 	/* width: calc(3 * 500px + 2 * 50px); */
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -31,4 +32,19 @@
 
 .loadMoreButton:hover {
 	background-color: #ffd166;
+}
+
+/* 태블릿 */
+@media (max-width: 1024px) {
+	.paletteGrid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+	.paletteGrid {
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
 }
