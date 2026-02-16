@@ -30,6 +30,7 @@ export default function Make() {
 	const [customMood, setCustomMood] = useState("");
 	const [count, setCount] = useState(4);
 	const [loading, setLoading] = useState(false);
+	const [isComposing, setIsComposing] = useState(false);
 
 	useEffect(() => {
 		dispatch({ type: "make/POST_MAKE", payload: [] });
@@ -128,7 +129,15 @@ export default function Make() {
 				placeholder="직접 입력"
 				value={customMood}
 				onChange={(e) => setCustomMood(e.target.value)}
-				onKeyDown={(e) => e.key === "Enter" && handleCustomMood()}
+
+				onCompositionStart={() => setIsComposing(true)}
+				onCompositionEnd={() => setIsComposing(false)}
+
+				onKeyDown={(e) => {
+					if (e.key === "Enter" && !isComposing) {
+						handleCustomMood();
+					}
+				}}
 				/>
 				<button onClick={handleCustomMood}>+</button>
 			</div>
