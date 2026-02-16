@@ -17,7 +17,7 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 /* 로고 */
@@ -59,6 +59,7 @@
     align-items: center;
     gap: 10px;
     font-weight: 500;
+    margin-left: auto;
     margin-right: 50px;
 }
 
@@ -91,6 +92,33 @@
     min-width: 150px;
     display: flex;
     flex-direction: column;
+}
+
+.dropdownItem,
+.dropdownItemButton {
+    padding: 12px 16px;  /* 패딩 통일 */
+    text-decoration: none;
+    color: #333;
+    font-size: 14px; /* 글씨 크기 통일 */
+    font-weight: 500;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+    gap: 5px;
+}
+
+.dropdownItem:hover,
+.dropdownItemButton:hover {
+    background-color: #f0f0f0ce;
+    color: #FF6F61;
+}
+
+/* 로그아웃 버튼 드롭다운 내에서 통일 */
+.dropdownItemButton {
+    width: 100%; /* 드롭다운 너비 맞춤 */
 }
 
 /* 모바일 대응 🔥 */
