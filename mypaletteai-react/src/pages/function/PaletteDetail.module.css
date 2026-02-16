@@ -4,11 +4,15 @@
 	max-width: 1200px;
 	margin: 0 auto;
 	align-content: center;
+	padding: 0 10px;
 }
 
 .colorBar {
 	display: flex;
-	border: 1px solid #e3e3e3;
+	flex-wrap: wrap;          /* 모바일에서도 여러 줄 가능 */
+    justify-content: center;   /* 가운데 정렬 */
+    gap: 10px;
+    border: 1px solid #e3e3e3;
 }
 
 .colorItem {
@@ -118,4 +122,24 @@
 	margin-top: 8px;
 	font-size: 14px;
 	color: #70c1b3;
+}
+
+/* 태블릿 */
+@media (max-width: 900px) {
+    .colorBlock {
+        height: 300px;
+    }
+	.colorName {
+		font-size: 16px;
+	}
+}
+
+/* 모바일 */
+@media (max-width: 600px) {
+    .colorBlock {
+        height: 400px;
+    }
+	.colorName {
+		font-size: 16px;
+	}
 }
