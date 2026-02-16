@@ -4,11 +4,13 @@
 	justify-content: space-between;
 	background-color: #fff;
 	overflow: hidden;
+
 	width: 100%;
-	max-width: 500px;
 	height: 200px;
+
 	cursor: pointer;
 	transition: transform 0.2s;
+
 	border: 1px solid #bcbcbc;
 	border-radius: 2px;
 	box-sizing: border-box;
