@@ -58,7 +58,7 @@ function Main() {
 						palette={{ ...defaultPalette}}
 					/>
 				) : (
-					<p>오류</p>
+					null
 				)}
 
 				{/* 최근 3개 팔레트 */}

@@ -34,7 +34,7 @@ export const getSavePalettesApi = () => {
 	const requestURL = `${prefix}/save`;
 
 	return async (dispatch) => {
-	console.log("요청 url: ", requestURL);
+	// console.log("요청 url: ", requestURL);
 
 	try {
 		const token = localStorage.getItem("accessToken"); // ✅ 토큰 가져오기
@@ -50,7 +50,7 @@ export const getSavePalettesApi = () => {
 		if (!response.ok) throw new Error("서버 요청 실패");
 
 		const result = await response.json();
-		console.log("api 결과: ", result);
+		// console.log("api 결과: ", result);
 
 		dispatch({ type: GET_SAVEPALETTES, payload: result });
 	} catch (error) {
@@ -63,7 +63,7 @@ export const deleteSavePaletteApi = (saveId) => {
 	const requestURL = `${prefix}/save/${saveId}`;
 
 	return async (dispatch) => {
-		console.log("요청 url: ", requestURL);
+		// console.log("요청 url: ", requestURL);
 
 		try {
 			const token = localStorage.getItem("accessToken");

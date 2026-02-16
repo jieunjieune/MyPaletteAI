@@ -14,7 +14,7 @@ export const userAllApi = () => {
 			});
 
 			const result = await response.json();
-			console.log("api 결과: ", result);
+			// console.log("api 결과: ", result);
 
 			let users = [];
 
@@ -26,7 +26,7 @@ export const userAllApi = () => {
 				console.warn("api 응답이 배열 형식이 아니. 빈 대열로 대체합니다.");
 			}
 
-			console.log("api 최종 users: ", users);
+			// console.log("api 최종 users: ", users);
 
 			dispatch( { type: GET_USER_ALL, payload: users });
 
@@ -79,7 +79,7 @@ export const updateUserApi = (userId, userData) => {
 
 		return result;
 	} catch (err) {
-		console.error("회원정보 수정 오류:", err);
+		// console.error("회원정보 수정 오류:", err);
 		alert(err.message || "회원정보 수정 실패");
 		throw err;
 	}

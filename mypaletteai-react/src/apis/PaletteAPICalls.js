@@ -42,7 +42,7 @@ export const paletteDetailApi = (paletteId) => {
 		if (!response.ok) throw new Error("서버 요청 실패");
 
 		const result = await response.json();
-		console.log("결과: ", result);
+		// console.log("결과: ", result);
 
 		dispatch({ type: GET_PALETTE, payload: result });
 		} catch (error) {
@@ -62,7 +62,7 @@ export const myPaletteApi = (userId) => {
 		if (!response.ok) throw new Error("서버 요청 실패");
 
 		const result = await response.json();
-		console.log("내 팔레트 결과:", result);
+		// console.log("내 팔레트 결과:", result);
 
 		dispatch({ type: GET_MYPALETTE, payload: result });
 		} catch (error) {

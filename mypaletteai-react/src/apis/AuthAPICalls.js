@@ -6,7 +6,7 @@ export const signupApi = (userData) => {
 	const requestURL = `${prefix}/auth/signup`;
 
 	return async (dispatch) => {
-		console.log("가입 요청 url: ", requestURL);
+		// console.log("가입 요청 url: ", requestURL);
 		try {
 			const response = await fetch(requestURL, {
 				method: "POST",
@@ -17,7 +17,7 @@ export const signupApi = (userData) => {
 			if (!response.ok) throw new Error("회원가입 실패");
 
 			const result = await response.text();
-			console.log("회원가입 결과:", result);
+			// console.log("회원가입 결과:", result);
 			alert(result);
 
 			dispatch({ type: "user/REGISTER_USER", payload: result });
@@ -31,8 +31,8 @@ export const signupApi = (userData) => {
 // 로그인
 export const loginApi = (loginData) => {
 	
-	console.log("loginApi진입");
-	console.log("입력값:", loginData);
+	// console.log("loginApi진입");
+	// console.log("입력값:", loginData);
 
     const requestURL = `${prefix}/auth/login`;
 
@@ -48,7 +48,7 @@ export const loginApi = (loginData) => {
             if (!response.ok) throw new Error("로그인 실패");
 
             const result = await response.json();
-			console.log("로그인 결과: ", result);
+			// console.log("로그인 결과: ", result);
 
             // accessToken + 유저 정보만 저장
             localStorage.setItem("accessToken", result.accessToken);
@@ -56,7 +56,7 @@ export const loginApi = (loginData) => {
             localStorage.setItem("nickname", result.nickname);
 
             dispatch({ type: "auth/POST_LOGIN", payload: result });
-			console.log("로그인결과: " , result);
+			// console.log("로그인결과: " , result);
 
             return result;
         } catch (err) {
@@ -82,7 +82,7 @@ export const refreshApi = () => {
 		if (!response.ok) throw new Error("리프레시 토큰 유효하지 않음");
 
 		const data = await response.json();
-		console.log("🔄 새 accessToken 발급:", data);
+		// console.log("🔄 새 accessToken 발급:", data);
 
 		// 🔹 localStorage 갱신
 		localStorage.setItem("accessToken", data.accessToken);
@@ -208,7 +208,7 @@ export const resetPasswordConfirmApi = ({ email, resetToken, newPassword }) => {
 // 닉네임 중복체크
 export const checkNicknameApi = (nickname) => {
 	const requestURL = `${prefix}/auth/check-nickname?nickname=${encodeURIComponent(nickname)}`;
-	console.log("요청 url: ", requestURL);
+	// console.log("요청 url: ", requestURL);
 
 	return async () => {
 		try {
