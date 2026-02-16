@@ -4,9 +4,9 @@ function Footer() {
 
 	return (
 		<div className={footerCss.footerBox}>
-			<h3 className={footerCss.text}>
+			<h4 className={footerCss.text}>
 				Copyright 2025. My Palette AI All rights reserved.{' '}
-			</h3>
+			</h4>
 		</div>
 	)
 
