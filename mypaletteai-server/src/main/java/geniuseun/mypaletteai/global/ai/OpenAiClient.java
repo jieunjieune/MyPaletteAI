@@ -36,7 +36,7 @@ public class OpenAiClient {
                 ", 분위기: '" + mood + "' 에 어울리는 팔레트 제목 하나 추천.";
 
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("model", "gpt-4o-mini");
+        requestBody.put("model", "gpt-4.1-mini");
         requestBody.put("messages", List.of(
                 Map.of("role", "system", "content", systemPrompt),
                 Map.of("role", "user", "content", userPrompt)
@@ -91,7 +91,7 @@ public class OpenAiClient {
                         "'. 팔레트 색상 " + count + "개 생성.";
 
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("model", "gpt-4o-mini");
+        requestBody.put("model", "gpt-4.1-mini");
         requestBody.put("messages", List.of(
                 Map.of("role", "system", "content", systemPrompt),
                 Map.of("role", "user", "content", userPrompt)
