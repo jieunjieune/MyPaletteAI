@@ -16,6 +16,8 @@ public class WebConfig {
                 // React 개발서버 주소 허용
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:3000",
+                                "https://mypaletteai.kr",
+                                "https://www.mypaletteai.kr",
                                 "https://my-palette-ai.vercel.app")
                         .allowedMethods("*")
                         .allowCredentials(true);

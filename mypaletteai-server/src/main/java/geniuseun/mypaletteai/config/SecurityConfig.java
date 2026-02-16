@@ -54,6 +54,8 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOrigins(List.of(
+                "https://mypaletteai.kr",
+                "https://www.mypaletteai.kr",
                 "https://my-palette-ai.vercel.app"
         ));
 
