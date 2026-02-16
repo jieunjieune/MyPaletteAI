@@ -14,8 +14,8 @@
 /* 정렬 select 영역 */
 .sortContainer {
 	width: 100%;
-	max-width: 1200px;
-	margin: 10px auto 0;
+	max-width: 1600px;
+	margin: 10px 0;
 	padding: 0 20px;
 	display: flex;
 	justify-content: flex-end;
@@ -46,7 +46,7 @@
 }
 
 /* 태블릿 */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
 	.paletteGrid {
 		grid-template-columns: repeat(2, 1fr);
 	}

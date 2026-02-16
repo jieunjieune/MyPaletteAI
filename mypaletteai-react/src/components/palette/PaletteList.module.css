@@ -112,6 +112,27 @@
 	color: #ff6f61;
 }
 
+.loadMoreContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.loadMoreButton {
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: bold;
+	width: 1600px;
+	background-color: #c7c7c7;
+	color: white;
+	border: none;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.loadMoreButton:hover {
+	background-color: #ffd166;
+}
+
 /* ================= 반응형 ================= */
 
 /* 태블릿 */
