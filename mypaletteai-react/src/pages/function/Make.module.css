@@ -39,7 +39,7 @@
 	min-width: 100px;
 	font-weight: bold;
 	color: #444;
-	margin-left: 50px;
+	/* margin-left: 50px; */
 }
 
 /* 컬러/무드/카운트 영역 flex */
@@ -100,7 +100,6 @@
 
 .selectedMoodList {
 	margin-top: -20px;
-	margin-left: 170px;
 	margin-bottom: 20px;
 	display: flex;
 	flex-wrap: wrap;
@@ -133,7 +132,7 @@
 	border: 1px solid #ccc;
 	font-size: 14px;
 	transition: border-color 0.2s, box-shadow 0.2s;
-	flex: 1 1 150px;
+	flex: 1 1 30px;
 }
 
 .moodInputWrapper input:focus {
@@ -227,9 +226,9 @@
 /* 결과 카드 그리드 */
 .resultGrid {
 	display: flex;
-	flex-direction: column; /* 한 번에 하나씩 */
-	align-items: center;
-	padding: 0 20px;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
 	width: 100%;
 }
 
