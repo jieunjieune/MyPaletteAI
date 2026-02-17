@@ -90,8 +90,6 @@ export default function PaletteDetail() {
 			const canvas = await html2canvas(paletteRef.current, { 
 				backgroundColor: "#ffffff",
 				scale: 0.8,
-				useCORS: true,
-				allowTaint: true,
 			});
 			const dataURL = canvas.toDataURL("image/png");
 			const link = document.createElement("a");
@@ -108,43 +106,60 @@ export default function PaletteDetail() {
 
 	return (
 		<div className={DetailCSS.container}>
-			{/* 캡처 영역: 컬러칩 + 컬러네임 */}
+			{/* 이미지 캡처 영역: 컬러칩 + 제목 + 무드 */}
 			<div className={DetailCSS.paletteExportArea} ref={paletteRef}>
 				<div className={DetailCSS.colorBar}>
 					{palette.recommendedColors?.map((color, idx) => (
-						<div key={idx} className={DetailCSS.colorBlock} style={{ backgroundColor: color }} />
-					))}
-				</div>
-				<div className={DetailCSS.colorNameBar}>
-					{palette.recommendedColors?.map((color, idx) => (
-						<div
-							key={idx}
-							className={DetailCSS.colorName}
-							onClick={() => handleCopyColor(color)}
-						>
-							{color}
-							{copied === color && <span className={DetailCSS.copied}>복사✨</span>}
+						<div key={idx} className={DetailCSS.colorItem}>
+							<div
+								className={DetailCSS.colorBlock}
+								style={{ backgroundColor: color }}
+							/>
+							<div
+								className={DetailCSS.colorName}
+								onClick={() => handleCopyColor(color)}
+							>
+								{color}
+								{copied === color && <span className={DetailCSS.copied}>복사✨</span>}
+							</div>
 						</div>
 					))}
 				</div>
 			</div>
-	
-			{/* 정보 영역 */}
-			<div className={DetailCSS.info}>
-				<h1 className={DetailCSS.title}>{palette.title}</h1>
-				<p className={DetailCSS.mood}>{palette.mood}</p>
-			</div>
-	
-			{/* 버튼 영역 */}
+				<div className={DetailCSS.info}>
+					<h1 className={DetailCSS.title}>{palette.title}</h1>
+					<p className={DetailCSS.mood}>{palette.mood}</p>
+				</div>
+
+			{/* 버튼 영역: URL 공유 → 다운로드 → 북마크 */}
 			<div className={DetailCSS.actionButtons}>
-				<FaShareAlt className={DetailCSS.shareIcon} onClick={handleShareURL} title="URL 공유" />
-				<MdDownload className={DetailCSS.downloadIcon} onClick={handleDownloadImage} title="이미지 다운로드" />
-				{userId && (!savedId
-					? <FaRegBookmark className={DetailCSS.bookmarkIcon} onClick={handleSave} title="저장하기" />
-					: <FaBookmark className={DetailCSS.bookmarkIconFilled} onClick={handleDelete} title="삭제하기" />
+				<FaShareAlt
+					className={DetailCSS.shareIcon}
+					onClick={handleShareURL}
+					title="URL 공유"
+				/>
+				<MdDownload
+					className={DetailCSS.downloadIcon}
+					onClick={handleDownloadImage}
+					title="이미지 다운로드"
+				/>
+				{userId && (
+					!savedId ? (
+						<FaRegBookmark
+							className={DetailCSS.bookmarkIcon}
+							onClick={handleSave}
+							title="저장하기"
+						/>
+					) : (
+						<FaBookmark
+							className={DetailCSS.bookmarkIconFilled}
+							onClick={handleDelete}
+							title="삭제하기"
+						/>
+					)
 				)}
 			</div>
-	
+
 			{/* 메시지 */}
 			{saveResult?.message && <div className={DetailCSS.saveMessage}>{saveResult.message}</div>}
 			{shareMessage && <div className={DetailCSS.saveMessage}>{shareMessage}</div>}
