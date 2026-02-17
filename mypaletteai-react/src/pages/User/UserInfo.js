@@ -91,7 +91,7 @@ export default function UserInfo() {
 		<div className={UserCSS.background}>
 		<div className={UserCSS.container}>
 			<form className={UserCSS.formCard} onSubmit={handleSubmit}>
-			<h1 className={UserCSS.title}>회원정보 수정</h1>
+			<h2 className={UserCSS.title}>회원정보 수정</h2>
 
 			{/* 닉네임 */}
 			<div className={UserCSS.row}>

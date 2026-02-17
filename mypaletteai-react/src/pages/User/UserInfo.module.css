@@ -160,3 +160,79 @@
 	color: #fff;
 	transform: translateY(-1px);
 }
+
+/* 모바일/태블릿 반응형 */
+@media (max-width: 900px) {
+	/* 컨테이너 폭 줄이기 */
+	.container {
+	padding: 20px 15px;
+	}
+
+	/* 카드 패딩 줄이기 */
+	.formCard {
+	padding: 20px 20px;
+	}
+
+	/* 라벨 줄어들기 */
+	.row label {
+	width: 90px;
+	font-size: 0.9rem;
+	}
+
+	/* 메시지 마진 조정 */
+	.error,
+	.success {
+	margin-left: 90px;
+	font-size: 0.8rem;
+	}
+
+	/* 버튼 크기 조정 */
+	.submitButton,
+	.checkButton,
+	.passwordButton {
+	font-size: 0.95rem;
+	padding: 12px;
+	}
+}
+
+@media (max-width: 600px) {
+	.container {
+	padding: 15px 10px;
+	}
+
+	.formCard {
+	padding: 15px 15px;
+	}
+
+	.row label {
+	width: 80px;
+	font-size: 0.85rem;
+	}
+
+	.row input {
+	font-size: 0.9rem;
+	}
+
+	.error,
+	.success {
+	margin-left: 80px;
+	font-size: 0.75rem;
+	}
+
+	.submitButton,
+	.checkButton,
+	.passwordButton {
+	font-size: 0.9rem;
+	padding: 10px;
+	}
+
+	/* 버튼 줄바꿈 가능 */
+	.rowInner {
+	flex-direction: column;
+	align-items: stretch;
+	}
+
+	.checkButton {
+	width: 100%;
+	}
+}
