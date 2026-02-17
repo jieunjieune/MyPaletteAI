@@ -86,41 +86,35 @@ export default function Make() {
 			<span className={MakeCSS.label}>Main Color</span>
 			<div className={MakeCSS.colorPicker}>
 				{mainColors.map((color, idx) => (
-				<button
+					<button
 					key={idx}
 					className={`${MakeCSS.colorButton} ${mainColor === color ? MakeCSS.selected : ""}`}
 					style={{ backgroundColor: color }}
 					onClick={() => handleColorClick(color)}
 					title={color}
-				/>
+					/>
 				))}
 
-				{/* 커스텀 컬러 선택 버튼 */}
+				{/* 커스텀 컬러 버튼 */}
 				<button
-				className={MakeCSS.customColorButton}
-				style={{ backgroundColor: mainColor || "#fff" }}
-				onClick={() => setShowColorPicker(!showColorPicker)}
-				title="직접 색 선택"
+					className={MakeCSS.customColorButton}
+					style={{ backgroundColor: mainColor || "#fff" }}
+					onClick={() => setShowColorPicker(!showColorPicker)}
+					title="직접 색 선택"
 				>
-				🎨
+					🎨
 				</button>
 
-				{/* ChromePicker 팝업 */}
 				{showColorPicker && (
-				<div className={MakeCSS.colorPickerPopup}>
-					<button 
-					className={MakeCSS.closePopupBtn} 
-					onClick={() => setShowColorPicker(false)}
-					>
-					✕
-					</button>
+					<div className={MakeCSS.colorPickerPopup}>
 					<ChromePicker
-					color={mainColor || "#ffffff"}
-					onChange={(color) => setMainColor(color.hex)}
+						color={mainColor || "#ffffff"}
+						onChange={(color) => setMainColor(color.hex)}
 					/>
-				</div>
+					<button className={MakeCSS.closePopupBtn} onClick={() => setShowColorPicker(false)}>✕</button>
+					</div>
 				)}
-			</div>
+				</div>
 			</div>
 
 			{/* 무드 */}
