@@ -14,7 +14,7 @@ export default function Make() {
 	const { userId } = useLoginInfo();
 	const navigator = useNavigate();
 
-	const mainColors = ["red","orange","yellow","green","blue","indigo","purple","pink","brown","gray","black","white"];
+	const mainColors = ["red","orange","yellow","green","blue","indigo","purple","pink","brown","gray"];
 	const moods = ["부드러운","화사한","선명한","차분한","밝은","따뜻한","시원한","청량한","알록달록한","비슷한 색감의","채도가 낮은","파스텔톤의","싱그러운","차가운","신비로운","몽환적인","현대적인","잔잔한","현재 계절에 어울리는","지금 날씨에 맞는","프레젠테이션 제작용","로고 제작용","인테리어용"];
 	const countOptions = [3,4,5,6,7];
 
@@ -112,7 +112,7 @@ export default function Make() {
 					color={mainColor || "#ffffff"}
 					onChange={(color) => setMainColor(color.hex)}
 					/>
-					<button onClick={() => setShowColorPicker(false)}>닫기</button>
+					<button onClick={() => setShowColorPicker(false)}>X</button>
 				</div>
 				)}
 			</div>

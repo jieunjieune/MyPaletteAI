@@ -78,15 +78,18 @@
 .customColorButton {
 	width: 40px;
 	height: 40px;
-	border-radius: 6px;
+	border-radius: 50%;
 	border: 1px solid #d1d5db;
 	cursor: pointer;
 }
 
 .colorPickerPopup {
-	position: absolute;
-	z-index: 999;
-	margin-top: 10px;
+	display: inline-block; /* 버튼 바로 아래 붙음 */
+	margin-top: 8px;       /* 버튼과 간격 */
+	padding: 8px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 6px;
 	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 } 
 
