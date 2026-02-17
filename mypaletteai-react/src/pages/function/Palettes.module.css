@@ -45,18 +45,38 @@
 	gap: 24px;
 }
 
-/* select 박스 스타일 */
-.selectBox {
-	padding: 6px 12px;
+/* 검색창 & select 공통 스타일 */
+.inputSelectCommon {
+	padding: 8px 12px;
 	border-radius: 8px;
 	border: 1px solid #ccc;
-	background-color: #fff;
 	font-size: 14px;
 	font-weight: 500;
 	color: #333;
 	outline: none;
-	cursor: pointer;
 	transition: all 0.2s;
+	background-color: #fff;
+}
+
+/* 검색창 전용 */
+.searchInput {
+	flex: 1 1 auto; /* 넓이 자동 */
+	min-width: 200px;
+}
+
+.searchInput:hover {
+	border-color: #70c1b3;
+}
+
+.searchInput:focus {
+	border-color: #FF6F61;
+	box-shadow: 0 0 6px rgba(255,111,97,0.3);
+}
+
+/* select 전용 */
+.selectBox {
+	min-width: 120px;
+	cursor: pointer;
 }
 
 .selectBox:hover {
@@ -65,7 +85,15 @@
 
 .selectBox:focus {
 	border-color: #FF6F61;
-	box-shadow: 0 0 5px rgba(255,111,97,0.3);
+	box-shadow: 0 0 6px rgba(255,111,97,0.3);
+}
+
+/* 정렬 + 검색 둘 다 포함하는 컨테이너 */
+.searchSortContainer {
+	display: flex;
+	gap: 12px;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
 }
 
 /* 태블릿 */

@@ -38,31 +38,24 @@ function Palettes() {
 		</h2>
 
 		{/* 검색창 */}
-		<div className={PaletteCSS.sortContainer}>
+		<div className={PaletteCSS.searchSortContainer}>
 			<input
-			type="text"
-			placeholder="제목 또는 무드 검색"
-			value={searchTerm}
-			onChange={(e) => setSearchTerm(e.target.value)}
+				type="text"
+				placeholder="제목 또는 무드 검색"
+				className={`${PaletteCSS.inputSelectCommon} ${PaletteCSS.searchInput}`}
+				value={searchTerm}
+				onChange={(e) => setSearchTerm(e.target.value)}
 			/>
-
 			<select
-			id="sortOrder"
-			value={sortOrder}
-			onChange={(e) => setSortOrder(e.target.value)}
+				id="sortOrder"
+				value={sortOrder}
+				onChange={(e) => setSortOrder(e.target.value)}
+				className={`${PaletteCSS.inputSelectCommon} ${PaletteCSS.selectBox}`}
 			>
-			<option value="latest">최신순</option>
-			<option value="oldest">오래된순</option>
+				<option value="latest">최신순</option>
+				<option value="oldest">오래된순</option>
 			</select>
-		</div>
-
-		<div className={PaletteCSS.container}>
-			{filteredPalettes?.length > 0 ? (
-			<PaletteList palettes={filteredPalettes} />
-			) : (
-			<p>검색 결과가 없습니다.</p>
-			)}
-		</div>
+			</div>
 		</div>
 	);
 }
