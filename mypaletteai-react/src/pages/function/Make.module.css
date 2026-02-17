@@ -53,8 +53,9 @@
 /* 컬러 선택 */
 .colorPicker {
 	display: flex;
+	flex-wrap: wrap; /* 모바일에서 줄 바꿈 */
 	gap: 10px;
-	flex-wrap: wrap;
+	align-items: center;
 }
 
 .colorButton {
@@ -73,6 +74,17 @@
 	border-color: #FF6F61; 
 	box-shadow: 0 0 6px #FF6F61; 
 }
+
+.colorInputPicker {
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	padding: 0;
+	margin-left: 5px;
+	vertical-align: middle;
+}  
 
 /* 무드 선택 */
 .moodPicker {
@@ -327,5 +339,13 @@
 	}
 	.buttonGroup {
 		justify-content: center;
+	}
+	.colorPicker {
+		justify-content: flex-start;
+		gap: 6px;
+	}
+	.colorButton, .colorInputPicker {
+		width: 35px;
+		height: 35px;
 	}
 }

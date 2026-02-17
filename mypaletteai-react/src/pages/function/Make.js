@@ -106,6 +106,15 @@ export default function Make() {
 					title={color}
 				/>
 				))}
+
+				{/* 컬러 피커 */}
+				<input
+					type="color"
+					value={mainColor}
+					onChange={(e) => setMainColor(e.target.value)}
+					className={MakeCSS.colorInputPicker}
+					title="직접 색 선택"
+				/>
 			</div>
 			</div>
 
