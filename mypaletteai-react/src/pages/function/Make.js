@@ -6,6 +6,7 @@ import MakeCSS from "./Make.module.css";
 import { FaDice, FaQuoteLeft, FaQuoteRight, FaPaintBrush } from "react-icons/fa";
 import { useLoginInfo } from "../../hooks/useLoginInfo";
 import { useNavigate } from "react-router-dom";
+import { ChromePicker } from 'react-color';
 
 export default function Make() {
 	const dispatch = useDispatch();
@@ -13,16 +14,8 @@ export default function Make() {
 	const { userId } = useLoginInfo();
 	const navigator = useNavigate();
 
-	const mainColors = [
-		"red","orange","yellow","green","blue","indigo",
-		"purple","pink", "brown", "gray","black","white"
-	];
-	const moods = [
-		"부드러운","화사한","선명한","차분한","밝은","따뜻한",
-		"시원한","청량한","알록달록한","비슷한 색감의",
-		"채도가 낮은","파스텔톤의", "싱그러운", "차가운", "신비로운",
-		"몽환적인", "현대적인", "잔잔한", "현재 계절에 어울리는", "지금 날씨에 맞는", "프레젠테이션 제작용", "로고 제작용", "인테리어용"
-	];
+	const mainColors = ["red","orange","yellow","green","blue","indigo","purple","pink","brown","gray","black","white"];
+	const moods = ["부드러운","화사한","선명한","차분한","밝은","따뜻한","시원한","청량한","알록달록한","비슷한 색감의","채도가 낮은","파스텔톤의","싱그러운","차가운","신비로운","몽환적인","현대적인","잔잔한","현재 계절에 어울리는","지금 날씨에 맞는","프레젠테이션 제작용","로고 제작용","인테리어용"];
 	const countOptions = [3,4,5,6,7];
 
 	const [mainColor, setMainColor] = useState("");
@@ -31,13 +24,13 @@ export default function Make() {
 	const [count, setCount] = useState(4);
 	const [loading, setLoading] = useState(false);
 	const [isComposing, setIsComposing] = useState(false);
+	const [showColorPicker, setShowColorPicker] = useState(false);
 
 	useEffect(() => {
 		dispatch({ type: "make/POST_MAKE", payload: [] });
 	}, [dispatch]);
 
 	const handleColorClick = (color) => setMainColor(color);
-
 	const handleMoodClick = (mood) => {
 		if (selectedMoods.includes(mood)) {
 		setSelectedMoods(selectedMoods.filter((m) => m !== mood));
@@ -45,14 +38,12 @@ export default function Make() {
 		setSelectedMoods([...selectedMoods, mood]);
 		}
 	};
-
 	const handleCustomMood = () => {
 		if (customMood && selectedMoods.length < 4) {
 		setSelectedMoods([...selectedMoods, customMood]);
 		setCustomMood("");
 		}
 	};
-
 	const handleRandomSelect = () => {
 		const randomColor = mainColors[Math.floor(Math.random() * mainColors.length)];
 		const randomMoods = [];
@@ -67,17 +58,14 @@ export default function Make() {
 		setSelectedMoods(randomMoods);
 		setCount(randomCount);
 	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!mainColor) return alert("메인 색상을 선택해주세요!");
-
 		if (!userId) {
 		alert("로그인 후 이용이 가능합니다.");
 		navigator("/auth/login");
 		return;
-	};
-			
+		}
 
 		const moodToSend = selectedMoods.length > 0 ? selectedMoods.join(", ") : "random";
 		setLoading(true);
@@ -94,7 +82,7 @@ export default function Make() {
 			<h2 className={MakeCSS.title}>My Palette AI와 팔레트 생성하기</h2>
 
 			{/* 메인 색상 */}
-			<div className={MakeCSS.row}>
+			<div className={MakeCSS.row} style={{ position: "relative" }}>
 			<span className={MakeCSS.label}>Main Color</span>
 			<div className={MakeCSS.colorPicker}>
 				{mainColors.map((color, idx) => (
@@ -107,14 +95,26 @@ export default function Make() {
 				/>
 				))}
 
-				{/* 컬러 피커 */}
-				<input
-					type="color"
-					value={mainColor}
-					onChange={(e) => setMainColor(e.target.value)}
-					className={MakeCSS.colorInputPicker}
-					title="직접 색 선택"
-				/>
+				{/* 커스텀 컬러 선택 버튼 */}
+				<button
+				className={MakeCSS.customColorButton}
+				style={{ backgroundColor: mainColor || "#fff" }}
+				onClick={() => setShowColorPicker(!showColorPicker)}
+				title="직접 색 선택"
+				>
+				🎨
+				</button>
+
+				{/* ChromePicker 팝업 */}
+				{showColorPicker && (
+				<div className={MakeCSS.colorPickerPopup}>
+					<ChromePicker
+					color={mainColor || "#ffffff"}
+					onChange={(color) => setMainColor(color.hex)}
+					/>
+					<button onClick={() => setShowColorPicker(false)}>닫기</button>
+				</div>
+				)}
 			</div>
 			</div>
 
@@ -138,14 +138,10 @@ export default function Make() {
 				placeholder="직접 입력"
 				value={customMood}
 				onChange={(e) => setCustomMood(e.target.value)}
-
 				onCompositionStart={() => setIsComposing(true)}
 				onCompositionEnd={() => setIsComposing(false)}
-
 				onKeyDown={(e) => {
-					if (e.key === "Enter" && !isComposing) {
-						handleCustomMood();
-					}
+					if (e.key === "Enter" && !isComposing) handleCustomMood();
 				}}
 				/>
 				<button onClick={handleCustomMood}>+</button>
@@ -185,18 +181,17 @@ export default function Make() {
 
 			{/* 버튼 그룹 */}
 			<div className={MakeCSS.buttonGroup}>
-				{/* 선택 초기화 버튼 */}
-					<button
-						className={MakeCSS.resetButton}
-						onClick={() => {
-							setMainColor("");
-							setSelectedMoods([]);
-							setCustomMood("");
-							setCount(4);
-						}}
-					>
-						선택 초기화
-					</button>
+			<button
+				className={MakeCSS.resetButton}
+				onClick={() => {
+				setMainColor("");
+				setSelectedMoods([]);
+				setCustomMood("");
+				setCount(4);
+				}}
+			>
+				선택 초기화
+			</button>
 			<button className={MakeCSS.randomButton} onClick={handleRandomSelect}>
 				<FaDice /> random
 			</button>
@@ -218,7 +213,7 @@ export default function Make() {
 			) : (
 				<div>
 				<FaQuoteLeft size={16} />
-				<span>  어떤 팔레트가 나올까?  </span>
+				<span> 어떤 팔레트가 나올까? </span>
 				<FaQuoteRight size={16} />
 				</div>
 			)}

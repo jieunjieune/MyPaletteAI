@@ -75,16 +75,20 @@
 	box-shadow: 0 0 6px #FF6F61; 
 }
 
-.colorInputPicker {
+.customColorButton {
 	width: 40px;
 	height: 40px;
-	border: none;
-	border-radius: 4px;
+	border-radius: 6px;
+	border: 1px solid #d1d5db;
 	cursor: pointer;
-	padding: 0;
-	margin-left: 5px;
-	vertical-align: middle;
-}  
+}
+
+.colorPickerPopup {
+	position: absolute;
+	z-index: 999;
+	margin-top: 10px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+} 
 
 /* 무드 선택 */
 .moodPicker {
