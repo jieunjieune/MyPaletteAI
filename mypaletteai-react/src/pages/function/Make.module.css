@@ -83,23 +83,25 @@
 	cursor: pointer;
 }
 
+/* 버튼 바로 아래 말풍선 팝업 */
 .colorPickerPopup {
-	position: absolute; /* 버튼 기준으로 띄움 */
-	top: 50px;          /* 버튼 아래로 */
+	position: absolute;
+	top: 100%; /* 부모 버튼 아래 */
 	left: 50%;
-	transform: translateX(-50%); /* 수평 중앙 정렬 */
+	transform: translateX(-50%);
+	margin-top: 8px; /* 버튼과 간격 */
 	background-color: #fff;
 	border-radius: 12px;
 	padding: 12px;
 	box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-	z-index: 999;       /* 다른 요소 위 */
+	z-index: 999;
 	border: 1px solid #ccc;
 
-	/* 말풍선 느낌: 위쪽에 삼각형 */
+	/* 아래쪽 삼각형 (말풍선 느낌) */
 	&::before {
 		content: "";
 		position: absolute;
-		top: -10px;  /* 삼각형 위치 */
+		top: -10px; /* 팝업 위쪽 끝에 붙임 */
 		left: 50%;
 		transform: translateX(-50%);
 		border-width: 0 10px 10px 10px;
@@ -110,9 +112,8 @@
 
 .closePopupBtn {
 	position: absolute;
-	top: 6px;
-	left: 50%;
-	transform: translateX(-50%);
+	top: -14px; /* 팝업 위쪽 바깥으로 살짝 띄움 */
+	right: 6px; /* 오른쪽 끝에 위치 */
 	background: #FF6F61;
 	color: #fff;
 	border: none;
