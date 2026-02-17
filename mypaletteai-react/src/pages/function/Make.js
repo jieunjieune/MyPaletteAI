@@ -108,11 +108,16 @@ export default function Make() {
 				{/* ChromePicker 팝업 */}
 				{showColorPicker && (
 				<div className={MakeCSS.colorPickerPopup}>
+					<button 
+					className={MakeCSS.closePopupBtn} 
+					onClick={() => setShowColorPicker(false)}
+					>
+					✕
+					</button>
 					<ChromePicker
 					color={mainColor || "#ffffff"}
 					onChange={(color) => setMainColor(color.hex)}
 					/>
-					<button onClick={() => setShowColorPicker(false)}>X</button>
 				</div>
 				)}
 			</div>

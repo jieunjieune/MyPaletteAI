@@ -84,14 +84,49 @@
 }
 
 .colorPickerPopup {
-	display: inline-block; /* 버튼 바로 아래 붙음 */
-	margin-top: 8px;       /* 버튼과 간격 */
-	padding: 8px;
+	position: absolute; /* 버튼 기준으로 띄움 */
+	top: 50px;          /* 버튼 아래로 */
+	left: 50%;
+	transform: translateX(-50%); /* 수평 중앙 정렬 */
 	background-color: #fff;
+	border-radius: 12px;
+	padding: 12px;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+	z-index: 999;       /* 다른 요소 위 */
 	border: 1px solid #ccc;
-	border-radius: 6px;
-	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-} 
+
+	/* 말풍선 느낌: 위쪽에 삼각형 */
+	&::before {
+		content: "";
+		position: absolute;
+		top: -10px;  /* 삼각형 위치 */
+		left: 50%;
+		transform: translateX(-50%);
+		border-width: 0 10px 10px 10px;
+		border-style: solid;
+		border-color: transparent transparent #fff transparent;
+	}
+}
+
+.closePopupBtn {
+	position: absolute;
+	top: 6px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #FF6F61;
+	color: #fff;
+	border: none;
+	border-radius: 50%;
+	width: 28px;
+	height: 28px;
+	font-weight: bold;
+	cursor: pointer;
+	z-index: 1000;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.closePopupBtn:hover {
+	background: #FF856F;
+}
 
 /* 무드 선택 */
 .moodPicker {
