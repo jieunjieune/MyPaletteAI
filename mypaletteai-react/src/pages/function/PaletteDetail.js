@@ -89,7 +89,7 @@ export default function PaletteDetail() {
 		try {
 			const canvas = await html2canvas(paletteRef.current, { 
 				backgroundColor: "#ffffff",
-				scale: 0.8,
+				scale: 1.2,
 			});
 			const dataURL = canvas.toDataURL("image/png");
 			const link = document.createElement("a");
