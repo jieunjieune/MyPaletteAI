@@ -103,24 +103,25 @@ export default function Login() {
 						{errors.password && <p className={LoginCSS.error}>{errors.password}</p>}
 					</div>
 
-					{/* 이메일 기억하기 */}
-					<div className={LoginCSS.rowInner}>
-						<input
-							type="checkbox"
-							checked={rememberEmail}
-							onChange={(e) => setRememberEmail(e.target.checked)}
-						/>
-						<label>이메일 기억하기</label>
-					</div>
+					{/* 체크박스 그룹 */}
+					<div className={LoginCSS.checkboxGroup}>
+						<label className={LoginCSS.checkboxItem}>
+							<input
+								type="checkbox"
+								checked={rememberEmail}
+								onChange={(e) => setRememberEmail(e.target.checked)}
+							/>
+							이메일 기억하기
+						</label>
 
-					{/* 자동 로그인 체크 */}
-					<div className={LoginCSS.rowInner}>
-						<input
-							type="checkbox"
-							checked={rememberMe}
-							onChange={(e) => setRememberMe(e.target.checked)}
-						/>
-						<label>자동 로그인</label>
+						<label className={LoginCSS.checkboxItem}>
+							<input
+								type="checkbox"
+								checked={rememberMe}
+								onChange={(e) => setRememberMe(e.target.checked)}
+							/>
+							자동 로그인
+						</label>
 					</div>
 
 					{/* 글로벌 에러 */}

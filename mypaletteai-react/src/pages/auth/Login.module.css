@@ -110,6 +110,29 @@
 	transform: translateY(-1px);
 }
 
+/* 체크박스 묶음 */
+.checkboxGroup {
+	display: flex;
+	gap: 20px;
+	margin-top: 6px;
+	align-items: center;
+}
+
+/* 개별 체크박스 */
+.checkboxItem {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 14px;
+	color: #444;
+	cursor: pointer;
+}
+
+/* 체크박스 클릭 영역 개선 */
+.checkboxItem input {
+	cursor: pointer;
+}
+
 /* 애니메이션 */
 @keyframes fadeIn {
 	from {
