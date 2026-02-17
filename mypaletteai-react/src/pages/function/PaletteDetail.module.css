@@ -124,8 +124,11 @@
 
 /* 태블릿 */
 @media (max-width: 900px) {
+	.container {
+		margin-top: 50px;
+	}
     .colorBlock {
-        height: 300px;
+        height: 100px;
     }
 	.colorName {
 		font-size: 16px;
@@ -135,7 +138,7 @@
 /* 모바일 */
 @media (max-width: 600px) {
     .colorBlock {
-        height: 300px;
+        height: 100px;
     }
 	.colorName {
 		font-size: 10px;
