@@ -118,3 +118,63 @@
 		transform: translateY(0);
 	}
 }
+
+/* 📱 태블릿 (900px 이하) */
+@media (max-width: 900px) {
+
+	.container {
+		padding: 30px 16px;
+	}
+
+	.formCard {
+		padding: 20px 30px;
+	}
+
+	.rowInner {
+		flex-wrap: wrap;
+		align-items: flex-start;
+	}
+
+	.row label {
+		width: 90px;
+	}
+
+	.error,
+	.success {
+		margin-left: 0; /* 고정 margin 제거 */
+	}
+}
+
+/* 📱 모바일 (600px 이하) */
+@media (max-width: 600px) {
+
+	.container {
+		padding: 20px 12px;
+	}
+
+	.formCard {
+		padding: 18px;
+		border-radius: 12px;
+	}
+
+	.rowInner {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 6px;
+	}
+
+	.row label {
+		width: auto;
+		font-size: 14px;
+	}
+
+	.row input {
+		padding: 12px;
+		font-size: 16px; /* 모바일 zoom 방지 */
+	}
+
+	.submitButton {
+		width: 100%;
+		padding: 14px;
+	}
+}

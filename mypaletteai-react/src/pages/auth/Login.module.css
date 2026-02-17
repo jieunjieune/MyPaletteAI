@@ -144,3 +144,68 @@
 	color: #70c1b3;
 	transform: translateY(-1px);
 }
+
+/* 📱 태블릿 (900px 이하) */
+@media (max-width: 900px) {
+
+	.container {
+		padding: 30px 16px;
+	}
+
+	.formCard {
+		padding: 20px 30px;
+	}
+
+	.rowInner {
+		flex-wrap: wrap; /* 줄바꿈 허용 */
+		align-items: flex-start;
+	}
+
+	.row label {
+		width: 90px;
+	}
+
+	.error,
+	.success {
+		margin-left: 0; /* label 고정폭 제거 대응 */
+	}
+}
+
+/* 📱 모바일 (600px 이하) */
+@media (max-width: 600px) {
+
+	.container {
+		padding: 20px 12px;
+	}
+
+	.formCard {
+		padding: 20px;
+		border-radius: 12px;
+	}
+
+	.rowInner {
+		flex-direction: column; /* 세로 배치 */
+		align-items: stretch;
+		gap: 6px;
+	}
+
+	.row label {
+		width: auto;
+		font-size: 14px;
+	}
+
+	.row input {
+		font-size: 16px; /* 모바일 확대 방지 */
+		padding: 12px;
+	}
+
+	.submitButton {
+		width: 100%;
+		padding: 16px;
+	}
+
+	.linkRow {
+		justify-content: center;
+		margin-right: 0;
+	}
+}
