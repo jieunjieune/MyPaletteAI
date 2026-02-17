@@ -37,25 +37,34 @@ function Palettes() {
 			<b>My Palette AI</b>와 함께 만들어진 팔레트 🎨
 		</h2>
 
-		{/* 검색창 */}
+		{/* 검색 + 정렬 */}
 		<div className={PaletteCSS.searchSortContainer}>
-			<input
-				type="text"
-				placeholder="제목 또는 무드 검색"
-				className={`${PaletteCSS.inputSelectCommon} ${PaletteCSS.searchInput}`}
-				value={searchTerm}
-				onChange={(e) => setSearchTerm(e.target.value)}
-			/>
-			<select
-				id="sortOrder"
-				value={sortOrder}
-				onChange={(e) => setSortOrder(e.target.value)}
-				className={`${PaletteCSS.inputSelectCommon} ${PaletteCSS.selectBox}`}
-			>
-				<option value="latest">최신순</option>
-				<option value="oldest">오래된순</option>
-			</select>
-			</div>
+		<input
+			type="text"
+			placeholder="제목 또는 무드 검색"
+			className={`${PaletteCSS.inputSelectCommon} ${PaletteCSS.searchInput}`}
+			value={searchTerm}
+			onChange={(e) => setSearchTerm(e.target.value)}
+		/>
+		<select
+			id="sortOrder"
+			value={sortOrder}
+			onChange={(e) => setSortOrder(e.target.value)}
+			className={`${PaletteCSS.inputSelectCommon} ${PaletteCSS.selectBox}`}
+		>
+			<option value="latest">최신순</option>
+			<option value="oldest">오래된순</option>
+		</select>
+		</div>
+
+		{/* 필터된 팔레트 목록 */}
+		<div className={PaletteCSS.container}>
+		{filteredPalettes.length > 0 ? (
+			<PaletteList palettes={filteredPalettes} />
+		) : (
+			<p className={PaletteCSS.noResult}>검색 결과가 없습니다.</p>
+		)}
+		</div>
 		</div>
 	);
 }

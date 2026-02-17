@@ -61,6 +61,7 @@
 /* 검색창 전용 */
 .searchInput {
 	flex: 1 1 auto; /* 넓이 자동 */
+	max-width: 500px;
 	min-width: 200px;
 }
 
@@ -86,6 +87,53 @@
 .selectBox:focus {
 	border-color: #FF6F61;
 	box-shadow: 0 0 6px rgba(255,111,97,0.3);
+}
+
+/* 검색 + 정렬 컨테이너: 오른쪽 정렬 */
+.searchSortContainer {
+	display: flex;
+	justify-content: flex-end; /* 오른쪽 정렬 */
+	gap: 10px;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+}
+
+/* 공통 스타일 */
+.inputSelectCommon {
+	padding: 6px 12px;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	font-size: 14px;
+	outline: none;
+	transition: all 0.2s;
+	background-color: #fff;
+}
+
+/* 검색창: 길이 제한 */
+.searchInput {
+	width: 180px; /* 적당한 크기 */
+}
+.searchInput:focus {
+	border-color: #FF6F61;
+	box-shadow: 0 0 6px rgba(255,111,97,0.3);
+}
+
+/* select 박스 */
+.selectBox {
+	width: 120px; /* 적당히 작게 */
+	cursor: pointer;
+}
+.selectBox:focus {
+	border-color: #FF6F61;
+	box-shadow: 0 0 6px rgba(255,111,97,0.3);
+}
+
+  /* 검색 결과 없음 */
+.noResult {
+	text-align: center;
+	color: #888;
+	font-style: italic;
+	margin-top: 20px;
 }
 
 /* 정렬 + 검색 둘 다 포함하는 컨테이너 */
