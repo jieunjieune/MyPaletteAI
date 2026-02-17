@@ -4,61 +4,59 @@
 	max-width: 1200px;
 	margin: 0 auto;
 	align-content: center;
+	padding: 20px;
 }
 
-.colorBar {
+.paletteExportArea {
 	display: flex;
-	border: 1px solid #e3e3e3;
-}
-
-.colorItem {
-	display: flex;
-	width: 1000px;
 	flex-direction: column;
 	align-items: center;
-	border: 1px solid #e3e3e3;
+	padding: 10px;
+	background-color: #fff;
+}
 
+.colorBar, .colorNameBar {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
 }
 
 .colorBlock {
-	width: 100%;
-	height: 500px;
+	width: 60px;
+	height: 60px;
+	border-radius: 4px;
+	border: 1px solid #e3e3e3;
 }
 
 .colorName {
-	margin-top: 6px;
-	font-size: 20px;
-	color: #757575;
+	width: 60px;
+	text-align: center;
+	font-size: 14px;
 	font-weight: 500;
-	height: 50px;
-	align-content: center;
+	color: #757575;
 	cursor: pointer;
 	position: relative;
 }
 
 .copied {
 	position: absolute;
-	bottom: 110%; /* 항상 위쪽으로 */
+	bottom: 110%;
 	left: 50%;
 	transform: translateX(-50%);
-	margin-bottom: 8px; /* 글자와 HEX 코드 간격 */
 	font-size: 14px;
 	color: #70c1b3;
-	white-space: nowrap; /* 줄바꿈 방지 */
+	white-space: nowrap;
 	animation: fadeOut 1.5s forwards;
 }
 
 @keyframes fadeOut {
-	0% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
+	0% { opacity: 1; }
+	100% { opacity: 0; }
 }
 
 .info {
-	text-align:right;
+	text-align: right;
+	margin-top: 10px;
 }
 
 .title {
@@ -71,46 +69,38 @@
 	color: #555;
 }
 
-
-/* 버튼 영역: 가로로 정렬, 오른쪽 정렬 */
 .actionButtons {
 	display: flex;
 	flex-direction: row;
-	gap: 18px; /* 아이콘 간격 */
+	gap: 18px;
 	margin-top: 10px;
-	justify-content: flex-end; /* 오른쪽 정렬 */
+	justify-content: flex-end;
 	align-items: center;
 }
 
-/* 아이콘 공통 스타일 */
-.bookmarkIcon, .bookmarkIconFilled, .shareIcon {
-	font-size: 28px; /* 아이콘 크기 */
-	color: #70c1b3;
+.bookmarkIcon, .bookmarkIconFilled, .shareIcon, .downloadIcon {
 	cursor: pointer;
 	transition: transform 0.2s ease;
+}
+
+.bookmarkIcon, .shareIcon {
+	font-size: 28px;
+	color: #70c1b3;
 }
 
 .downloadIcon {
 	font-size: 34px;
 	color: #70c1b3;
-	cursor: pointer;
-	transition: transform 0.2s ease;
-}
-
-.bookmarkIcon:hover, .bookmarkIconFilled:hover, .shareIcon:hover, .downloadIcon:hover {
-	transform: translateY(-2px);
-	color: #ff6f61;
 }
 
 .bookmarkIconFilled {
 	font-size: 28px;
 	color: #ff6f61;
-	cursor: pointer;
-	transition: transform 0.2s;
 }
 
-.bookmarkIconFilled:hover {
-	transform: scale(1.2);
+.bookmarkIcon:hover, .bookmarkIconFilled:hover, .shareIcon:hover, .downloadIcon:hover {
+	transform: translateY(-2px);
+	color: #ff6f61;
 }
 
 .saveMessage {
@@ -120,22 +110,13 @@
 	color: #70c1b3;
 }
 
-/* 태블릿 */
+/* 반응형 */
 @media (max-width: 900px) {
-    .colorBlock {
-        height: 300px;
-    }
-	.colorName {
-		font-size: 16px;
-	}
+	.colorBlock { width: 50px; height: 50px; }
+	.colorName { font-size: 12px; }
 }
 
-/* 모바일 */
 @media (max-width: 600px) {
-    .colorBlock {
-        height: 300px;
-    }
-	.colorName {
-		font-size: 16px;
-	}
+	.colorBlock { width: 40px; height: 40px; }
+	.colorName { font-size: 12px; }
 }
