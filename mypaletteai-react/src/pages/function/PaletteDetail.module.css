@@ -8,17 +8,26 @@
 }
 
 .paletteExportArea {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	display: inline-block; /* 캡처 영역 맞춤 */
 	padding: 10px;
 	background-color: #fff;
 }
 
-.colorBar, .colorNameBar {
+/* 컬러칩 줄 */
+.colorBar {
 	display: flex;
 	gap: 10px;
 	justify-content: center;
+	flex-wrap: nowrap; /* 무조건 한 줄 */
+}
+
+/* 컬러 이름 줄 */
+.colorNameBar {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	flex-wrap: nowrap; /* 한 줄로 유지 */
+	margin-top: 6px;
 }
 
 .colorBlock {
@@ -32,8 +41,8 @@
 	width: 60px;
 	text-align: center;
 	font-size: 14px;
-	font-weight: 500;
 	color: #757575;
+	font-weight: 500;
 	cursor: pointer;
 	position: relative;
 }
@@ -52,62 +61,6 @@
 @keyframes fadeOut {
 	0% { opacity: 1; }
 	100% { opacity: 0; }
-}
-
-.info {
-	text-align: right;
-	margin-top: 10px;
-}
-
-.title {
-	font-size: 24px;
-	margin: 6px 0;
-}
-
-.mood {
-	font-size: 16px;
-	color: #555;
-}
-
-.actionButtons {
-	display: flex;
-	flex-direction: row;
-	gap: 18px;
-	margin-top: 10px;
-	justify-content: flex-end;
-	align-items: center;
-}
-
-.bookmarkIcon, .bookmarkIconFilled, .shareIcon, .downloadIcon {
-	cursor: pointer;
-	transition: transform 0.2s ease;
-}
-
-.bookmarkIcon, .shareIcon {
-	font-size: 28px;
-	color: #70c1b3;
-}
-
-.downloadIcon {
-	font-size: 34px;
-	color: #70c1b3;
-}
-
-.bookmarkIconFilled {
-	font-size: 28px;
-	color: #ff6f61;
-}
-
-.bookmarkIcon:hover, .bookmarkIconFilled:hover, .shareIcon:hover, .downloadIcon:hover {
-	transform: translateY(-2px);
-	color: #ff6f61;
-}
-
-.saveMessage {
-	text-align: right;
-	margin-top: 8px;
-	font-size: 14px;
-	color: #70c1b3;
 }
 
 /* 반응형 */
