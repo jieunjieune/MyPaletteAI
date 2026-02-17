@@ -45,6 +45,29 @@
 	gap: 24px;
 }
 
+/* select 박스 스타일 */
+.selectBox {
+	padding: 6px 12px;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	color: #333;
+	outline: none;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.selectBox:hover {
+	border-color: #70c1b3;
+}
+
+.selectBox:focus {
+	border-color: #FF6F61;
+	box-shadow: 0 0 5px rgba(255,111,97,0.3);
+}
+
 /* 태블릿 */
 @media (max-width: 900px) {
 	.paletteGrid {
@@ -59,7 +82,6 @@
 	}
 
 	.title {
-		margin-top: 80px;
 		font-size: 22px;
 	}
 }
