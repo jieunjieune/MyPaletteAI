@@ -95,25 +95,32 @@ export default function Make() {
 					/>
 				))}
 
-				{/* 커스텀 컬러 버튼 */}
-				<button
+				{/* 커스텀 컬러 버튼 + 팝업 wrapper */}
+				<div style={{ position: "relative" }}>
+					<button
 					className={MakeCSS.customColorButton}
 					style={{ backgroundColor: mainColor || "#fff" }}
 					onClick={() => setShowColorPicker(!showColorPicker)}
 					title="직접 색 선택"
-				>
+					>
 					🎨
-				</button>
+					</button>
 
-				{showColorPicker && (
+					{showColorPicker && (
 					<div className={MakeCSS.colorPickerPopup}>
-					<ChromePicker
+						<ChromePicker
 						color={mainColor || "#ffffff"}
 						onChange={(color) => setMainColor(color.hex)}
-					/>
-					<button className={MakeCSS.closePopupBtn} onClick={() => setShowColorPicker(false)}>✕</button>
+						/>
+						<button
+						className={MakeCSS.closePopupBtn}
+						onClick={() => setShowColorPicker(false)}
+						>
+						✕
+						</button>
 					</div>
-				)}
+					)}
+				</div>
 				</div>
 			</div>
 
