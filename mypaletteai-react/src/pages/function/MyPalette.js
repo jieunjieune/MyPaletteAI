@@ -68,10 +68,10 @@ export default function MyPalette() {
 
 	return (
 		<div className={MyPaletteCSS.container}>
-		<h1 className={MyPaletteCSS.title}>내가 만든 팔레트</h1>
+		<h2 className={MyPaletteCSS.title}>내가 만든 팔레트</h2>
 		{renderList(palettes, visibleMade, setVisibleMade, "생성한")}
 
-		<h1 className={MyPaletteCSS.title}>저장한 팔레트</h1>
+		<h2 className={MyPaletteCSS.title}>저장한 팔레트</h2>
 		{renderList(savedPalettes, visibleSaved, setVisibleSaved, "저장한")}
 		</div>
 	);

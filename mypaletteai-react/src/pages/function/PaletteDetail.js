@@ -127,7 +127,7 @@ export default function PaletteDetail() {
 				</div>
 			</div>
 				<div className={DetailCSS.info}>
-					<h1 className={DetailCSS.title}>{palette.title}</h1>
+					<h2 className={DetailCSS.title}>{palette.title}</h2>
 					<p className={DetailCSS.mood}>{palette.mood}</p>
 				</div>
 

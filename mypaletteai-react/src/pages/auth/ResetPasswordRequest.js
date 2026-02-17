@@ -28,7 +28,7 @@ export default function ResetPasswordRequest() {
 		<div className={ResetCSS.background}>
 			<div className={ResetCSS.container}>
 				<form className={ResetCSS.formCard} onSubmit={handleSubmit}>
-					<h1 className={ResetCSS.title}>비밀번호 재설정</h1>
+					<h2 className={ResetCSS.title}>비밀번호 재설정</h2>
 					<p className={ResetCSS.subtitle}>
 						가입한 이메일을 입력하면 재설정 링크를 보내드립니다.
 					</p>

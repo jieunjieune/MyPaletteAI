@@ -69,7 +69,7 @@ export default function ResetPassword() {
 		<div className={LoginCSS.background}>
 		<div className={LoginCSS.container}>
 			<form className={LoginCSS.formCard} onSubmit={handleSubmit}>
-			<h1 className={LoginCSS.title}>비밀번호 재설정</h1>
+			<h2 className={LoginCSS.title}>비밀번호 재설정</h2>
 
 			<div className={LoginCSS.row}>
 				<div className={LoginCSS.rowInner}>
