@@ -4,6 +4,16 @@
 
 <p>MyPaletteAI는 프로젝트 목적과 상황에 맞는 색상 조합을 추천하고, 사용자가 직접 팔레트를 탐색·제작할 수 있도록 설계한 웹 서비스입니다. 색상 선택에 어려움을 느낀 경험을 바탕으로, 개발자와 디자이너 모두에게 실질적인 도움이 되는 서비스를 목표로 프로젝트를 진행했습니다.</p>
 
+## 🔗 Live Demo
+👉 https://mypaletteai.kr
+
+## 🧪 Demo Account
+
+테스트용 계정으로 로그인하여 서비스를 체험할 수 있습니다. 
+(비밀번호 찾기는 본인 이메일로 가입시 체험 가능)
+ID : test@mypaletteai.kr
+PW : qwer1234!
+
 # 🖼️ Preview
 ![메인 화면](./assets/main.png)
 ![제작 화면](./assets/make.png)
