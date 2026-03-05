@@ -8,11 +8,10 @@
 👉 https://mypaletteai.kr
 
 ## 🧪 Demo Account
-
 테스트용 계정으로 로그인하여 서비스를 체험할 수 있습니다. 
-(비밀번호 찾기는 본인 이메일로 가입시 체험 가능)
-ID : test@mypaletteai.kr
-PW : qwer1234!
+(비밀번호 찾기 제외)
+- 아이디 : test@mypaletteai.kr
+- 비밀번호 : qwer1234!
 
 # 🖼️ Preview
 ![메인 화면](./assets/main.png)
