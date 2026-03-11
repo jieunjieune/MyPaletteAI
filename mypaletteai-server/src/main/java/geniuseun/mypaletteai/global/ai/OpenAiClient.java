@@ -20,20 +20,24 @@ public class OpenAiClient {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public String generateTitle(String mainColor, String mood) {
+    public String generateTitle(List<String> colors, String mood) {
 
         String systemPrompt = """
-        너는 감성적인 색상 팔레트 이름을 만드는 전문 AI다.
-        반드시 조건을 지켜라:
-        - 한글만 사용
-        - 15자 이내
-        - 서정적이고 자연스러운 표현
-        - 설명 없이 제목 하나만 출력
-        - 번호, 따옴표, 줄바꿈 절대 금지
+            너는 감성적인 색상 팔레트 이름을 만드는 전문 AI다.
+            반드시 조건을 지켜라:
+            - 한글만 사용
+            - 15자 이내
+            - 서정적 표현
+            - 설명 없이 제목 하나만 출력
+            - 번호, 따옴표, 줄바꿈 절대 금지
+            - 흔한 팔레트 이름(빛, 속삭임, 노을, 푸른, 꿈, 햇살) 반복 금지
+            - 매번 새로운 단어 조합을 만들어라
         """;
 
-        String userPrompt = "메인 색상: " + mainColor +
-                ", 분위기: '" + mood + "' 에 어울리는 팔레트 제목 하나 추천.";
+        String userPrompt =
+                "팔레트 색상: " + String.join(" ", colors) +
+                        ", 분위기: " + mood +
+                        ". 이 색 조합에 어울리는 팔레트 이름 하나 생성.";
 
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("model", "gpt-4.1-mini");
@@ -42,7 +46,7 @@ public class OpenAiClient {
                 Map.of("role", "user", "content", userPrompt)
         ));
         requestBody.put("max_tokens", 20);
-        requestBody.put("temperature", 0.9);
+        requestBody.put("temperature", 1.0);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

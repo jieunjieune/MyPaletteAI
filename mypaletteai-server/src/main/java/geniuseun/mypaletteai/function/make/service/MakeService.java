@@ -25,7 +25,7 @@ public class MakeService {
 
         // OpenAI로 색 조합 생성
         List<String> recommendedColors = openAiClient.generateColors(request.getMainColor(), request.getMood(), request.getCount());
-        String title = openAiClient.generateTitle(request.getMainColor(), request.getMood());
+        String title = openAiClient.generateTitle(recommendedColors, request.getMood());
 
         // 큰따옴표, 작은따옴표 제거
         title = title.replace("\"", "").replace("'", "");
