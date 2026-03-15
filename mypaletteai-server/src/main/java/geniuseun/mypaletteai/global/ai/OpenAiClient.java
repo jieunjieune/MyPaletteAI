@@ -96,7 +96,9 @@ public class OpenAiClient {
         - 동일한 명도 수준의 색상이 연속되지 않도록 한다
         - 유사색과 대비색을 적절히 혼합 (보색 과다 사용 금지)
         - 색상 hue 분포를 넓게 사용하되 조화 유지
-        - 동일한 hue(색상계열)의 색상이 3개 이상 연속되지 않도록 구성
+        - 최소 2개 이상의 다른 hue 색상을 포함
+        - 동일한 hue 계열 색상은 최대 3개까지만 허용
+        - 필요 시 중립색(회색/브라운 등) 1개 포함 가능
         - 색상 간 충분한 대비 확보
         - 웹 UI 디자인에 자연스럽고 실용적인 팔레트
         - 단순히 같은 색의 명도/채도만 변경한 팔레트 금지
@@ -118,7 +120,7 @@ public class OpenAiClient {
                 Map.of("role", "user", "content", userPrompt)
         ));
         requestBody.put("max_tokens", 100);
-        requestBody.put("temperature", 0.7); // 안정성 ↑
+        requestBody.put("temperature", 0.85); // 안정성 ↑
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
