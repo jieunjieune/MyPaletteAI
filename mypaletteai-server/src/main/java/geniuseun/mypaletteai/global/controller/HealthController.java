@@ -16,12 +16,13 @@ public class HealthController {
     @GetMapping("/health")
     public ResponseEntity<?> healthCheck() {
         try {
-            Integer count = jdbcTemplate.queryForObject(
+            jdbcTemplate.queryForObject(
                 "SELECT 1 FROM color_palette LIMIT 1",
-            Integer.class
-        );
+                Integer.class
+            );
 
-        return ResponseEntity.ok("ok");
+            return ResponseEntity.ok("ok");
+
         } catch (Exception e) {
             return ResponseEntity.status(503).body("db error");
         }
