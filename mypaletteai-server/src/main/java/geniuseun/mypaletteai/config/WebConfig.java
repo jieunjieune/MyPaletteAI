@@ -20,6 +20,7 @@ public class WebConfig {
                                 "https://www.mypaletteai.kr",
                                 "https://my-palette-ai.vercel.app")
                         .allowedMethods("*")
+                        .allowedHeaders("*")
                         .allowCredentials(true);
             }
         };
