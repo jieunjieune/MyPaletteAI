@@ -48,6 +48,10 @@ export default function PaletteDetail() {
 	}, [savedPalettes, id, userId]);
 
 	const handleCopyColor = (color) => {
+		if (!color) return;
+
+		const upperColor = color.toUpperCase();
+		
 		navigator.clipboard.writeText(color);
 		setCopied(color);
 		setTimeout(() => setCopied(""), 1500);
