@@ -119,7 +119,7 @@ export default function PaletteDetail() {
 								className={DetailCSS.colorName}
 								onClick={() => handleCopyColor(color)}
 							>
-								{color}
+								{color.toUppercase()}
 								{copied === color && <span className={DetailCSS.copied}>복사✨</span>}
 							</div>
 						</div>
