@@ -48,8 +48,6 @@ export default function PaletteDetail() {
 	}, [savedPalettes, id, userId]);
 
 	const handleCopyColor = (color) => {
-		const upper = String(color).toUpperCase();
-
 		navigator.clipboard.writeText(color);
 		setCopied(color);
 		setTimeout(() => setCopied(""), 1500);
@@ -119,7 +117,7 @@ export default function PaletteDetail() {
 							/>
 							<div
 								className={DetailCSS.colorName}
-								onClick={() => handleCopyColor(color.toUpperCase())}
+								onClick={() => handleCopyColor(color)}
 							>
 								{color}
 								{copied === color && <span className={DetailCSS.copied}>복사✨</span>}
