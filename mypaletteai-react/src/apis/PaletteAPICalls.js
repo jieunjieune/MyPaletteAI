@@ -79,3 +79,17 @@ export const myPaletteApi = (userId) => {
 		}
 	};
 };
+
+// 팔레트 삭제
+export const deletePalette = async (id) => {
+	let requestURL = `${prefix}/palettes/${paletteId}`;
+
+    const response = await fetch(
+        {
+            method: "DELETE",
+            credentials: "include",
+        }
+    );
+
+    return response.json();
+};
