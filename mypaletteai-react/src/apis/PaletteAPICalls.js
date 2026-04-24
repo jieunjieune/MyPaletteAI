@@ -2,6 +2,8 @@ import { GET_PALETTES, GET_PALETTE, GET_MYPALETTE, LOADING_PALETTES } from "../m
 
 const prefix = `https://${process.env.REACT_APP_RESTAPI_IP}`;
 
+
+// 전체 팔레트 조회
 export const callPaletteApi = () => {
 	let requestURL = `${prefix}/palettes`;
 
@@ -27,6 +29,8 @@ export const callPaletteApi = () => {
 	};
 };
 
+
+// 상세 팔레트 조회
 export const paletteDetailApi = (paletteId) => {
 	let requestURL = `${prefix}/palettes/${paletteId}`;
 
@@ -51,6 +55,8 @@ export const paletteDetailApi = (paletteId) => {
 	};
 };
 
+
+// 내가 만든 팔레트 조회
 export const myPaletteApi = (userId) => {
 	const requestURL = `${prefix}/palettes/my/${userId}`;
 
