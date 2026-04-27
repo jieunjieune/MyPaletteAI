@@ -81,15 +81,17 @@ export const myPaletteApi = (userId) => {
 };
 
 // 팔레트 삭제
-export const deletePalette = async (id) => {
-	let requestURL = `${prefix}/palettes/${paletteId}`;
+export const deletePalette = async (paletteId) => {
+	const requestURL = `${prefix}/palettes/${paletteId}`;
 
-    const response = await fetch(
-        {
-            method: "DELETE",
-            credentials: "include",
-        }
-    );
+    const response = await fetch(requestURL, {
+        method: "DELETE",
+        credentials: "include",
+    });
 
-    return response.json();
+    if (!response.ok) {
+        throw new Error("삭제 실패");
+    }
+
+    return true;
 };
