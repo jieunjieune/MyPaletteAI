@@ -35,7 +35,7 @@ public class MakeService {
                 .title(title)
                 .mood(request.getMood())
                 .mainColor(request.getMainColor())
-                .createdBy(request.getUserId())
+                .createdBy(userId)
                 .createdAt(LocalDateTime.now())
                 .build();
         paletteRepository.save(palette);
