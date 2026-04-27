@@ -15,6 +15,8 @@ export default function PaletteDetail() {
 	const { userId } = useLoginInfo();
 
 	const palette = useSelector((state) => state.paletteReducer.detail);
+
+	console.log("팔레트 내용: ", palette);
 	// const savingState = useSelector((state) => state.paletteReducer.saving);
 	const saveResult = useSelector((state) => state.paletteReducer.saveResult);
 	const savedPalettes = useSelector((state) => state.saveReducer.list || []);
