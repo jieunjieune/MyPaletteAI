@@ -56,6 +56,7 @@ public class MakeService {
                 .mood(palette.getMood())
                 .mainColor(palette.getMainColor())
                 .recommendedColors(recommendedColors)
+                .paletteCreatedBy(palette.getCreatedBy())
                 .message("추천 색조합 생성 완료")
                 .build();
     }

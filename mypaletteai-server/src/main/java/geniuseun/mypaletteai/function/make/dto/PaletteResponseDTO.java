@@ -16,4 +16,6 @@ public class PaletteResponseDTO {
     private String mainColor;
     private List<String> recommendedColors;
     private String message;
+
+    private Long paletteCreatedBy;
 }
