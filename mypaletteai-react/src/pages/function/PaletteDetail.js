@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { paletteDetailApi } from "../../apis/PaletteAPICalls";
+import { paletteDetailApi, deletePalette } from "../../apis/PaletteAPICalls";
 import { savePaletteApi, deleteSavePaletteApi, getSavePalettesApi } from "../../apis/SaveAPICalls";
 import DetailCSS from "./PaletteDetail.module.css";
 import { useLoginInfo } from "../../hooks/useLoginInfo";
@@ -59,7 +59,7 @@ export default function PaletteDetail() {
 		alert("팔레트를 저장했습니다 ( ˶'ᵕ'🫶)💕");
 	};
 
-	const handleDelete = async () => {
+	const handleUnSave = async () => {
 		if (!savedId) return;
 		await dispatch(deleteSavePaletteApi(savedId));
 		setSavedId(null);
@@ -98,6 +98,23 @@ export default function PaletteDetail() {
 			link.click();
 		} catch (error) {
 			console.error("이미지 다운로드 실패:", error);
+		}
+	};
+
+	const handlePaletteDelete = async () => {
+		const confirmed = window.confirm("정말 이 팔레트를 삭제하시겠습니까?");
+		if (!confirmed) return;
+	
+		try {
+			await deletePalette(id);
+	
+			alert("팔레트가 삭제되었습니다 🗑️");
+	
+			window.location.href = "/";
+	
+		} catch (error) {
+			console.error("팔레트 삭제 실패", error);
+			alert("삭제에 실패했습니다 😢");
 		}
 	};
 
@@ -153,10 +170,15 @@ export default function PaletteDetail() {
 					) : (
 						<FaBookmark
 							className={DetailCSS.bookmarkIconFilled}
-							onClick={handleDelete}
+							onClick={handleUnSave}
 							title="삭제하기"
 						/>
 					)
+				)}
+				{userId === palette.paletteCreatedBy && (
+					<button onClick={handlePaletteDelete}>
+						삭제하기 🗑️
+					</button>
 				)}
 			</div>
 
