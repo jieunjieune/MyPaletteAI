@@ -34,6 +34,7 @@ public class PaletteController {
                 .recommendedColors(palette.getColors().stream()
                         .map(c -> c.getHexCode())
                         .collect(Collectors.toList()))
+                .paletteCreatedBy(palette.getCreatedBy())
                 .message("팔레트 상세 조회 성공")
                 .build();
     }
