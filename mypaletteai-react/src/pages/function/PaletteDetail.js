@@ -177,11 +177,11 @@ export default function PaletteDetail() {
 						/>
 					)
 				)}
-				{userId === palette.paletteCreatedBy && (
+				{Number(userId) === Number(palette.paletteCreatedBy) && (
 					<button onClick={handlePaletteDelete}>
 						삭제하기 🗑️
 					</button>
-				)}
+				)}	
 			</div>
 
 			{/* 메시지 */}
