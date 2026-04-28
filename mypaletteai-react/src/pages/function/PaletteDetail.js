@@ -7,7 +7,7 @@ import DetailCSS from "./PaletteDetail.module.css";
 import { useLoginInfo } from "../../hooks/useLoginInfo";
 import { FaRegBookmark, FaBookmark, FaShareAlt } from "react-icons/fa";
 import html2canvas from "html2canvas";
-import { MdDownload } from "react-icons/md";
+import { MdDownload, MdDelete } from "react-icons/md";
 
 export default function PaletteDetail() {
 	const { id } = useParams();
@@ -173,14 +173,16 @@ export default function PaletteDetail() {
 						<FaBookmark
 							className={DetailCSS.bookmarkIconFilled}
 							onClick={handleUnSave}
-							title="삭제하기"
+							title="저장취소"
 						/>
 					)
 				)}
 				{Number(userId) === Number(palette.paletteCreatedBy) && (
-					<button onClick={handlePaletteDelete}>
-						삭제하기 🗑️
-					</button>
+					<MdDelete
+						className={DetailCSS.deleteIcon}
+						onClick={handlePaletteDelete}
+						title="삭제하기"
+					/>
 				)}	
 			</div>
 
