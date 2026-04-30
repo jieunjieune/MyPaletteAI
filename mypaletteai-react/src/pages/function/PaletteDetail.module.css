@@ -1,10 +1,14 @@
 .container {
 	width: 100%;
-	min-height: 100vh;
+	min-height: calc(100vh - 80px);
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 0 6px;
+	padding: 80px 6px 40px;
 	box-sizing: border-box;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .colorBar {
@@ -125,7 +129,7 @@
 
 .loading,
 .error {
-	min-height: 100hv;
+	min-height: calc(100vh - 80px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -145,9 +149,6 @@
 
 /* 태블릿 */
 @media (max-width: 900px) {
-	.container {
-		margin-top: 50px;
-	}
     .colorBlock {
         height: 100px;
     }
