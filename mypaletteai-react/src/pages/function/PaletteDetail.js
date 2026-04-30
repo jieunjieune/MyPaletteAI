@@ -120,8 +120,20 @@ export default function PaletteDetail() {
 		}
 	};
 
-	if (loading) return <div className={DetailCSS.loading}>불러오는 중...</div>;
-	if (!palette) return <div className={DetailCSS.error}>팔레트를 찾을 수 없습니다.</div>;
+	if (loading) {
+		return (
+			<div className={DetailCSS.loading}>
+				불러오는 중... 🎨
+			</div>
+		);
+	}
+	if (!palette) {
+		return (
+			<div className={DetailCSS.error}>
+				팔레트를 찾을 수 없습니다 🥲
+			</div>
+		);
+	}
 
 	return (
 		<div className={DetailCSS.container}>

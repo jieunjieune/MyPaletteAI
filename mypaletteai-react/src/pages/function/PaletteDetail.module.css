@@ -3,8 +3,8 @@
 	min-height: 100vh;
 	max-width: 1200px;
 	margin: 0 auto;
-	align-content: center;
-	padding: 0 6px;
+	padding: 80px 6px 0;
+	box-sizing: border-box;
 }
 
 .colorBar {
@@ -121,6 +121,26 @@
 	margin-top: 8px;
 	font-size: 14px;
 	color: #70c1b3;
+}
+
+.loading,
+.error {
+	min-height: calc(100vh - 80px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	font-weight: 600;
+	text-align: center;
+}
+
+
+.loading {
+	color: #70c1b3;
+}
+
+.error {
+	color: #999;
 }
 
 /* 태블릿 */
