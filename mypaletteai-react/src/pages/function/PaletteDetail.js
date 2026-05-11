@@ -189,7 +189,8 @@ export default function PaletteDetail() {
 						/>
 					)
 				)}
-				{Number(userId) === Number(palette.paletteCreatedBy) && (
+				{userId &&
+				Number(userId) === Number(palette.paletteCreatedBy) && (
 					<MdDelete
 						className={DetailCSS.deleteIcon}
 						onClick={handlePaletteDelete}
