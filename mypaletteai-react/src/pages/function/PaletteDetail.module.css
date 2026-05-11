@@ -1,11 +1,10 @@
 .container {
 	width: 100%;
-	min-height: 100hv;
+	min-height: 100vh;
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 80px 6px 40px;
 	box-sizing: border-box;
-
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
